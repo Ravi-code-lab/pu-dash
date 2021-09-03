@@ -1,0 +1,40 @@
+
+.sidebar-item{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 56px;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 0 20px;
+  border-radius: 12px;
+}
+.sidebar-item-icon{
+  margin-right: 10px;
+}
+.sidebar-item-icon img{
+  width: 29px;
+  height: 29px;
+}
+.sidebar-logo div{
+    font-size: 20px;
+
+}
+.sidebar-logo img{
+    width: 100%;
+}
+.sidebar-logo{
+    display: flex;
+    align-items: center;
+    padding: 12px 8px 62px;
+
+}
+.sidebar-item-text{
+	color: #717579;
+	font-style: samin-bold;
+	font-weight: 600;
+}
+a{
+	text-decoration: none;
+	font-family: Cambria, "Hoefler Text", "Liberation Serif", Times, "Times New Roman", "serif";
+}
