@@ -21,7 +21,10 @@
 	display: inline-block;
 	position: sticky;
 	height: 71px;
+	border-bottom: 1px solid #EEEEEE;
+	
 }
+
 ul{
 	display: inline-flex;
 	list-style: none;
@@ -40,5 +43,6 @@ ul{
 	width: 100%;
 }
 .main-contaner{
-	background-color:rgba(236,239,241,.8);
+	background-color: #fbfbfb;
+	// background-color:rgba(236,239,241,.8);
 }

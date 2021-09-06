@@ -11,6 +11,7 @@ import puiconname from '../../assets/logo/pu-logo.png';
 import { Link } from 'react-router-dom';
 
 export default function Sidebar() {
+    
     return (
         <div className="sidebar">
             <Link className="sidebar-logo" to="/">
@@ -21,6 +22,7 @@ export default function Sidebar() {
                     <img src={puiconname} alt=""/>
                 </div>
             </Link>
+                <h2>Main Menu</h2>
             <Link className="sidebar-item" to="/">
                 <div className="sidebar-item-icon"><img src={deshboard} alt=""/>
                  </div>

@@ -40,13 +40,18 @@ nav{
     height: 38px;
 }
 .profile{
-    border: 2px solid fuchsia;
+    border: 1px solid #EEEEEE;
     display: flex;
     width: 173px;
     height: 43px;
     border-radius: 23px;
     align-items: center;
 }
-.setting img{
-    width: 73px;;
+a.profile img {
+    width: 38px;
+    height: 38px;
+    margin-right: 10px;
 }
+// .setting img{
+//     width: 73px;;
+// }

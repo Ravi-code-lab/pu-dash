@@ -8,7 +8,7 @@ html,body{
 
 /* Channghing the scroll bar color unable to currently */
 body{
-    scrollbar-width: 0.25rem;
+    scrollbar-width: 1.5rem;
     scrollbar-color: blueviolet;
     scrollbar-base-color: red;
 }
@@ -23,7 +23,4 @@ h3{
     font-weight: bold;
     padding: 0px;
     margin: 0px;
-}
-h5{
-    
 }

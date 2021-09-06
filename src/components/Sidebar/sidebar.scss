@@ -1,4 +1,6 @@
-
+.sidebar{
+  border-right: 1px solid #EEEEEE;
+}
 .sidebar-item{
   display: flex;
   flex-direction: row;
@@ -13,12 +15,8 @@
   margin-right: 10px;
 }
 .sidebar-item-icon img{
-  width: 29px;
-  height: 29px;
-}
-.sidebar-logo div{
-    font-size: 20px;
-
+  width: 23px;
+  height: 23px;
 }
 .sidebar-logo img{
     width: 100%;
@@ -27,9 +25,14 @@
     display: flex;
     align-items: center;
     padding: 12px 8px 62px;
-
+}
+.sidebar h2{
+  font-size: 14px;
+  text-align: start;
+  margin: 0px 0px 18px 18px;
 }
 .sidebar-item-text{
+  font-size: 18px;
 	color: #717579;
 	font-style: samin-bold;
 	font-weight: 600;
@@ -37,4 +40,8 @@
 a{
 	text-decoration: none;
 	font-family: Cambria, "Hoefler Text", "Liberation Serif", Times, "Times New Roman", "serif";
+}
+.togle{
+  display: flex;
+  align-items: center;
 }
