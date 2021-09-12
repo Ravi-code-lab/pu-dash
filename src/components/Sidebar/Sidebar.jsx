@@ -9,6 +9,7 @@ import Ebooks from '../../assets/icon/coment.svg';
 import puicon from '../../assets/logo/PUicon.svg';
 import puiconname from '../../assets/logo/pu-logo.png';
 import { Link } from 'react-router-dom';
+import { auth } from '../../firebase';
 
 export default function Sidebar() {
     
@@ -48,6 +49,7 @@ export default function Sidebar() {
                 <div className="sidebar-item-icon"><img src={Event} alt=""/></div>
                 <div className="sidebar-item-text">Event</div>
             </Link>
+            <button onClick={() => auth.signOut()}>Sign out</button>
        </div>
     )
 }
