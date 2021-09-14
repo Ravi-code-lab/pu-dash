@@ -21,7 +21,7 @@ export default function TopBar() {
             <nav>
               {/* <a className="setting" href="#!"><img src={setting} alt=""/></a> */}
               <button onClick={()=>signOutGoogle()}>Sign Out</button>
-              <a className='profile' href="#!"><img src={profile} alt="Img"/>Kuldeep</a>
+              <a className='profile' href="#!"><img src={auth.currentUser.photoURL} alt="Img"/>{auth.currentUser.displayName}</a>
               <a href="#!"><img src={Notification} alt=""/></a>
               <a href="#!"><img src={Notification} alt=""/></a>
               <a href="#!"><img src={file} alt=""/></a>

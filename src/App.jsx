@@ -6,9 +6,9 @@ import {auth, signInGoogle, signOutGoogle} from "./services/firebase";
 
 
 function App() {
-  const [notSignedIn, setnotSignedIn] = useState(true);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null);//for verifying if user is signeIn or signedOut
 
+  //for making the user sign in and sign out effect an change the page from signIn or Layout according to authantication
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(userAuth => {
       const user = {
@@ -24,15 +24,11 @@ function App() {
     return unsubscribe
   }, [])
 
-  //for checking and setting the notSignedIn State
-  
-  console.log(user);
+
   //Handle Sign In
   const  handleSClick = async () =>{
     await signInGoogle();
     console.log("Sign In");
-    
-    console.log(notSignedIn);
   }
 
   //Handle Sign Out
@@ -41,8 +37,8 @@ function App() {
     console.log("Sign Out");
   }
 
-  //checkSigned();
   return (
+      //this is B
       <div>
         {user===null?
         <input type="button" onClick={()=>handleSClick()}value="Sign In"/>:

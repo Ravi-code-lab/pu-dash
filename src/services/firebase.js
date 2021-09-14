@@ -12,7 +12,7 @@ const signInGoogle = async ()=>{
     try{
     setPersistence(auth, browserLocalPersistence);
     googleProvider.setCustomParameters({
-        'login_hint': 'user@poornima.edu.in'
+        'hd': 'poornima.edu.in'
     });
     await signInWithPopup(auth,googleProvider).catch((error)=> alert(error.message));
     }catch(error)
