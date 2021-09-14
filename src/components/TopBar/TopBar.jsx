@@ -1,7 +1,6 @@
 import React from 'react';
 import './TopBar.scss';
 import Notification from '../../assets/icon/Noti.svg'
-import profile from '../../assets/images/teachers.png'
 import group from '../../assets/icon/group.svg'
 // import setting from '../../assets/icon/setting.svg'
 import file from '../../assets/icon/fill.svg'
