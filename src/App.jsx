@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 // import Layout from "./Layout";
-import Login from "./Login";
+import Login from "./components/Login/Login";
 //import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
 import {auth} from "./services/firebase";
-import Temp from "./Temp";
+import Temp from "./components/Coming/Temp";
 //import signIn from "./services/auth";
 
 

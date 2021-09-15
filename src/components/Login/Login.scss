@@ -1,4 +1,4 @@
-.login-box {
+.login-style{
   position: absolute;
   top: 50%;
   left: 50%;
@@ -10,31 +10,31 @@
   box-shadow: 0 15px 25px rgba(0,0,0,.6);
   border-radius: 10px;
 }
-
 .login-box h2 {
   margin: 0 0 30px;
   padding: 0;
   color: #000;
   text-align: center;
 }
-.login-box form{
+.login-box {
   text-align: center;
 }
-
-
-.login-box form a {
+.login-box  button {
   position: relative;
   display: inline-block;
   padding: 10px 20px;
-  color: #03e9f4;
-  font-size: 16px;
+  color:#03e9f4 ;
+  font-size: 22px;
+  font-family: 'Monoton', cursive;
   text-decoration: none;
   text-transform: uppercase;
   overflow: hidden;
   transition: .5s;
-  letter-spacing: 4px
+  letter-spacing: 4px;
+  border: 0px;
+  background-color: #eeeeee00;
 }
-.login-box a:hover {
+.login-box button:hover {
   background: #03e9f4;
   color: #fff;
   border-radius: 5px;
@@ -44,11 +44,11 @@
               0 0 100px #03e9f4;
 }
 
-.login-box a span {
+.login-box button span {
   position: absolute;
   display: block;
 }
-.login-box a span:nth-child(1) {
+.login-box button span:nth-child(1) {
   top: 0;
   left: -100%;
   width: 100%;
@@ -66,7 +66,7 @@
   }
 }
 
-.login-box a span:nth-child(2) {
+.login-box button span:nth-child(2) {
   top: -100%;
   right: 0;
   width: 2px;
@@ -85,7 +85,7 @@
   }
 }
 
-.login-box a span:nth-child(3) {
+.login-box button span:nth-child(3) {
   bottom: 0;
   right: -100%;
   width: 100%;
@@ -103,7 +103,7 @@
   }
 }
 
-.login-box a span:nth-child(4) {
+.login-box button span:nth-child(4) {
   bottom: -100%;
   left: 0;
   width: 2px;
@@ -120,9 +120,4 @@
   50%,100% {
     bottom: 100%;
   }
-}
-
-.logo{
-  margin-top: 0px !important;
-  margin-bottom: 10px ;
 }
