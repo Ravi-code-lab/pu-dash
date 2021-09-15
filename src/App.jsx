@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import Layout from "./Layout";
-//import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
-import {auth, signInGoogle, signOutGoogle} from "./services/firebase";
-//import signIn from "./services/auth";
+import {auth, signInGoogle } from "./services/firebase";
 
 
 function App() {
@@ -31,11 +29,11 @@ function App() {
     console.log("Sign In");
   }
 
-  //Handle Sign Out
-  const handleOClick = async () =>{
-    await signOutGoogle();
-    console.log("Sign Out");
-  }
+  // //Handle Sign Out
+  // const handleOClick = async () =>{
+  //   await signOutGoogle();
+  //   console.log("Sign Out");
+  // }
 
   return (
       //this is B

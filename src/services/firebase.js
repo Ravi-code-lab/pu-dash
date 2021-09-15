@@ -3,22 +3,18 @@ import { getAuth ,GoogleAuthProvider, signInWithPopup, setPersistence,browserLoc
 import firebaseConfig from '../config/firebase-config';
 
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(); //Authantication variable contain Authantication related details
+const auth = getAuth(app); //Authantication variable contain Authantication related details
 const googleProvider = new GoogleAuthProvider();//provider for google signin
 
 
 //Function for signin
 const signInGoogle = async ()=>{
-    try{
+   
     setPersistence(auth, browserLocalPersistence);
     googleProvider.setCustomParameters({
         'hd': 'poornima.edu.in'
     });
     await signInWithPopup(auth,googleProvider).catch((error)=> alert(error.message));
-    }catch(error)
-    {
-        const mes= error.message;
-    }
 };
 
 //Functior used To sign Out

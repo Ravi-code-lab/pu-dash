@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import Layout from './Layout';
+//import Layout from './Layout';
 // import Protect from './Protect';
 
 ReactDOM.render(
