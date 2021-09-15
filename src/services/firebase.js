@@ -25,5 +25,5 @@ const signInGoogle = async ()=>{
 const signOutGoogle = async ()=>{
     await auth.signOut().catch((error)=>alert(error));
 }
-
 export { auth,signInGoogle,signOutGoogle};
+export default app;

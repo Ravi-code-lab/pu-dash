@@ -4,7 +4,6 @@ import TopBar from './components/TopBar/TopBar';
 import './Layout.scss';
 import './global.scss'
 import Pages from './components/Pages/Pages';
-
 import Dashoard from './components/Dashboard/Dashoard';
 import MyClass from './components/MyClass/MyClass';
 import Spage from './components/Student/Student';

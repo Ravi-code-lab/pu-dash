@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
-import Layout from "./Layout";
+// import Layout from "./Layout";
+import Login from "./Login";
 //import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
-import {auth, signInGoogle, signOutGoogle} from "./services/firebase";
+import {auth} from "./services/firebase";
+import Temp from "./Temp";
 //import signIn from "./services/auth";
 
 
@@ -26,23 +28,22 @@ function App() {
 
 
   //Handle Sign In
-  const  handleSClick = async () =>{
-    await signInGoogle();
-    console.log("Sign In");
-  }
+  // const  handleSClick = async () =>{
+  //   await signInGoogle();
+  //   console.log("Sign In");
+  // }
 
   //Handle Sign Out
-  const handleOClick = async () =>{
-    await signOutGoogle();
-    console.log("Sign Out");
-  }
+  // const handleOClick = async () =>{
+  //   await signOutGoogle();
+  //   console.log("Sign Out");
+  // }
 
   return (
       //this is B
       <div>
         {user===null?
-        <input type="button" onClick={()=>handleSClick()}value="Sign In"/>:
-        <Layout />
+        <Login/>: <Temp/>
         }
       </div>
     
