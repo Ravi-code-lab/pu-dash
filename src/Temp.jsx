@@ -10,10 +10,22 @@ export default function temp() {
 
   
   return (
+    <>
+    
+    <div class="object">
+      <div class="object-rope">
+       </div>
+      <div class="object-shape">
+    	   Coming <span class="soon">Soon</span>
+      </div>
+    </div>
+   
+    
+  <div className="box">
     <div className="welcome">
-      <div className="">
-        <img src={puicon} alt=""></img>
-        <img className="logo" src={puiconname} alt=""></img>
+      <div className="logo">
+        <img src={puicon} alt=""></img> 
+        <img className="" src={puiconname} alt=""></img>
       </div>
       <div className="timer">
         <Timer/>
@@ -23,7 +35,8 @@ export default function temp() {
       {auth.currentUser.displayName}<br/> Welcome to Poornim Uinversty</h1>
       
       <button onClick={()=>signOutGoogle()}>Sign Out</button>
+      </div>
     </div>
-   
+    </>
   )
 }
