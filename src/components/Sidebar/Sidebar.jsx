@@ -9,13 +9,9 @@ import Ebooks from '../../assets/icon/coment.svg';
 import puicon from '../../assets/logo/PUicon.svg';
 import puiconname from '../../assets/logo/pu-logo.png';
 import { Link } from 'react-router-dom';
-<<<<<<< HEAD
 
 export default function Sidebar() {
     
-=======
-export default function Sidebar() {
->>>>>>> 6251541c8ba6d1309774bdefefb71800b9853216
     return (
         <div className="sidebar">
             <Link className="sidebar-logo" to="/">
