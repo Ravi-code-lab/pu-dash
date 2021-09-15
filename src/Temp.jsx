@@ -10,7 +10,6 @@ export default function temp() {
 
   
   return (
-   
     <div className="welcome">
       <div className="">
         <img src={puicon} alt=""></img>
