@@ -1,7 +1,10 @@
 import React from 'react';
 import './TopBar.scss';
 import Notification from '../../assets/icon/Noti.svg'
+<<<<<<< HEAD
 //import profile from '../../assets/images/teachers.png'
+=======
+>>>>>>> 6251541c8ba6d1309774bdefefb71800b9853216
 import group from '../../assets/icon/group.svg'
 // import setting from '../../assets/icon/setting.svg'
 import file from '../../assets/icon/fill.svg'

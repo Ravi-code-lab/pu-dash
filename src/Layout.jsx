@@ -4,12 +4,20 @@ import TopBar from './components/TopBar/TopBar';
 import './Layout.scss';
 import './global.scss'
 import Pages from './components/Pages/Pages';
+<<<<<<< HEAD
 
 import Dashoard from './components/Pages/Dashboard/Dashoard';
 import MyClass from './components/Pages/MyClass/MyClass';
 import Spage from './components/Pages/Student/Student';
 import Event from './components/Pages/Event/Event';
 import Ebook from './components/Pages/Ebook/Ebook';
+=======
+import Dashoard from './components/Dashboard/Dashoard';
+import MyClass from './components/MyClass/MyClass';
+import Spage from './components/Student/Student';
+import Event from './components/Event/Event';
+import Ebook from './components/Ebook/Ebook';
+>>>>>>> 6251541c8ba6d1309774bdefefb71800b9853216
 import {
   BrowserRouter as Router,
   Switch,
