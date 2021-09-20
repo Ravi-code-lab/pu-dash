@@ -1,14 +1,17 @@
 import React from 'react';
 import './TopBar.scss';
+<<<<<<< HEAD
 import Notification from '../../assets/icon/Noti.svg'
 //import profile from '../../assets/images/teachers.png'
 import group from '../../assets/icon/group.svg'
 // import setting from '../../assets/icon/setting.svg'
 import file from '../../assets/icon/fill.svg'
+=======
+import { Notification, file ,group} from '../Import';
+>>>>>>> 1f18491ece3d45d0afc9775f1fa46b05e6924ad0
 import { auth, signOutGoogle } from '../../services/firebase';
 
 export default function TopBar() {
-    
     return (
         <div className="right-top-hedeer">
             <div className="togle" > 
@@ -25,7 +28,7 @@ export default function TopBar() {
               <a href="#!"><img src={Notification} alt=""/></a>
               <a href="#!"><img src={Notification} alt=""/></a>
               <a href="#!"><img src={file} alt=""/></a>
-              </nav>              
+             </nav>              
         </div>
     )
 }

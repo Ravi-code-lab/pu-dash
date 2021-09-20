@@ -5,12 +5,16 @@ import './Layout.scss';
 import './global.scss'
 import Pages from './components/Pages/Pages';
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1f18491ece3d45d0afc9775f1fa46b05e6924ad0
 import Dashoard from './components/Pages/Dashboard/Dashoard';
 import MyClass from './components/Pages/MyClass/MyClass';
 import Spage from './components/Pages/Student/Student';
 import Event from './components/Pages/Event/Event';
 import Ebook from './components/Pages/Ebook/Ebook';
+<<<<<<< HEAD
 =======
 import Dashoard from './components/Dashboard/Dashoard';
 import MyClass from './components/MyClass/MyClass';
@@ -18,6 +22,8 @@ import Spage from './components/Student/Student';
 import Event from './components/Event/Event';
 import Ebook from './components/Ebook/Ebook';
 >>>>>>> 6251541c8ba6d1309774bdefefb71800b9853216
+=======
+>>>>>>> 1f18491ece3d45d0afc9775f1fa46b05e6924ad0
 import {
   BrowserRouter as Router,
   Switch,

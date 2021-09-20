@@ -1,13 +1,6 @@
 import React from 'react';
 import './sidebar.scss'
-import Event from '../../assets/icon/event.svg';
-import deshboard from '../../assets/icon/desh.svg';
-import Teacher from '../../assets/icon/stud.svg';
-import Student from '../../assets/icon/stud.svg';
-import MyClass from '../../assets/icon/Noti.svg';
-import Ebooks from '../../assets/icon/coment.svg';
-import puicon from '../../assets/logo/PUicon.svg';
-import puiconname from '../../assets/logo/pu-logo.png';
+import {Event,Ebooks,deshboard,Teacher,Student,MyClass,puicon,puiconname} from "../Import"
 import { Link } from 'react-router-dom';
 
 export default function Sidebar() {

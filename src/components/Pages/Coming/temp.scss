@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
+@import "../../../global.scss";
+.welcome{
+  // background-image:.\assets\images\background.jpg;
+  /* Full height & width */
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: center;
+  height: 100vh;
+}
+.box{
+  margin: 0px;
+  padding: 0px;
+}
+h1 img{
+  border-radius: 50%;
+}
+// /* For Loop for font-size */
+// @for $f from 1 to 70 {
+// 	.f-size-#{$f}{
+//     font-family: 'Monoton', cursive;
+// 		font-size: 1px * $f;
+// 		$f: $f +1 ;
+// 	}
+// }
+h1{
+  color: $dark;
+}
+.logo{
+  margin-top: 60px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+//comeing shoon degin 
+@keyframes sway {
+  0% {
+    transform: rotate(8deg);
+  }
+  50% {
+    transform: rotate(-8deg);
+  }
+  100% {
+    transform: rotate(8deg);
+  }
+}
+.object {
+  position: absolute;
+  animation: sway 2.4s infinite;
+  animation-timing-function: ease-in-out;
+  -webkit-transform-origin: top;
+  -moz-transform-origin: top;
+  transform-origin: top;
+  padding-left:30px;
+  height: 5%;
+  z-index: 999;
+  text-transform: uppercase;
+}
+
+.object-shape {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  display: block;
+  background-color: #2187C7;
+  margin: 0 auto;
+  position: relative;
+  color: $white;
+  text-align: center;
+  padding-top: 25px;
+  font-weight: 800;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 22px;
+}
+
+.object-shape span {
+  font-family: 'Monoton', cursive;
+  font-size: 22px;
+  color: $white;
+}
+
+.object-rope {
+  height: 100%;
+  width: 5px;
+  background-color: #0b4163;
+  content: "";
+  display: block;
+  margin-left: 50%;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .object{
+    margin-left: 231px;
+  }
+  .object-shape{
+    width: 100px;
+    height: 100px;
+    font-size: 18px;
+  }
+  
+}
+@media only screen and  (max-width:340px) {
+  .object{
+    margin-left: 180px;
+  }
+  
+}
