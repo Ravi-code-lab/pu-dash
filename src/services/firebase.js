@@ -17,7 +17,7 @@ const signInGoogle = async ()=>{
     await signInWithPopup(auth,googleProvider).catch((error)=> alert(error.message));
     }catch(error)
     {
-        const mes= error.message;
+        // const mes= error.message;
     }
 };
 

@@ -70,5 +70,4 @@ class CountDown extends Component {
     );
   }
 }
-
 export default CountDown;

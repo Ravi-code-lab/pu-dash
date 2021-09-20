@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
+@import "../../global.scss";
 .welcome{
   // background-image:.\assets\images\background.jpg;
   /* Full height & width */
@@ -21,10 +22,16 @@
 h1 img{
   border-radius: 50%;
 }
+// /* For Loop for font-size */
+// @for $f from 1 to 70 {
+// 	.f-size-#{$f}{
+//     font-family: 'Monoton', cursive;
+// 		font-size: 1px * $f;
+// 		$f: $f +1 ;
+// 	}
+// }
 h1{
-  font-size: 48px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  color: grey;
+  color: $dark;
 }
 .logo{
   margin-top: 60px;
@@ -66,7 +73,7 @@ h1{
   background-color: #2187C7;
   margin: 0 auto;
   position: relative;
-  color: #fff;
+  color: $white;
   text-align: center;
   padding-top: 25px;
   font-weight: 800;
@@ -79,13 +86,13 @@ h1{
 .object-shape span {
   font-family: 'Monoton', cursive;
   font-size: 22px;
-  color:white;
+  color: $white;
 }
 
 .object-rope {
   height: 100%;
   width: 5px;
-  background-color: #2187C7;
+  background-color: #0b4163;
   content: "";
   display: block;
   margin-left: 50%;
