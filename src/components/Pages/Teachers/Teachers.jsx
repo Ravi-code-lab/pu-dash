@@ -1,5 +1,5 @@
 import React from 'react'
-import { teachers } from '../Import';
+import { teachers } from '../../Import';
 import './teachers.scss';
 
 export default function Teachers({ name, message,}) {

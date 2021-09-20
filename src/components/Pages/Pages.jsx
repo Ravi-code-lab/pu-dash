@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Teachers from '../Teachers/Teachers';
+import Teachers from '../Pages/Teachers/Teachers';
 import './Pages.scss';
 export default function Pages() {
     const [users] = useState([

@@ -1,6 +1,6 @@
 import React from 'react'
-import {signInGoogle } from '../../services/firebase';
-import { puicon, puiconname } from '../Import';
+import {signInGoogle } from '../../../services/firebase';
+import { puicon, puiconname } from '../../Import';
 import './Login.scss'
 export default function Login() {
   return (

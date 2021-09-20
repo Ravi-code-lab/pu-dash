@@ -1,5 +1,4 @@
-import Timer from './Timer/Timer';
-
+import Timer from './Pages/Timer/Timer';
 import teachers from '../assets/images/teachers.png';
 import puicon from '../assets/logo/PUicon.svg';
 import puiconname from '../assets/logo/pu-logo.png';

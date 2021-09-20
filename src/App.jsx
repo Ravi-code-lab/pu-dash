@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Layout from "./Layout";
-import Login from "./components/Login/Login";
+import Login from "./components/Pages/Login/Login";
 //import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
 import {auth} from "./services/firebase";
 // import Temp from "./components/Coming/Temp";
