@@ -1,59 +1,19 @@
-import { React, useState, useEffect } from 'react';
+import { React } from 'react';
 import {
-  BrowserRouter as Router, Redirect, Route, Switch
+  BrowserRouter as Router, Route, Switch
 } from "react-router-dom";
-import Dashoard from './components/Pages/Dashboard/Dashoard';
-import Ebook from './components/Pages/Ebook/Ebook';
-import Event from './components/Pages/Event/Event';
-import MyClass from './components/Pages/MyClass/MyClass';
-import Pages from './components/Pages/Pages';
-import Spage from './components/Pages/Student/Student';
+import Dashoard from './components/Pages/DashboardPages/Dashboard/Dashoard';
+import Ebook from './components/Pages/DashboardPages/Ebook/Ebook';
+import Event from './components/Pages/DashboardPages/Event/Event';
+import MyClass from './components/Pages/DashboardPages/MyClass/MyClass';
+import Spage from './components/Pages/DashboardPages/Student/Student';
+import Teachers from './components/Pages/DashboardPages/Teachers/Teachers';
 import Sidebar from './components/Sidebar/Sidebar';
 import TopBar from './components/TopBar/TopBar';
 import './global.scss';
 import './Layout.scss';
-import { auth, getFirebaseDocument } from './services/firebase';
 
 function Layout() {
-  //for redirecting to login if user is not login
-  const [registerd, setregisterd] = useState(false);
-  const [user, setUser] = useState(null);//for verifying if user is signeIn or signedOut
-  // //for making the user sign in and sign out effect an change the page from signIn or Layout according to authantication
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(userAuth => {
-      // const userData= {email: userAuth.email, name:userAuth.displayName};
-      if (userAuth === null) {
-        setUser(null)
-      }
-      else {
-        setUser(userAuth);
-      }
-    })
-    return unsubscribe
-  }, []);
-  if (user === null) {
-    console.log("login")
-    return <Redirect to="/Login" />
-  }
-  
-  let docId = user.email.split('@');
-  docId.pop();
-  docId = docId.join();
-  console.log(docId);
-  const querySnap = getFirebaseDocument("students", docId);
-  console.log(docId);
-  console.log(docId);
-  if (querySnap.exist()) {
-    setregisterd(true)
-  } else {
-    setregisterd(false)
-  }
-
-  if (!registerd) {
-    console.log("register")
-    return <Redirect to="/Register" />
-  }
-
   return (
     <Router>
       <div className="main-body">
@@ -81,7 +41,7 @@ function Layout() {
               </Route>
               {/* On Clike content Change  */}
               <Route path="/Teachers">
-                <Pages />
+                <Teachers />
               </Route>
               {/* On Clike content Change  */}
               <Route path="/MyClass">

@@ -28,7 +28,7 @@ const signOutGoogle = async ()=>{
 const insertFirebaseDocument = async (collection,docId,data) =>
 {
     const ref= doc( db, collection, docId);
-    return await setDoc(ref, { name: "data"}).catch((erro)=>alert(erro));
+    return await setDoc(ref, data).catch((erro)=>alert(erro));
 };
 
 //function for getting document

@@ -1,20 +1,14 @@
 // import userEvent from '@testing-library/user-event';
-import {React, useState} from 'react'
-import { Redirect } from 'react-router-dom';
+import {React} from 'react'
 import {signInGoogle } from '../../../services/firebase';
 import { puicon, puiconname } from '../../Import';
 import './Login.scss'
 export default function Login() {
-  const [loggedIn, setloggedIn] = useState(false)
-  console.log('test');
-  //for signIn or login
+   //for signIn or login
   async function logIn(){
-    await signInGoogle().then((result)=>{setloggedIn(true)});
+    await signInGoogle();
   }
 
-  if(loggedIn){
-    return <Redirect to="/Dashboard"/>
-  }
   return (
   <div className="login-box login-style">
     <div className="logo">
