@@ -1,8 +1,9 @@
-import Layout from "./Layout";
+//import Layout from "./Layout";
 import Login from "./components/Pages/Login/Login";
 import RegisterationForm, { CheckRegistration } from "./components/Pages/Registration/RegisterationForm";
 import {useState, useEffect} from 'react'
 import {auth} from './services/firebase'
+import Temp from "./components/Pages/Coming/Temp";
 
 export default function App() {
   const [user, setUser] = useState(null);//for verifying if user is signeIn or signedOut
@@ -31,7 +32,7 @@ export default function App() {
   console.log(registered);
   return (
     //for navigating to diffrent page based on registered logged in or not logged in
-    user === null ? <Login /> : registered ? <Layout /> : <RegisterationForm submitCallback={(val) => SubmitCallback(val)} />
+    user === null ? <Login /> : registered ? <Temp/> : <RegisterationForm submitCallback={(val) => SubmitCallback(val)} />
   );
 }
 
