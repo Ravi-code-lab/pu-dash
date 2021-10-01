@@ -1,6 +1,11 @@
 import {React, useState} from 'react'
 import { teachers } from '../../../Import';
 import './teachers.scss';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import Typography from '@mui/material/Typography' ;
+import CardContent from '@mui/material/CardContent';
+
 
 export default function Teachers() {
   const [users] = useState([
@@ -34,17 +39,17 @@ export default function Teachers() {
           </div>
         <div className="row">
           {users.map(user =>(
-        <div className="teach">
-        <div className="teachers-contener">
-          <img src={teachers} alt="dddd" width="80px"/>
-          <h3>{user.name}</h3>
-          <p>{user.message}</p>
-          <i className="bi bi-geo-alt"></i>
-          </div>
-        </div>
+            <Card variant="outlined">
+              <CardContent>
+                <Typography>
+                  Arun
+                </Typography>
+              </CardContent>
+
+            </Card>
         ))}
         </div>
-        <div className="teachers-title">sss
+        <div className="teachers-title">
           </div>
       </>
     
