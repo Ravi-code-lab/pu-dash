@@ -1,4 +1,4 @@
-import { doc, getDoc } from '@firebase/firestore';
+import { doc, getDoc, Timestamp } from '@firebase/firestore';
 import { React, useState } from 'react'
 import { db, auth, insertFirebaseDocument } from '../../../services/firebase'
 import Container from '@mui/material/Container';
@@ -32,6 +32,20 @@ export const CheckRegistration = async (user) => {
     return register;
 }
 
+function getCoursesAndSpecilization(email){
+    let course;
+    let specilizition;
+    if(email.indexof('bca')!==-1){
+        course='bca';
+        specilizition='gen'
+        if(email.indexof('bcaai')!==-1){
+            specilizition='ai'
+        }else if(email.indexof('bcamais')!==-1){
+            specilizition='mais'
+        }
+    }
+    return [course,specilizition]
+}
 
 
 
@@ -48,24 +62,26 @@ export default function RegisterationForm({ submitCallback }) {
         docId = docId.join();
         console.log(docId);
         console.log(form.regno);
+
+        let course = getCoursesAndSpecilization(docId);
         const data= { 
             name: auth.currentUser.displayName,
-            regno: form.regno.value,
-            dob: form.dob.value,
-            personalMobile: form.personalMobile.value,
+            regno: form.regno.value.toUpperCase(),
+            dob:form.dob.value,
+            email: auth.currentUser.email,
+            mobile: parseInt(form.personalMobile.value),
             personalEmail: form.personalEmail.value,
             fatherName: form.fatherName.value,
             fatherMobile: form.fatherMobile.value,
             motherName: form.motherName.value,
-            motherMobile: form.motherMobile.value,
+            motherMobile: form.motherMobile.value==null? parseInt('0'): parseInt(form.motherMobile.value),
             acadmics:{ 
-                marks10th: form.marks10.value, 
+                marks10th: parseInt(form.marks10.value), 
                 marks10thunit: form.marks10unit.value,
-                marks12th: form.marks12.value, 
+                marks12th: parseInt(form.marks12.value), 
                 marks12thunit: form.marks12unit.value 
             }
         }
-
         //submiting the form
         insertFirebaseDocument("students", docId, data).then(() => { submitCallback(true) });
     }
