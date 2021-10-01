@@ -1,41 +1,164 @@
 import { doc, getDoc } from '@firebase/firestore';
-import {React} from 'react'
+import { React, useState } from 'react'
 import { db, auth, insertFirebaseDocument } from '../../../services/firebase'
-export const CheckRegistration = async (user)=> {
-    let register = false;
+import Container from '@mui/material/Container';
+import Paper from '@mui/material/Paper';
+import { Avatar, Grid, TextField, Typography, Box, Autocomplete, Button } from '@mui/material'
+import { AvatarIcon, avatarImage } from '../../Import'
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DatePicker from '@mui/lab/DatePicker';
+
+
+//This Function is for checking the registeration
+export const CheckRegistration = async (user) => {
+    let register = 'std';
     let docId = user.email.split('@');
     docId.pop();
     docId = docId.join();
-    //const querySnap = getFirebaseDocument("students", docId);
-    //console.log(docId);
-    const ref = doc(db, "students", docId);
-    await getDoc(ref).then((docSnap) => { if (docSnap.exists()) { register=true } else { register=false } }).catch((error) => alert(error))
+    if (isNaN(docId.substring(0, 4))) {
+        register = 'tch'
+    }
+
+    if (register === 'tch') {
+        const ref = doc(db, "staff", docId);
+        await getDoc(ref).then((docSnap) => { if (docSnap.exists()) { register = 'staff' } else { register = 'staff' } }).catch((error) => alert(error))
+
+    } else {
+        const ref = doc(db, "students", docId);
+        await getDoc(ref).then((docSnap) => { if (docSnap.exists()) { register = 'std' } else { register = 'stdn' } }).catch((error) => alert(error))
+    }
     console.log(register);
     return register;
 }
 
- 
-export default function RegisterationForm({submitCallback}) {
+
+
+
+export default function RegisterationForm({ submitCallback }) {
+    const [dobvalue, setDobValue] = useState(null);
+    const gender = [{ label: "Male" }, { label: "Female" }, { label: "Other" }];
+
+    //on form submit this will run
     function SubmitForm(e) {
         const form = document.querySelector("#reg-form");
         e.preventDefault();
-        let docId=auth.currentUser.email.split('@');
+        let docId = auth.currentUser.email.split('@');
         docId.pop();
         docId = docId.join();
         console.log(docId);
-        const receivedData= insertFirebaseDocument("students",docId,{name:form.name.value});
-        console.log(receivedData);
-        receivedData.then((result)=>{ submitCallback(true)});
+        console.log(form.regno);
+        const data= { 
+            name: auth.currentUser.displayName,
+            regno: form.regno.value,
+            dob: form.dob.value,
+            personalMobile: form.personalMobile.value,
+            personalEmail: form.personalEmail.value,
+            fatherName: form.fatherName.value,
+            fatherMobile: form.fatherMobile.value,
+            motherName: form.motherName.value,
+            motherMobile: form.motherMobile.value,
+            acadmics:{ 
+                marks10th: form.marks10.value, 
+                marks10thunit: form.marks10unit.value,
+                marks12th: form.marks12.value, 
+                marks12thunit: form.marks12unit.value 
+            }
+        }
+
+        //submiting the form
+        insertFirebaseDocument("students", docId, data).then(() => { submitCallback(true) });
     }
+
+
     return (
         <div>
-            <form id="reg-form" action="POST" onSubmit={(e) => SubmitForm(e)}>
-                <div>
-                    <label htmlFor="name">Name</label>
-                    <input type="text" name="name" id="name" placeholder="Enter your Name" />
-                </div>
-                <button type="submit">Submit</button>
-            </form>
+            <Container component="main" maxWidth="md" sx={{textAlign:'center'}}>
+            <Typography sx={{ padding:'20px'}} variant="h5"  gutterBottom>Registration Form</Typography>
+                <Paper sx={{ padding: "20px 20px 20px 20px" }}>
+                    <form id="reg-form" method="POST" onSubmit={(e) => SubmitForm(e)}>
+                        <Typography variant="h6"  gutterBottom>Personal Details</Typography>
+                        <Box style={{ margin: "auto" }}>
+                            <Avatar alt="Avatar Icon" sx={{ width: 150, height: 150, margin: "auto" }} src={AvatarIcon} />
+                        </Box>
+                        <Grid sx={{ mt: 1 }} container spacing={3}>
+                            <Grid xs={12} item>
+                                <TextField label="Registation no" name="regno" fullWidth required />
+                            </Grid>
+                            <Grid xs={12} item>
+                                <TextField sx={{textAlign:'left'}} type="email" label="Personal Email" name="personalEmail" fullWidth required />
+                            </Grid>
+                            <Grid xs={12} item>
+                                <TextField type="tel" label="Personal Mobile" name="personalMobile" fullWidth required />
+                            </Grid>
+                            <Grid xs={12} sm={6} item>
+                                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                    <DatePicker
+                                        label="DOB"
+                                        value={dobvalue}
+                                        onChange={(newValue) => {
+                                            setDobValue(newValue);
+                                        }}
+                                        renderInput={(params) => <TextField {...params} name="dob" fullWidth required />}
+                                    />
+                                </LocalizationProvider>
+                            </Grid>
+                            <Grid xs={12} sm={6} item>
+                                <Autocomplete
+                                    disablePortal
+                                    options={gender}
+                                    renderInput={(params) => <TextField {...params} name="gender" label="Gender" required />}
+                                />
+                            </Grid>
+                            <Grid xs={12} sm={6} item>
+                                <TextField label="Father Name" name="fatherName"fullWidth required />
+                            </Grid>
+                            <Grid xs={12} sm={6} item>
+                                <TextField
+                                    inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+                                    label="Father Phone Number"
+                                    fullWidth
+                                    name="fatherMobile"
+                                    required />
+                            </Grid>
+                            <Grid xs={12} sm={6} item>
+                                <TextField label="Mother Name" name="motherName" fullWidth required/>
+                            </Grid>
+                            <Grid xs={12} sm={6} item>
+                                <TextField label="Mother Phone Number" name="motherMobile" type="number" fullWidth />
+                            </Grid>
+                            <Grid xs={12} item>
+                                <TextField label="Address" name="address" fullWidth />
+                            </Grid>
+                        </Grid>
+                        <Typography sx={{mt:2}} variant="h6" gutterBottom>Acadmic Details</Typography>
+                        <Grid sx={{ mt: 1 }} container spacing={3}>
+                        <Grid xs={12} sm={3} item>
+                                <TextField label="10th Marks" name="marks10" type="number" fullWidth required />
+                        </Grid>
+                        <Grid item xs={12} sm={3}>
+                        <Autocomplete
+
+                                    disablePortal
+                                    options={['%','CGPA']}
+                                    renderInput={(params) => <TextField {...params} name="marks10unit" label="Unit" required />}
+                                />
+                        </Grid>
+                        <Grid xs={12} sm={3} item>
+                                <TextField label="12th Marks" type="number" name="marks12" fullWidth required />
+                        </Grid>
+                        <Grid item xs={12} sm={3}>
+                        <Autocomplete
+                                    disablePortal
+                                    options={['%','CGPA']}
+                                    renderInput={(params) => <TextField {...params} name="marks12unit" label="Unit" required />}
+                                />
+                        </Grid>
+                        </Grid>
+                        <Button type="submit" variant="contained" sx={{mt:5}}> Register</Button>
+                    </form>
+                </Paper>
+            </Container>
         </div>
     )
 }
