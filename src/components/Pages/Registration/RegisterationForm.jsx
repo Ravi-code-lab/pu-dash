@@ -35,16 +35,21 @@ export const CheckRegistration = async (user) => {
 function getCoursesAndSpecilization(email){
     let course;
     let specilizition;
+    let dep;
     if(email.indexof('bca')!==-1){
         course='bca';
+        dep='sce'
         specilizition='gen'
         if(email.indexof('bcaai')!==-1){
             specilizition='ai'
         }else if(email.indexof('bcamais')!==-1){
             specilizition='mais'
+        }else if(email.indexof('bcads')!==-1){
+        }else if(email.indexof('bcacloud'!==-1)){
+            
         }
     }
-    return [course,specilizition]
+    return [dep,course,specilizition]
 }
 
 
