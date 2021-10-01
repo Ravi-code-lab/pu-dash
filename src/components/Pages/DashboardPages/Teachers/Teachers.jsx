@@ -9,7 +9,7 @@ import { red } from '@mui/material/colors';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CallIcon from '@mui/icons-material/Call';
 import EmailIcon from '@mui/icons-material/Email';
-import { Container } from '@mui/material';
+import { Container, Grid, Icon } from '@mui/material';
 import CardActions from '@mui/material/CardActions';
 import Box from '@mui/material/Box'
 import { makeStyles } from '@mui/styles';
@@ -17,6 +17,9 @@ import { makeStyles } from '@mui/styles';
 const useStyles = makeStyles({
   root:{
     background:  '#fefkdf'
+  },
+  boxSize:{
+
   }
 })
 
@@ -51,56 +54,67 @@ export default function Teachers() {
 
   return (
     <>
-      <Container className={classes.root} sx={{padding:"",textAlign:'center'}}>
-      <Typography variant="h4"> Teachers </Typography>
-      <div className="row">
-        {users.map(user => (
-          <Card sx={{ maxWidth: 405, margin: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <div className="Carss">
-              <CardHeader
-                avatar={
-                  <Avatar variant="rounded"  sx={{borderRadius:4,display: 'flex', alignItems: 'center', bgcolor: red[800], width: 90, height: 90 }}>
-                    A
-                  </Avatar>
-                }
-                action={
-                  <IconButton aria-label="settings">
-                    <MoreVertIcon />
-                  </IconButton>
-                }
-              />
-              <CardContent sx={{ display: 'block' }}>
-                <Typography gutterBottom variant="h5" component="div">
-                  Kavita Lal
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  Matemathics
-                </Typography>
+        <Grid container sx={{}} columnGap={2} rowGap={2}>
+          {users.map((user,index) => (
+            <Grid item xs={12} sm={3}key={index} ><Card
+              sx={{
+                margin: 1,
+            
+              }}
+            >
+                <CardHeader
+                  action={
+                    <IconButton aria-label="settings">
+                      <MoreVertIcon />
+                    </IconButton>
+                  }
+                  avatar={
+                    <Avatar
+                      variant="rounded"
+                      sx={{
+                        borderRadius: 4,
+                        alignItems: "center",
+                        justifyContent:"center",
+                        bgcolor: red[800],
+                        width: 90,
+                        height: 90,
+                      }}
+                    >
+                      A
+                </Avatar>
+
+                  }
+                />
+                
+                <CardContent sx={{ display: "block" }}>
+                  <Typography gutterBottom variant="h6" component="div">Kavita Lal</Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Matemathics
+                  </Typography>
                 </CardContent>
 
-              <CardActions sx={{width:'100%',textAlign:'left',display: 'inline-block'}}>
-                  <Box>
-                    <IconButton aria-label="Call" sx={{ background: red[50], borderRadius: 6}}>
-                      <CallIcon sx={{ color: red[500]}} />
+                <CardActions sx={{ display: "inline-block" , alignItems:'center'}}>
+                  <Box sx={{ display: "flex",}}>
+                    <IconButton sx={{ background: red[50], borderRadius: 6 }}>
+                      <CallIcon sx={{ color: red[500] }} /> <Typography variant="body2">+91 7405273736</Typography>
                     </IconButton>
-                    <Typography variant="body2" color="text.secondary">
-                      Matemathics
-                    </Typography>
-                        
+                    
                   </Box>
-                  <Box sx={{display:'block'}}>
-                    <IconButton aria-label="Email"  sx={{ background: red[50], borderRadius: 6}}>
-                      <EmailIcon sx={{ color:red[500]}}/>
+                  <Box sx={{ display: "flex" ,  }}>
+                    <IconButton sx={{ background: red[50], borderRadius: 6 }}>
+                      <Icon>
+                      <EmailIcon sx={{ color: red[500] }} /> 
+                      </Icon>
+                      <Typography variant="body2">123@example.com</Typography>
                     </IconButton>
+                    
                   </Box>
                 </CardActions>
-            </div>
-          </Card>
-        ))}
-      </div>
-      </Container>
+            </Card>
+            </Grid>
+          ))}
+        </Grid>
     </>
-
-  )
+  );
 }
 

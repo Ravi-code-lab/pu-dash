@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router, Route, Switch
 } from "react-router-dom";
 import Dashoard from './components/Pages/DashboardPages/Dashboard/Dashoard';
-import Ebook from './components/Pages/DashboardPages/Ebook/Ebook';
+import Chats from './components/Pages/DashboardPages/Chats/Chats';
 import Event from './components/Pages/DashboardPages/Event/Event';
 import MyClass from './components/Pages/DashboardPages/MyClass/MyClass';
 import Spage from './components/Pages/DashboardPages/Student/Student';
@@ -30,33 +30,32 @@ function Layout() {
           </div>
           <div className="bottom main-contaner">
             <Switch>
-
               {/* On Clike content Change  */}
-              <Route path="/Event">
+              <Route exact path="/Event">
                 <Event />
               </Route>
               {/* On Clike content Change  */}
-              <Route path="/Student">
+              <Route exact path="/Student">
                 <Spage />
               </Route>
               {/* On Clike content Change  */}
-              <Route path="/Teachers">
+              <Route exact path="/Teachers">
                 <Teachers />
               </Route>
               {/* On Clike content Change  */}
-              <Route path="/MyClass">
+              <Route exact path="/MyClass">
                 <MyClass />
               </Route>
               {/* On Clike content Change  */}
-              <Route path="/Ebook">
-                <Ebook />
+              <Route exact path="/Chats">
+                <Chats />
               </Route>
               {/* On Clike content Change  */}
-              <Route path="/Student">
+              <Route exact path="/Student">
                 <Spage />
               </Route>
               {/* On Clike content Change  */}
-              <Route path="/Dashboard">
+              <Route path="/">
                 <Dashoard />
               </Route>
             </Switch>

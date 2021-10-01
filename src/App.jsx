@@ -1,9 +1,9 @@
-import Layout from "./Layout";
+// import Layout from "./Layout";
+import Layout from "./components/navigation/Layout";
 import Login from "./components/Pages/Login/Login";
 import RegisterationForm, { CheckRegistration } from "./components/Pages/Registration/RegisterationForm";
 import {useState, useEffect} from 'react'
 import {auth} from './services/firebase'
-import Temp from "./components/Pages/Coming/Temp";
 
 export default function App() {
   const [user, setUser] = useState(null);//for verifying if user is signeIn or signedOut
