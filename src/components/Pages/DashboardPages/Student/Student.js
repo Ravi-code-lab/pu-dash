@@ -1,4 +1,4 @@
-import {React, useState} from 'react';
+import {React, useState,useEffect} from 'react';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 
@@ -14,42 +14,69 @@ import EmailIcon from '@mui/icons-material/Email';
 
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CallIcon from '@mui/icons-material/Call';
-import { Box } from '@mui/material';
+import { Box, LinearProgress } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+
+
+// Student Styles  
+const useStyles = makeStyles(theme => ({
+  
+  container: {
+    display:'flex',
+    flexWrap:'wrap',
+  },
+  card:{
+    margin:'19px'
+
+  },
+  avatar:{
+    borderRadius: '16px',
+    margin: '-50px auto auto auto',
+    bgcolor: red[800],
+    width: 90,
+    height: 90,
+  },
+  cardContent:{
+    textAlign:'center'
+  },
+  iconButton:{
+    background: red[50], 
+    borderRadius: '20px' ,
+    marginRight:'6px'
+  },
+  iconColor:{
+    color: red[500]
+  },
+  font:{
+    fontSize: '16px'
+  }
+
+}));
+
+
 export default function Student() {
+
+
+  const classes = useStyles();
     const [users] = useState([
       { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
       { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
       { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
-      { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
-      { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
-      { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
-      { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
-      { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
-      { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
-      { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
-      { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
-      { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
-      { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
-      { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
-      { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
-      { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
-      { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
-      { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
-      { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
-      { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
-      { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
-      { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
-      { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
-      { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
-      { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
-      { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
-     
+
       ]);
+
+
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 500)
+  }, [])
   return (
-    
-    <Box container  sx={{display:'flex',flexWrap:'wrap',}}>
+    <>
+    {loading === false ? (
+    <Box container className={classes.container}>
     {users.map((user, index) => (
-    <Card key={index}  sx={{ margin:'19px'}}>
+    <Card key={index}>
       <CardHeader
         action={
           <IconButton aria-label="settings">
@@ -57,36 +84,32 @@ export default function Student() {
           </IconButton>
         }
       />
-     <Avatar 
-     sx={{
-      borderRadius: 4,
-      margin: '-50px auto auto auto',
-      bgcolor: red[800],
-      width: 90,
-      height: 90,
-    }}
+     <Avatar className={classes.avatar}
      ></Avatar>
-      <CardContent sx={{ display: "block", textAlign:'center' }}>
+      <CardContent className={classes.cardContent}>
          <Typography gutterBottom variant="h6" component="div">{user.name}</Typography>
          <Typography variant="body2" color="text.secondary">
            {user.message}
           </Typography>
          </CardContent>
-      <CardActions sx={{fontSize:14}} >
-        <IconButton sx={{background: red[50], borderRadius: 6 ,marginRight:1 }}>
-        <CallIcon sx={{ color: red[500] }} />
+      <CardActions className={classes.font}>
+        <IconButton className={classes.iconButton}>
+        <CallIcon className={classes.iconc} />
         </IconButton>
        {user.mobile}
       </CardActions>
-      <CardActions sx={{fontSize:14}}>
-        <IconButton sx={{background: red[50], borderRadius: 6 ,marginRight:1 }} aria-label="Email">
-        <EmailIcon sx={{ color: red[500]}} /> 
+      <CardActions >
+        <IconButton className={classes.iconButton} aria-label="Email">
+        <EmailIcon className={classes.iconColor} /> 
         </IconButton>
         {user.email}
       </CardActions>
     </Card>
         ))}
    </Box>
-   
+   ) : (
+     <LinearProgress/>
+  )}
+  </>
   );
 }
