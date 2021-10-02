@@ -1,5 +1,37 @@
-@import "../../../global.scss";
+
 @import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
+
+
+$blue : #304FFD;
+
+$dark: #1D1E24;
+
+$bg: #F8F8F8;
+*{
+	margin: 0%;
+	border: 0px;
+	box-sizing: border-box;
+}
+@for $v from 1 to 70 {	
+	.f-size-#{$v}{
+		font-size: 1px * $v;
+		$v: $v +1 ;
+	}
+}
+
+
+@for $v from 1 to 70{
+	.b-size-#{$v}{
+		border: 1px * $v;
+		$v: $v +1;
+	}
+}
+
+
+
+
+
+
 /* Counter styles */
 .counter{
   font-family: 'Monoton', cursive;
