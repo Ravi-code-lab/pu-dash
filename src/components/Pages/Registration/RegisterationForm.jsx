@@ -36,6 +36,8 @@ function getCoursesAndSpecilization(email){
     let course;
     let specilizition;
     let dep;
+
+    //checking for course from email
     if(email.indexof('bca')!==-1){
         course='bca';
         dep='sce'
@@ -154,9 +156,11 @@ export default function RegisterationForm({ submitCallback }) {
                         </Grid>
                         <Typography sx={{mt:2}} variant="h6" gutterBottom>Acadmic Details</Typography>
                         <Grid sx={{ mt: 1 }} container spacing={3}>
+                            {/* 10ths Marks */}
                         <Grid xs={12} sm={3} item>
                                 <TextField label="10th Marks" name="marks10" type="number" fullWidth required />
                         </Grid>
+                        {/* 10th Marks Unit */}
                         <Grid item xs={12} sm={3}>
                         <Autocomplete
 
@@ -165,9 +169,11 @@ export default function RegisterationForm({ submitCallback }) {
                                     renderInput={(params) => <TextField {...params} name="marks10unit" label="Unit" required />}
                                 />
                         </Grid>
+                        {/* 12th Marks Unit */}
                         <Grid xs={12} sm={3} item>
                                 <TextField label="12th Marks" type="number" name="marks12" fullWidth required />
                         </Grid>
+                        {}
                         <Grid item xs={12} sm={3}>
                         <Autocomplete
                                     disablePortal
