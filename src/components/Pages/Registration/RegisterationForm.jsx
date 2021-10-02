@@ -9,6 +9,7 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 
+export let userData;
 
 //This Function is for checking the registeration
 export const CheckRegistration = async (user) => {
@@ -26,7 +27,7 @@ export const CheckRegistration = async (user) => {
 
     } else {
         const ref = doc(db, "students", docId);
-        await getDoc(ref).then((docSnap) => { if (docSnap.exists()) { register = 'std' } else { register = 'stdn' } }).catch((error) => alert(error))
+        await getDoc(ref).then((docSnap) => { if (docSnap.exists()) { register = 'std'; userData=docSnap.data(); } else { register = 'stdn'; userData=null;} }).catch((error) => alert(error))
     }
     // console.log(register);
     return register;
@@ -35,25 +36,26 @@ export const CheckRegistration = async (user) => {
 //for checking the department courses and setting them and then return arrary [dep, course, spec]
 function getCoursesAndSpecilization(email){
     let course;
-    let specilizition;
+    let specilization;
     let dep;
 
     //checking for course from email
-    if(email.indexof('bca')!==-1){
+    if(email.indexOf('bca')!==-1){
         dep='sce';
         course='bca';
         dep='sce'
-        specilizition='gen'
-        if(email.indexof('bcaai')!==-1){
-            specilizition='ai'
-        }else if(email.indexof('bcamais')!==-1){
-            specilizition='mais'
-        }else if(email.indexof('bcads')!==-1){
-        }else if(email.indexof('bcacloud'!==-1)){
-            
+        specilization='gen'
+        if(email.indexOf('bcaai')!==-1){
+            specilization='ai';
+        }else if(email.indexOf('bcamais')!==-1){
+            specilization='mais';
+        }else if(email.indexOf('bcads')!==-1){
+            specilization="ds";
+        }else if(email.indexOf('bcacloud'!==-1)){
+            specilization="cloud";
         }
     }
-    return [dep, course, specilizition]
+    return [dep, course, specilization]
 }
 
 
@@ -194,3 +196,4 @@ export default function RegisterationForm({ submitCallback }) {
         </div>
     )
 }
+
