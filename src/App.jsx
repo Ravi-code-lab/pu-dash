@@ -35,7 +35,7 @@ export default function App() {
     CheckRegistration(user).then((result) => setRegistered(result));
   }
 
-  console.log(registered);
+  // console.log(registered);
   return (
     //for navigating to diffrent page based on registered logged in or not logged in
     user === null ? <Login /> : registered === 'std' ? <Layout/> : registered === 'stdn'?<RegisterationForm submitCallback={(val) => SubmitCallback(val)} />:registered==='tch'?<Layout/>:<Layout/>

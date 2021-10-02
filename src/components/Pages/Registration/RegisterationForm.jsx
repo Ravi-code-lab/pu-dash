@@ -1,10 +1,10 @@
 import { doc, getDoc} from '@firebase/firestore';
-import { React, useState } from 'react'
-import { db, auth, insertFirebaseDocument } from '../../../services/firebase'
+import { React, useState } from 'react';
+import { db, auth, insertFirebaseDocument } from '../../../services/firebase';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
-import { Avatar, Grid, TextField, Typography, Box, Autocomplete, Button } from '@mui/material'
-import { AvatarIcon} from '../../Import'
+import { Avatar, Grid, TextField, Typography, Box, Autocomplete, Button } from '@mui/material';
+import { AvatarIcon} from '../../Import';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
@@ -28,10 +28,11 @@ export const CheckRegistration = async (user) => {
         const ref = doc(db, "students", docId);
         await getDoc(ref).then((docSnap) => { if (docSnap.exists()) { register = 'std' } else { register = 'stdn' } }).catch((error) => alert(error))
     }
-    console.log(register);
+    // console.log(register);
     return register;
 }
 
+//for checking the department courses and setting them and then return arrary [dep, course, spec]
 function getCoursesAndSpecilization(email){
     let course;
     let specilizition;
@@ -39,6 +40,7 @@ function getCoursesAndSpecilization(email){
 
     //checking for course from email
     if(email.indexof('bca')!==-1){
+        dep='sce';
         course='bca';
         dep='sce'
         specilizition='gen'
@@ -51,7 +53,7 @@ function getCoursesAndSpecilization(email){
             
         }
     }
-    return [dep,course,specilizition]
+    return [dep, course, specilizition]
 }
 
 
@@ -70,13 +72,16 @@ export default function RegisterationForm({ submitCallback }) {
         console.log(docId);
         console.log(form.regno);
 
-        let course = getCoursesAndSpecilization(docId);
+        let courseDetails = getCoursesAndSpecilization(docId);
         const data= { 
             name: auth.currentUser.displayName,
             regno: form.regno.value.toUpperCase(),
             dob:form.dob.value,
             email: auth.currentUser.email,
             mobile: parseInt(form.personalMobile.value),
+            department: courseDetails[0],
+            course: courseDetails[1],
+            specilization: courseDetails[2],
             personalEmail: form.personalEmail.value,
             fatherName: form.fatherName.value,
             fatherMobile: form.fatherMobile.value,
