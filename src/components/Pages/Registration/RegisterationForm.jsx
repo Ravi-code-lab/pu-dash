@@ -43,16 +43,15 @@ function getCoursesAndSpecilization(email){
     if(email.indexOf('bca')!==-1){
         dep='sce';
         course='bca';
-        dep='sce'
-        specilization='gen'
+        specilization='gen';
         if(email.indexOf('bcaai')!==-1){
             specilization='ai';
+        }else if(email.indexOf('bcaitms')!==-1){
+            specilization='itms';
         }else if(email.indexOf('bcamais')!==-1){
             specilization='mais';
         }else if(email.indexOf('bcads')!==-1){
             specilization="ds";
-        }else if(email.indexOf('bcacloud'!==-1)){
-            specilization="cloud";
         }
     }
     return [dep, course, specilization]
@@ -81,12 +80,13 @@ export default function RegisterationForm({ submitCallback }) {
             dob:form.dob.value,
             email: auth.currentUser.email,
             mobile: parseInt(form.personalMobile.value),
+            address: form.address.value,
             department: courseDetails[0],
             course: courseDetails[1],
             specilization: courseDetails[2],
             personalEmail: form.personalEmail.value,
             fatherName: form.fatherName.value,
-            fatherMobile: form.fatherMobile.value,
+            fatherMobile: parseInt(form.fatherMobile.value),
             motherName: form.motherName.value,
             motherMobile: form.motherMobile.value==null? parseInt('0'): parseInt(form.motherMobile.value),
             acadmics:{ 
@@ -165,7 +165,7 @@ export default function RegisterationForm({ submitCallback }) {
                         <Grid sx={{ mt: 1 }} container spacing={3}>
                             {/* 10ths Marks */}
                         <Grid xs={12} sm={3} item>
-                                <TextField label="10th Marks" name="marks10" type="number" fullWidth required />
+                                <TextField label="10th Marks" name="marks10" type="" fullWidth required />
                         </Grid>
                         {/* 10th Marks Unit */}
                         <Grid item xs={12} sm={3}>

@@ -12,10 +12,12 @@ import EmailIcon from "@mui/icons-material/Email";
 import {  Grid } from "@mui/material";
 import CardActions from "@mui/material/CardActions";
 import Box from "@mui/material/Box";
-
+import { userData } from "../../Registration/RegisterationForm";
 
 
 export default function Teachers() {
+
+  const [teachersData, setteachersData] = useState(null)
   
   const [users] = useState([
     { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
@@ -46,6 +48,11 @@ export default function Teachers() {
     { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
   ]);
 
+  function getTeacherData(){
+  }
+
+
+  getTeacherData();
   return (
     <>
       <Grid container spacing={2}>

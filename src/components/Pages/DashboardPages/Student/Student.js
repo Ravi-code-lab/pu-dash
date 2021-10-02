@@ -15,12 +15,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CallIcon from '@mui/icons-material/Call';
 import { Box } from '@mui/material';
-
-
-
 export default function Student() {
-  
- 
     const [users] = useState([
       { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
       { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
