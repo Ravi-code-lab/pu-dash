@@ -28,7 +28,7 @@ import Dashoard from '../Pages/DashboardPages/Dashboard/Dashoard';
 import Chats from '../Pages/DashboardPages/Chats/Chats';
 import Event from '../Pages/DashboardPages/Event/Event';
 import MyClass from '../Pages/DashboardPages/MyClass/MyClass';
-import Spage from '../Pages/DashboardPages/Student/Student';
+import Student from '../Pages/DashboardPages/Student/Student';
 import Teachers from '../Pages/DashboardPages/Teachers/Teachers';
 import { Avatar } from '@mui/material';
 import { auth,signOutGoogle } from '../../services/firebase';
@@ -105,6 +105,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 export default function Layout() {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
+  const routeName = ['Dashboard', 'My Class', 'Student', 'Teachers', 'Events', 'Chats'];
+  const routeLinks = ['/', '/MyClass', '/Student', '/Teachers', '/Events', '/Chats']
   const [activePage, setActivePage] = useState(0)
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -126,14 +128,11 @@ export default function Layout() {
     }
   }
 
-  const routeLinks = ['/', '/MyClass', '/Student', '/Teachers', '/Events', '/Chats']
-  const routeName = ['Dashboard', 'My Class', 'Student', 'Teachers', 'Events', 'Chats'];
 
   return (
     <Router>
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-
        {/* App Bar Stat */}
       <AppBar sx={{background:"white",color:"black"}} position="fixed" open={open}>
         <Toolbar>
@@ -156,10 +155,6 @@ export default function Layout() {
           <Button  onClick={()=>{signOutGoogle()}}> Logout</Button>
         </Toolbar>
       </AppBar>
-
-
-
-      
       {/* Sidebar */}
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
@@ -170,12 +165,12 @@ export default function Layout() {
         <Divider />
         <List>
           {routeName.map((text, index) => (
-            <Link key={text} to={routeLinks[index]}>
+            <Link key={index} to={routeLinks[index]}>
             <ListItem button onClick={()=>{setActivePage(index)}}>
               <ListItemIcon>
                 {getIconTag(index,activePage)}
               </ListItemIcon>
-              <ListItemText sx={{textDecoration:'none'}} primary={text}  />
+              <ListItemText primaryTypographyProps={{ style:{color:'#000' } }} primary={text}  />
             </ListItem>
             </Link>
           ))}
@@ -185,32 +180,28 @@ export default function Layout() {
         <DrawerHeader />
             <Switch>
               {/* On Clike content Change  */}
-              <Route path="/Event">
-                <Event />
+              <Route exact path="/">
+                <Dashoard />
               </Route>
               {/* On Clike content Change  */}
-              <Route path="/Student">
-                <Spage />
-              </Route>
-              {/* On Clike content Change  */}
-              <Route path="/Teachers">
-                <Teachers />
-              </Route>
-              {/* On Clike content Change  */}
-              <Route path="/MyClass">
+              <Route exact path="/MyClass">
                 <MyClass />
               </Route>
               {/* On Clike content Change  */}
-              <Route path="/Chats">
+              <Route exact path="/Student">
+                <Student />
+              </Route>
+              {/* On Clike content Change  */}
+              <Route exact path="/Teachers">
+                <Teachers />
+              </Route>
+              {/* On Clike content Change  */}
+              <Route exact path="/Event">
+                <Event />
+              </Route>
+              {/* On Clike content Change  */}
+              <Route exact path="/Chats">
                 <Chats />
-              </Route>
-              {/* On Clike content Change  */}
-              <Route path="/Student">
-                <Spage />
-              </Route>
-              {/* On Clike content Change  */}
-              <Route path="/">
-                <Dashoard />
               </Route>
             </Switch>
       </Box>
