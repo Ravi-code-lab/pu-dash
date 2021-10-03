@@ -111,7 +111,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 
-///  Search 
+///  Search
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
