@@ -1,29 +1,28 @@
 import {React, useState,useEffect} from 'react';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
 
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
+// Use For Styles 
 
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
+import { makeStyles } from '@mui/styles';
+
+// components
+import {IconButton,CardHeader,Card,Typography,Avatar,CardActions,CardContent,Box, LinearProgress} from '@mui/material';
+
+
+
+// mui Color
 import { red } from '@mui/material/colors';
-
+// Icons
 import EmailIcon from '@mui/icons-material/Email';
-
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CallIcon from '@mui/icons-material/Call';
-import { Box, LinearProgress } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 
 
 // Student Styles  
 const useStyles = makeStyles(theme => ({
-  
   container: {
     display:'flex',
     flexWrap:'wrap',
+   
   },
   card:{
     margin:'19px'
@@ -35,6 +34,7 @@ const useStyles = makeStyles(theme => ({
     bgcolor: red[800],
     width: 90,
     height: 90,
+    
   },
   cardContent:{
     textAlign:'center'
@@ -62,10 +62,7 @@ export default function Student() {
       { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
       { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
       { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
-
       ]);
-
-
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
