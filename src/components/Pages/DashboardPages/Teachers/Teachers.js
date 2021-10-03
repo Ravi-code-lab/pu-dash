@@ -9,12 +9,14 @@ import { red } from "@mui/material/colors";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import CallIcon from "@mui/icons-material/Call";
 import EmailIcon from "@mui/icons-material/Email";
-import { Grid } from "@mui/material";
 import CardActions from "@mui/material/CardActions";
 import Box from "@mui/material/Box";
 import { userData } from "../../Registration/RegisterationForm";
 import { db } from '../../../../services/firebase';
 import { collection, query, where, getDocs } from "firebase/firestore";
+// Use For Styles 
+
+import { makeStyles } from '@mui/styles';
 
 
 export default function Teachers() {
@@ -77,12 +79,106 @@ export default function Teachers() {
     return;
   }, []);
   //getTeacherData();
+
+
+
+
+  // Student Styles  
+const useStyles = makeStyles(theme => ({
+  container: {
+    display:'flex',
+    flexWrap:'wrap',
+   
+  },
+  card:{
+    margin:'19px'
+
+  },
+  cardBody:{
+    width:'270px',
+    margin:'10px'
+  },
+  avatar:{
+    borderRadius: '16px',
+    margin: '-50px auto auto auto',
+    bgcolor: red[800],
+    width: 90,
+    height: 90,
+    
+  },
+  cardContent:{
+    textAlign:'center'
+  },
+  iconButton:{
+    background: red[50], 
+    borderRadius: '20px' ,
+    marginRight:'6px'
+  },
+  iconColor:{
+    color: red[500]
+  },
+  font:{
+    fontSize: '16px'
+  }
+
+}));
+
+
+  // styles
+  const classes = useStyles();
+
   return (
     <>
-      <Grid container spacing={2}>
+
+      <Box container className={classes.container}>
+
+
+      {staffData.map((user, index) => {
+            currentTechData = user.data();
+            return (
+
+      <Card key={index} className={classes.cardBody}>
+        <CardHeader
+          action={
+            <IconButton aria-label="settings">
+              <MoreVertIcon />
+            </IconButton>
+          }
+        />
+      <Avatar className={classes.avatar}
+      ></Avatar>
+        <CardContent className={classes.cardContent}>
+          <Typography gutterBottom variant="h6" component="div">{currentTechData.name.lenght<= 15?(currentTechData.name):((currentTechData.name.substring(0,14)+'..').toString())}</Typography>
+          <Typography variant="body2" color="text.secondary">
+            {'teacher'}
+            </Typography>
+          </CardContent>
+        <CardActions className={classes.font}>
+          <IconButton className={classes.iconButton} href={('tel:'+currentTechData.mobile.toString())}>
+          <CallIcon className={classes.iconColor} />
+          </IconButton>
+        {currentTechData.mobile}
+        </CardActions>
+        <CardActions >
+          <IconButton className={classes.iconButton} aria-label="Email" href={('mailto:'+user.id+'@poornima.edu.in')}>
+          <EmailIcon className={classes.iconColor} /> 
+          </IconButton>
+          {user.id}
+        </CardActions>
+      </Card>
+      )
+      })}
+
+
+      </Box>
+
+
+
+
+      {/* <Grid container spacing={2}>
         {staffData.map((user, index) => {
           currentTechData = user.data();
-          return (
+          return (currentTechData
             <Grid item xs key={index} >
               <Card
                 sx={{
@@ -142,7 +238,7 @@ export default function Teachers() {
             </Grid>
           )
         })}
-      </Grid>
+      </Grid> */}
     </>
   );
 }
