@@ -1,10 +1,10 @@
-import { doc, getDoc } from '@firebase/firestore';
+import { doc, getDoc} from '@firebase/firestore';
 import { React, useState } from 'react'
 import { db, auth, insertFirebaseDocument } from '../../../services/firebase'
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 import { Avatar, Grid, TextField, Typography, Box, Autocomplete, Button } from '@mui/material'
-import { AvatarIcon } from '../../Import'
+import { AvatarIcon} from '../../Import'
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';

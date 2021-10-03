@@ -1,6 +1,5 @@
 import React from 'react'
 import Simg from '../../../../assets/images/Arun.png';
-import '../Teachers/teachers.scss';
 
 export default function Student({Sname, Smessage}) 
 {
