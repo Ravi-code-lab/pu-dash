@@ -2,7 +2,6 @@ import React from 'react'
 import { auth,signOutGoogle } from '../../../services/firebase'
 import "./temp.scss"
 import {puicon,puiconname,backgr,Timer} from '../../Import'
-import "../../../global.scss"
 
 export default function Temp() {
   return (

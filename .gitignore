@@ -22,6 +22,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+<<<<<<< HEAD
 #vscode configurations
+=======
+#vscode config
+>>>>>>> ec00466b996ef9648c229ebaf1d4654bbcd30d36
 /.vscode
 

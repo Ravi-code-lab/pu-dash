@@ -1,42 +1,50 @@
-import { styled, useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import MuiDrawer from '@mui/material/Drawer';
+import { React, useState,useEffect } from 'react';
+import {BrowserRouter as Router, Route, Switch,Link} from "react-router-dom";
+
+import { styled,alpha,
+   useTheme } from '@mui/material/styles';
+
+// components
+import {Box,Toolbar,List,CssBaseline,Typography,Divider,IconButton,ListItem,ListItemIcon,LinearProgress,Avatar,ListItemText,Stack,Badge,Menu,MenuItem,Tooltip,InputBase } from '@mui/material';
 import MuiAppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import CssBaseline from '@mui/material/CssBaseline';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
+import MuiDrawer from '@mui/material/Drawer';
+
+
+
+// icons
+
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import SchoolIcon  from '@mui/icons-material/School';
 import ClassIcon from '@mui/icons-material/Class';
 import EventIcon from '@mui/icons-material/Event';
 import ForumRoundedIcon from '@mui/icons-material/ForumRounded';
 import GroupIcon from '@mui/icons-material/Group';
+import Settings from '@mui/icons-material/Settings';
+import Logout from '@mui/icons-material/Logout';
+import MailIcon from '@mui/icons-material/Mail';
+import NotificationImportantIcon from '@mui/icons-material/NotificationImportant';
+import SearchIcon from '@mui/icons-material/Search';
 
-import { React, useState } from 'react';
-import {
-  BrowserRouter as Router, Route, Switch,Link
-} from "react-router-dom";
+
+
+// Pages
 import Dashoard from '../Pages/DashboardPages/Dashboard/Dashoard';
 import Chats from '../Pages/DashboardPages/Chats/Chats';
 import Event from '../Pages/DashboardPages/Event/Event';
 import MyClass from '../Pages/DashboardPages/MyClass/MyClass';
-import Spage from '../Pages/DashboardPages/Student/Student';
+import Student from '../Pages/DashboardPages/Student/Student';
 import Teachers from '../Pages/DashboardPages/Teachers/Teachers';
-import { Avatar } from '@mui/material';
+
+
+
+// Firebase
 import { auth,signOutGoogle } from '../../services/firebase';
-import {Button,ListItemText} from '@mui/material'
 
 
 const drawerWidth = 240;
-
 const openedMixin = (theme) => ({
   width: drawerWidth,
   transition: theme.transitions.create('width', {
@@ -102,9 +110,58 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
+
+///  Search 
+
+const Search = styled('div')(({ theme }) => ({
+  position: 'relative',
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginLeft: 0,
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
+    marginLeft: theme.spacing(1),
+    width: 'auto',
+  },
+}));
+
+const SearchIconWrapper = styled('div')(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: 'inherit',
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: '12ch',
+      '&:focus': {
+        width: '20ch',
+      },
+    },
+  },
+}));
+
+
+
 export default function Layout() {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
+  const routeName = ['Dashboard', 'My Class', 'Student', 'Teachers', 'Events', 'Chats'];
+  const routeLinks = ['/', '/MyClass', '/Student', '/Teachers', '/Events', '/Chats']
   const [activePage, setActivePage] = useState(0)
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -125,15 +182,31 @@ export default function Layout() {
       default: return <DashboardIcon/>;
     }
   }
+  const [loading, setLoading] = useState(true)
 
-  const routeLinks = ['/', '/MyClass', '/Student', '/Teachers', '/Events', '/Chats']
-  const routeName = ['Dashboard', 'My Class', 'Student', 'Teachers', 'Events', 'Chats'];
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 500)
+  }, []);
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const opan = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
+
+    
+    <>
+
+    
     <Router>
+    {loading === false ? (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-
        {/* App Bar Stat */}
       <AppBar sx={{background:"white",color:"black"}} position="fixed" open={open}>
         <Toolbar>
@@ -152,14 +225,88 @@ export default function Layout() {
           <Typography sx={{ flex:1, fontWeight:"bold"}} variant="h6" noWrap component="div">
             {routeName[activePage]}
           </Typography>
-          <Avatar src={auth.currentUser.photoURL}/>
-          <Button  onClick={()=>{signOutGoogle()}}> Logout</Button>
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </Search>
+
+           <Stack spacing={3} direction="row">
+           <IconButton>
+              <Badge badgeContent={4}  color="secondary">
+                <NotificationImportantIcon color="action"/>
+              </Badge>
+              </IconButton>
+              <IconButton>
+              <Badge badgeContent={4} color="success">
+                <MailIcon color="action" />
+              </Badge>
+              </IconButton>
+          </Stack>
+           <Tooltip  title="Account settings">
+          <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
+            <Avatar src={auth.currentUser.photoURL} ></Avatar>
+          </IconButton>
+        </Tooltip>
+
+        <Menu
+        anchorEl={anchorEl}
+        open={opan}
+        onClose={handleClose}
+        onClick={handleClose}
+        PaperProps={{
+          elevation: 0,
+          sx: {
+            overflow: 'visible',
+            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+            mt: 1.5,
+            '& .MuiAvatar-root': {
+              width: 32,
+              height: 32,
+              ml: -0.5,
+              mr: 1,
+            },
+            '&:before': {
+              content: '""',
+              display: 'block',
+              position: 'absolute',
+              top: 0,
+              right: 14,
+              width: 10,
+              height: 10,
+              bgcolor: 'background.paper',
+              transform: 'translateY(-50%) rotate(45deg)',
+              zIndex: 0,
+            },
+          },
+        }}
+        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+      >
+        <MenuItem>
+          <ListItemIcon>
+            <Settings fontSize="small" />
+          </ListItemIcon>
+          Settings
+        </MenuItem>
+        <MenuItem onClick={()=>{signOutGoogle()}}>
+          <ListItemIcon>
+            <Logout fontSize="small" />
+          </ListItemIcon>
+          Logout
+        </MenuItem>
+      </Menu>
+
+
+
+
+
         </Toolbar>
       </AppBar>
-
-
-
-      
       {/* Sidebar */}
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
@@ -170,12 +317,12 @@ export default function Layout() {
         <Divider />
         <List>
           {routeName.map((text, index) => (
-            <Link key={text} to={routeLinks[index]}>
+            <Link key={index} to={routeLinks[index]}>
             <ListItem button onClick={()=>{setActivePage(index)}}>
               <ListItemIcon>
                 {getIconTag(index,activePage)}
               </ListItemIcon>
-              <ListItemText sx={{textDecoration:'none'}} primary={text}  />
+              <ListItemText primaryTypographyProps={{ style:{color:'#000' } }} primary={text}  />
             </ListItem>
             </Link>
           ))}
@@ -185,36 +332,35 @@ export default function Layout() {
         <DrawerHeader />
             <Switch>
               {/* On Clike content Change  */}
-              <Route path="/Event">
-                <Event />
+              <Route exact path="/">
+                <Dashoard />
               </Route>
               {/* On Clike content Change  */}
-              <Route path="/Student">
-                <Spage />
-              </Route>
-              {/* On Clike content Change  */}
-              <Route path="/Teachers">
-                <Teachers />
-              </Route>
-              {/* On Clike content Change  */}
-              <Route path="/MyClass">
+              <Route exact path="/MyClass">
                 <MyClass />
               </Route>
               {/* On Clike content Change  */}
-              <Route path="/Chats">
+              <Route exact path="/Student">
+                <Student />
+              </Route>
+              {/* On Clike content Change  */}
+              <Route exact path="/Teachers">
+                <Teachers />
+              </Route>
+              {/* On Clike content Change  */}
+              <Route exact path="/Event">
+                <Event />
+              </Route>
+              {/* On Clike content Change  */}
+              <Route exact path="/Chats">
                 <Chats />
-              </Route>
-              {/* On Clike content Change  */}
-              <Route path="/Student">
-                <Spage />
-              </Route>
-              {/* On Clike content Change  */}
-              <Route path="/">
-                <Dashoard />
               </Route>
             </Switch>
       </Box>
-    </Box>
+    </Box>) : (
+      <LinearProgress/>
+   )}
     </Router>
+    </>
   );
 }
