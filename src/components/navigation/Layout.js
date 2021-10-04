@@ -27,6 +27,7 @@ import Logout from '@mui/icons-material/Logout';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationImportantIcon from '@mui/icons-material/NotificationImportant';
 import SearchIcon from '@mui/icons-material/Search';
+import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
 
 
 
@@ -37,7 +38,7 @@ import Event from '../Pages/DashboardPages/Event/Event';
 import MyClass from '../Pages/DashboardPages/MyClass/MyClass';
 import Student from '../Pages/DashboardPages/Student/Student';
 import Teachers from '../Pages/DashboardPages/Teachers/Teachers';
-
+import TodoPage from '../Pages/DashboardPages/TaskPage/TaskPage'
 
 
 // Firebase
@@ -160,8 +161,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function Layout() {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
-  const routeName = ['Dashboard', 'My Class', 'Student', 'Teachers', 'Events', 'Chats'];
-  const routeLinks = ['/', '/MyClass', '/Student', '/Teachers', '/Events', '/Chats']
+  const routeName = ['Dashboard', 'My Class','Todo', 'Student', 'Teachers', 'Events', 'Chats' ];
+  const routeLinks = ['/', '/MyClass','/Todo', '/Student', '/Teachers', '/Events', '/Chats' ]
   const [activePage, setActivePage] = useState(0)
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -175,10 +176,11 @@ export default function Layout() {
     switch(index){
       case 0: return <DashboardIcon/>;
       case 1: return <ClassIcon/>;
-      case 2: return <SchoolIcon/>;
-      case 3: return <GroupIcon/>;
-      case 4: return <EventIcon/>;
-      case 5: return <ForumRoundedIcon/>;
+      case 2: return <PlaylistAddCheckIcon/>
+      case 3: return <SchoolIcon/>;
+      case 4: return <GroupIcon/>;
+      case 5: return <EventIcon/>;
+      case 6: return <ForumRoundedIcon/>;
       default: return <DashboardIcon/>;
     }
   }
@@ -359,6 +361,10 @@ export default function Layout() {
               {/* On Clike content Change  */}
               <Route exact path="/Chats">
                 <Chats />
+              </Route>
+              {/* On Clike content Change  */}
+              <Route exact path="/Todo">
+                <TodoPage />
               </Route>
             </Switch>
       </Box>

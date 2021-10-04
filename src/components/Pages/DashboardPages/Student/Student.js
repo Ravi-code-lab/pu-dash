@@ -25,7 +25,7 @@ import { db } from '../../../../services/firebase';
 import { collection, query, where, getDocs} from "firebase/firestore";
 
 // Student Styles  
-// const mediaqtest= useMediaQuery('');
+//const mediaqtest= useMediaQuery('');
 // const theme = createTheme({});
 const useStyles = makeStyles((theme) => ({
  
@@ -40,9 +40,6 @@ const useStyles = makeStyles((theme) => ({
   cardBody:{
     width:'250px',
     margin:'5px',
-    [theme.breakpoints.up('md')]:{
-      width:'1'
-    }
   },
   avatar:{
     borderRadius: '16px',
