@@ -5,12 +5,40 @@ import Task from './Tasks/Task';
 
 
 
+// Use For Styles 
+
+import { makeStyles } from '@mui/styles';
+
+
+// const todo = [
+//   { task: 'Create a todo app', createdBy: 'UserName', dueDate: '12/12/2021 12:50AM', des: 'create the following things in the project', attachment: ['files'], submit: false },
+// ]
+
+
+const useStyles = makeStyles((theme) => ({
+ 
+  Attandance:{
+    width:'500px',
+  },
+  Task:{
+    width:'400px',
+  }
+
+}));
+
+
 export default function Dashoard() {
+  // const [value, setValue] = React.useState('1');
+  const classes = useStyles();
+
+  // const handleChange = (event, newValue) => {
+  //   setValue(newValue);
+  // };
   return (
     <>
       <Grid container spacing={3}>
         <Grid item>
-          <Card>
+          <Card className={classes.Attandance}>
             <CardHeader
               action={<IconButton aria-label="settings">
                 <MoreHorizIcon />
@@ -22,13 +50,18 @@ export default function Dashoard() {
           </Card>
         </Grid>
         <Grid item>
-          <Task/>
+          <Card className={classes.Task}> 
+          <Task />
+          </Card>
         </Grid>
         <Grid item>
-          <CardHeader
-            title={<Typography varient="h6">News</Typography>}
-          />
-          <Card>
+        <Card className={classes.Attandance}>
+            <CardHeader
+              action={<IconButton aria-label="settings">
+                <MoreHorizIcon />
+              </IconButton>}
+              title={<Typography varient="h6">News</Typography>}
+            />
             <CardContent>
             </CardContent>
           </Card>

@@ -1,4 +1,4 @@
-// import Layout from "./Layout";
+//import Layout from "./Layout";
 import Layout from "./components/navigation/Layout";
 //import Temp from './components/Pages/Coming/Temp';
 import Login from "./components/Pages/Login/Login";
