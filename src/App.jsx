@@ -50,6 +50,7 @@ export default function App() {
   // console.log(registered);
   return (
     <>
+    
     {loading === false ? (
     //for navigating to diffrent page based on registered logged in or not logged in
     GetPage()

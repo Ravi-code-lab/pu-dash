@@ -64,7 +64,7 @@ export default function Teachers() {
       await getDocs(query(staffCollection, where('department', 'array-contains', userData.department))).then(
         (result) => {
           result.forEach(doc => {
-            //console.log(doc.id, '=>', doc.data());
+            // console.log(doc.id, '=>', doc.data());
             data.push(doc);
           })
           // lastStaffDoc = data[19];
@@ -73,7 +73,7 @@ export default function Teachers() {
       )
       // } 
       setstaffData(data);
-      console.log(data);
+      // console.log(data);
     }
     fetchData();
     return;
@@ -88,12 +88,12 @@ const useStyles = makeStyles(theme => ({
   container: {
     display:'flex',
     flexWrap:'wrap',
-   
-  },
-  card:{
+   card:{
     margin:'19px'
 
   },
+  },
+  
   cardBody:{
     width:'270px',
     margin:'10px'
