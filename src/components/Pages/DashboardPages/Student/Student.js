@@ -1,33 +1,48 @@
 import {React, useState,useEffect} from 'react';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
 
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
+// Use For Styles 
 
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
+import { makeStyles } from '@mui/styles';
+// import {createTheme} from '@mui/material/styles'
+
+// components
+import {IconButton,CardHeader,Card,Typography,Avatar,CardActions,CardContent,Box} from '@mui/material';
+
+
+
+// mui Color
 import { red } from '@mui/material/colors';
-
+// Icons
 import EmailIcon from '@mui/icons-material/Email';
-
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CallIcon from '@mui/icons-material/Call';
-import { Box, LinearProgress } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 
+
+
+// Data red
+import { userData } from "../../Registration/RegisterationForm";
+import { db } from '../../../../services/firebase';
+import { collection, query, where, getDocs} from "firebase/firestore";
 
 // Student Styles  
-const useStyles = makeStyles(theme => ({
-  
+// const mediaqtest= useMediaQuery('');
+// const theme = createTheme({});
+const useStyles = makeStyles((theme) => ({
+ 
   container: {
     display:'flex',
     flexWrap:'wrap',
   },
+  
   card:{
     margin:'19px'
-
+  },
+  cardBody:{
+    width:'250px',
+    margin:'5px',
+    [theme.breakpoints.up('md')]:{
+      width:'1'
+    }
   },
   avatar:{
     borderRadius: '16px',
@@ -35,18 +50,21 @@ const useStyles = makeStyles(theme => ({
     bgcolor: red[800],
     width: 90,
     height: 90,
+    
   },
   cardContent:{
     textAlign:'center'
   },
   iconButton:{
     background: red[50], 
-    borderRadius: '20px' ,
-    marginRight:'6px'
+    borderRadius: '20px',
+    marginRight:'6px',
   },
+
   iconColor:{
     color: red[500]
   },
+
   font:{
     fontSize: '16px'
   }
@@ -55,28 +73,48 @@ const useStyles = makeStyles(theme => ({
 
 
 export default function Student() {
+  const [studentData, setstudentData] = useState([]);
+
+  let currentStudentData;
+
+
+  //for getting teacher data currently
+  useEffect(() => {
+    const fetchData = async () => {
+      const studentCollection = collection(db, "students");
+      let data = [];
+      //  if (lastStaffDoc === null) {
+      await getDocs(query(studentCollection, where('course','==', userData.course))).then(
+        (result) => {
+          result.forEach(doc => {
+            console.log(doc.id, '=>', doc.data());
+            data.push(doc);
+          })
+          // lastStaffDoc = data[19];
+          // console.log(lastStaffDoc);
+        }
+      )
+      // } 
+      setstudentData(data);
+      console.log(data);
+    }
+    fetchData();
+    return;
+  }, []);
 
 
   const classes = useStyles();
-    const [users] = useState([
-      { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
-      { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
-      { name: "Ravi Raj Yadav", message: "Student" ,mobile:" +91 705604005", email: "2020bcaravi832@poornima.edu.in" },
-
-      ]);
-
-
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 500)
-  }, [])
+  
   return (
     <>
-    {loading === false ? (
     <Box container className={classes.container}>
-    {users.map((user, index) => (
-    <Card key={index}>
+
+
+    {studentData.map((user, index) => {
+          currentStudentData = user.data();
+          return (
+    
+    <Card key={index} className={classes.cardBody}>
       <CardHeader
         action={
           <IconButton aria-label="settings">
@@ -87,29 +125,35 @@ export default function Student() {
      <Avatar className={classes.avatar}
      ></Avatar>
       <CardContent className={classes.cardContent}>
-         <Typography gutterBottom variant="h6" component="div">{user.name}</Typography>
+         <Typography gutterBottom variant="h6" component="div">{
+           currentStudentData.name.length<=15?
+           (currentStudentData.name):(
+             currentStudentData.name.substring(0,14)+'...')
+         }</Typography>
          <Typography variant="body2" color="text.secondary">
-           {user.message}
+           {currentStudentData.course.toUpperCase()+'('+currentStudentData.specilization.toUpperCase()+') '}
           </Typography>
          </CardContent>
+
       <CardActions className={classes.font}>
-        <IconButton className={classes.iconButton}>
-        <CallIcon className={classes.iconc} />
+        <IconButton className={classes.iconButton} href={('tel:'+currentStudentData.mobile.toString())}>
+        <CallIcon className={classes.iconColor} />
         </IconButton>
-       {user.mobile}
+       {currentStudentData.mobile}
       </CardActions>
+
       <CardActions >
-        <IconButton className={classes.iconButton} aria-label="Email">
+        <IconButton className={classes.iconButton} aria-label="Email" href={('mailto:'+user.id+'@poornima.edu.in')}>
         <EmailIcon className={classes.iconColor} /> 
         </IconButton>
-        {user.email}
+        {user.id}
       </CardActions>
     </Card>
-        ))}
+    )
+  })}
+
+
    </Box>
-   ) : (
-     <LinearProgress/>
-  )}
-  </>
+    </>
   );
 }

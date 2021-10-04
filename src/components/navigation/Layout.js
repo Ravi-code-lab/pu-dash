@@ -4,11 +4,11 @@ import {BrowserRouter as Router, Route, Switch,Link} from "react-router-dom";
 import { styled,alpha,
    useTheme } from '@mui/material/styles';
 
+   
 // components
 import {Box,Toolbar,List,CssBaseline,Typography,Divider,IconButton,ListItem,ListItemIcon,LinearProgress,Avatar,ListItemText,Stack,Badge,Menu,MenuItem,Tooltip,InputBase } from '@mui/material';
 import MuiAppBar from '@mui/material/AppBar';
 import MuiDrawer from '@mui/material/Drawer';
-
 
 
 // icons
@@ -43,7 +43,6 @@ import Teachers from '../Pages/DashboardPages/Teachers/Teachers';
 // Firebase
 import { auth,signOutGoogle } from '../../services/firebase';
 
-
 const drawerWidth = 240;
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -74,6 +73,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
+
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -207,6 +207,10 @@ export default function Layout() {
     {loading === false ? (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
+
+
+
+
        {/* App Bar Stat */}
       <AppBar sx={{background:"white",color:"black"}} position="fixed" open={open}>
         <Toolbar>
@@ -234,6 +238,7 @@ export default function Layout() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
+          
 
            <Stack spacing={3} direction="row">
            <IconButton>
@@ -301,12 +306,12 @@ export default function Layout() {
         </MenuItem>
       </Menu>
 
-
-
-
-
         </Toolbar>
       </AppBar>
+
+
+
+
       {/* Sidebar */}
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
