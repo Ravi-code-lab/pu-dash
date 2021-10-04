@@ -10,6 +10,7 @@ import {IconButton,CardHeader,Card,Typography,Avatar,CardActions,CardContent,Box
 
 
 
+
 // mui Color
 import { red } from '@mui/material/colors';
 // Icons
@@ -40,9 +41,13 @@ const useStyles = makeStyles((theme) => ({
   cardBody:{
     width:'250px',
     margin:'5px',
-    [theme.breakpoints.up('md')]:{
-      width:'1'
-    }
+    // '@media (min-height:360px)':{
+    //   width:'130px'
+    // },
+    '@media only screen and (max-width: 600px)': {
+      width: '223px'
+    },
+    
   },
   avatar:{
     borderRadius: '16px',
@@ -73,6 +78,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function Student() {
+
   const [studentData, setstudentData] = useState([]);
 
   let currentStudentData;
@@ -87,7 +93,7 @@ export default function Student() {
       await getDocs(query(studentCollection, where('course','==', userData.course))).then(
         (result) => {
           result.forEach(doc => {
-            console.log(doc.id, '=>', doc.data());
+            // console.log(doc.id, '=>', doc.data());
             data.push(doc);
           })
           // lastStaffDoc = data[19];
@@ -96,7 +102,7 @@ export default function Student() {
       )
       // } 
       setstudentData(data);
-      console.log(data);
+      // console.log(data);
     }
     fetchData();
     return;

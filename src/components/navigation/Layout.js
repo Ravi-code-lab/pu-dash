@@ -6,7 +6,7 @@ import { styled,alpha,
 
    
 // components
-import {Box,Toolbar,List,CssBaseline,Typography,Divider,IconButton,ListItem,ListItemIcon,LinearProgress,Avatar,ListItemText,Stack,Badge,Menu,MenuItem,Tooltip,InputBase } from '@mui/material';
+import {Box,Toolbar,List,CssBaseline,Typography,Divider,IconButton,ListItem,ListItemIcon,LinearProgress,Avatar,ListItemText,Stack,Badge,Menu,MenuItem,Tooltip,InputBase, Card } from '@mui/material';
 import MuiAppBar from '@mui/material/AppBar';
 import MuiDrawer from '@mui/material/Drawer';
 
@@ -27,6 +27,7 @@ import Logout from '@mui/icons-material/Logout';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationImportantIcon from '@mui/icons-material/NotificationImportant';
 import SearchIcon from '@mui/icons-material/Search';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 
 
@@ -197,21 +198,16 @@ export default function Layout() {
     setAnchorEl(null);
   };
 
-  return (
-
-    
+  return (    
     <>
-
-    
     <Router>
     {loading === false ? (
     <Box sx={{ display: 'flex' }}>
+
       <CssBaseline />
 
-
-
-
        {/* App Bar Stat */}
+
       <AppBar sx={{background:"white",color:"black"}} position="fixed" open={open}>
         <Toolbar>
           <IconButton
@@ -237,10 +233,11 @@ export default function Layout() {
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
             />
+
           </Search>
-          
 
            <Stack spacing={3} direction="row">
+
            <IconButton>
               <Badge badgeContent={4}  color="secondary">
                 <NotificationImportantIcon color="action"/>
@@ -253,9 +250,18 @@ export default function Layout() {
               </IconButton>
           </Stack>
            <Tooltip  title="Account settings">
-          <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
+          <Card sx={{display:'flex', borderRadius:'10px'}}>
+          <IconButton  size="small">
             <Avatar src={auth.currentUser.photoURL} ></Avatar>
           </IconButton>
+          <Typography  sx={{m:'auto',}}>{
+           auth.currentUser.displayName.length<=4?
+           (auth.currentUser.displayName):(
+            auth.currentUser.displayName.substring(0,4)+'..')
+         } </Typography>
+          <IconButton><ArrowDropDownIcon onClick={handleClick} /></IconButton>
+          
+          </Card>
         </Tooltip>
 
         <Menu
