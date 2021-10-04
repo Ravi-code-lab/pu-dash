@@ -15,7 +15,7 @@ export let isTodoLoaded = false;
 
 function getTodoList() {
     let todoList = [];
-    userData.todo.ownTask.todo.map()
+    userData.todo.ownTask.todo.map((data,index)=>{todo=""});
     return
 }
 
@@ -31,6 +31,7 @@ export default function TaskPage() {
     const [dueDate, setDueDate] = useState(null);
     const [allowText, setallowText] = useState(false);
     const [allowAttachment, setallowAttachment] = useState(false);
+    const [todoList, setTodoList] = useState([]);
 
     const handleDueDateChange = (newValue) => {
         setDueDate(newValue);
@@ -46,20 +47,21 @@ export default function TaskPage() {
         console.log(docId);
         console.log(form.regno);
         const stdDoc= doc(db,'students',docId);
+        const date = new Date();
         const todo={
-                taskid:Timestamp.fromDate(Date()),
+                taskid:Timestamp.fromDate(date),
                 task:form.title.value,
                 des:form.des.value,
                 attachment:['test_txt.txt'],
-                dueDate:Timestamp.fromDate(Date(dueDate)),
+                dueDate:Timestamp.fromDate(dueDate),
                 submitted:false,
-                submitDate:Timestamp.fromDate(Date()),
+                submitDate:Timestamp.fromDate(date),
                 priority:form.priority.value,
                 allowAttachment:allowAttachment,
                 allowText:allowText
         }
         console.log(todo);
-        //await updateDoc(stdDoc,{"ownTask.todo":arrayUnion(todo)});
+        await updateDoc(stdDoc,{"ownTask.todo":arrayUnion(todo)});
         setOpenTodoForm(false);
     }
 
