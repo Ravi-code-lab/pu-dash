@@ -4,11 +4,11 @@ import {BrowserRouter as Router, Route, Switch,Link} from "react-router-dom";
 import { styled,alpha,
    useTheme } from '@mui/material/styles';
 
+   
 // components
-import {Box,Toolbar,List,CssBaseline,Typography,Divider,IconButton,ListItem,ListItemIcon,LinearProgress,Avatar,ListItemText,Stack,Badge,Menu,MenuItem,Tooltip,InputBase } from '@mui/material';
+import {Box,Toolbar,List,CssBaseline,Typography,Divider,IconButton,ListItem,ListItemIcon,LinearProgress,Avatar,ListItemText,Stack,Badge,Menu,MenuItem,Tooltip,InputBase, Card } from '@mui/material';
 import MuiAppBar from '@mui/material/AppBar';
 import MuiDrawer from '@mui/material/Drawer';
-
 
 
 // icons
@@ -27,6 +27,8 @@ import Logout from '@mui/icons-material/Logout';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationImportantIcon from '@mui/icons-material/NotificationImportant';
 import SearchIcon from '@mui/icons-material/Search';
+import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 
 
@@ -37,12 +39,11 @@ import Event from '../Pages/DashboardPages/Event/Event';
 import MyClass from '../Pages/DashboardPages/MyClass/MyClass';
 import Student from '../Pages/DashboardPages/Student/Student';
 import Teachers from '../Pages/DashboardPages/Teachers/Teachers';
-
+import TodoPage from '../Pages/DashboardPages/TaskPage/TaskPage'
 
 
 // Firebase
 import { auth,signOutGoogle } from '../../services/firebase';
-
 
 const drawerWidth = 240;
 const openedMixin = (theme) => ({
@@ -74,6 +75,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
+
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -160,8 +162,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function Layout() {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
-  const routeName = ['Dashboard', 'My Class', 'Student', 'Teachers', 'Events', 'Chats'];
-  const routeLinks = ['/', '/MyClass', '/Student', '/Teachers', '/Events', '/Chats']
+  const routeName = ['Dashboard', 'My Class','Todo', 'Student', 'Teachers', 'Events', 'Chats' ];
+  const routeLinks = ['/', '/MyClass','/Todo', '/Student', '/Teachers', '/Events', '/Chats' ]
   const [activePage, setActivePage] = useState(0)
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -175,10 +177,11 @@ export default function Layout() {
     switch(index){
       case 0: return <DashboardIcon/>;
       case 1: return <ClassIcon/>;
-      case 2: return <SchoolIcon/>;
-      case 3: return <GroupIcon/>;
-      case 4: return <EventIcon/>;
-      case 5: return <ForumRoundedIcon/>;
+      case 2: return <PlaylistAddCheckIcon/>
+      case 3: return <SchoolIcon/>;
+      case 4: return <GroupIcon/>;
+      case 5: return <EventIcon/>;
+      case 6: return <ForumRoundedIcon/>;
       default: return <DashboardIcon/>;
     }
   }
@@ -197,17 +200,16 @@ export default function Layout() {
     setAnchorEl(null);
   };
 
-  return (
-
-    
+  return (    
     <>
-
-    
     <Router>
     {loading === false ? (
     <Box sx={{ display: 'flex' }}>
+
       <CssBaseline />
+
        {/* App Bar Stat */}
+
       <AppBar sx={{background:"white",color:"black"}} position="fixed" open={open}>
         <Toolbar>
           <IconButton
@@ -233,9 +235,11 @@ export default function Layout() {
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
             />
+
           </Search>
 
            <Stack spacing={3} direction="row">
+
            <IconButton>
               <Badge badgeContent={4}  color="secondary">
                 <NotificationImportantIcon color="action"/>
@@ -248,9 +252,18 @@ export default function Layout() {
               </IconButton>
           </Stack>
            <Tooltip  title="Account settings">
-          <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
+          <Card sx={{display:'flex', borderRadius:'10px'}}>
+          <IconButton  size="small">
             <Avatar src={auth.currentUser.photoURL} ></Avatar>
           </IconButton>
+          <Typography  sx={{m:'auto',}}>{
+           auth.currentUser.displayName.length<=4?
+           (auth.currentUser.displayName):(
+            auth.currentUser.displayName.substring(0,4)+'..')
+         } </Typography>
+          <IconButton><ArrowDropDownIcon onClick={handleClick} /></IconButton>
+          
+          </Card>
         </Tooltip>
 
         <Menu
@@ -301,12 +314,12 @@ export default function Layout() {
         </MenuItem>
       </Menu>
 
-
-
-
-
         </Toolbar>
       </AppBar>
+
+
+
+
       {/* Sidebar */}
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
@@ -354,6 +367,10 @@ export default function Layout() {
               {/* On Clike content Change  */}
               <Route exact path="/Chats">
                 <Chats />
+              </Route>
+              {/* On Clike content Change  */}
+              <Route exact path="/Todo">
+                <TodoPage />
               </Route>
             </Switch>
       </Box>

@@ -70,8 +70,8 @@ export default function RegisterationForm({ submitCallback }) {
 
     //on form submit this will run
     function SubmitForm(e) {
-        const form = document.querySelector("#reg-form");
         e.preventDefault();
+        const form = document.querySelector("#reg-form");
         let docId = auth.currentUser.email.split('@');
         docId.pop();
         docId = docId.join();
