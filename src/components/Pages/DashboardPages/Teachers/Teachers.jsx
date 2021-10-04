@@ -62,7 +62,7 @@ export default function Teachers() {
       await getDocs(query(staffCollection, where('department', 'array-contains', userData.department))).then(
         (result) => {
           result.forEach(doc => {
-            console.log(doc.id, '=>', doc.data());
+            //console.log(doc.id, '=>', doc.data());
             data.push(doc);
           })
           // lastStaffDoc = data[19];
