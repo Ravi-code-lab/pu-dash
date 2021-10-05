@@ -159,7 +159,7 @@ export default function Task() {
                                                 />
                                             </ListItem>
                                             <Typography variant='body2'>{'created by -'+tododata.createdBy}</Typography>
-                                            <Typography variant='body2'>{'Due date -'+date.get}</Typography>
+                                            <Typography variant='body2'>{'Due date -'+date}</Typography>
                                             <Divider />
                                         </Box>)
                                 })}
