@@ -67,7 +67,6 @@ function getCoursesAndSpecilization(email) {
 export default function RegisterationForm({ submitCallback }) {
     const [dobvalue, setDobValue] = useState(null);
     const gender = [{ label: "Male" }, { label: "Female" }, { label: "Other" }];
-
     //on form submit this will run
     function SubmitForm(e) {
         e.preventDefault();
@@ -94,6 +93,7 @@ export default function RegisterationForm({ submitCallback }) {
             fatherMobile: parseInt(form.fatherMobile.value),
             motherName: form.motherName.value,
             motherMobile: form.motherMobile.value == null ? parseInt('0') : parseInt(form.motherMobile.value),
+            ownTask:{todo:[],complete:[]},
             acadmics: {
                 marks10th: parseInt(form.marks10.value),
                 marks10thunit: form.marks10unit.value,
