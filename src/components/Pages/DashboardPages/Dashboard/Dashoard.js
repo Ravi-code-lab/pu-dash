@@ -2,6 +2,7 @@ import React from 'react'
 import { Grid, Card, CardContent, Typography, CardHeader, IconButton } from '@mui/material'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Task from './Tasks/Task';
+import News from '../Dashboard/News/News';
 
 
 
@@ -22,6 +23,10 @@ const useStyles = makeStyles((theme) => ({
   },
   Task:{
     width:'400px',
+  },
+  News:{
+    width: '500px',
+    height:'300px',
   }
 
 }));
@@ -49,21 +54,16 @@ export default function Dashoard() {
             </CardContent>
           </Card>
         </Grid>
+        
         <Grid item>
           <Card className={classes.Task}> 
-          <Task />
+           <Task />
           </Card>
         </Grid>
+        
         <Grid item>
-        <Card className={classes.Attandance}>
-            <CardHeader
-              action={<IconButton aria-label="settings">
-                <MoreHorizIcon />
-              </IconButton>}
-              title={<Typography varient="h6">News</Typography>}
-            />
-            <CardContent>
-            </CardContent>
+          <Card className={classes.News}>
+            <News />
           </Card>
         </Grid>
       </Grid>
