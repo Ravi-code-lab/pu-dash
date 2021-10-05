@@ -140,8 +140,7 @@ export default function Task() {
                                                     secondary={<>
                                                             <Typography variant='body2'>{tododata.des}</Typography>
                                                             <Typography variant='body2'>{'created by -'+tododata.createdBy}</Typography>
-                                                            <Typography variant='body2'>{'Due date -'+tododata.dueDate.toDate().getDate()+' '+tododata.dueDate.toDate().getTime()}</Typography>
-</>
+                                                            <Typography variant='body2'>{'Due date -'+tododata.dueDate.toDate().getDate()+'Due time '+tododata.dueDate.toDate().getTime()}</Typography></>
                                                     }
                                                 />
                                             </ListItem>
