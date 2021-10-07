@@ -16,7 +16,7 @@ import { React, useState } from 'react';
 import { Box, Button, CardActions, CardContent, CardHeader, Checkbox, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, FormControlLabel, FormGroup, IconButton, InputLabel, List, Divider, ListItem, ListItemText, MenuItem, Select, Tab, TextField, Typography } from '@mui/material';
 
 // firebse
-import { arrayUnion, arrayRemove, doc, Timestamp, updateDoc } from '@firebase/firestore';
+import { arrayUnion, doc, Timestamp, updateDoc } from '@firebase/firestore';
 import { auth, db } from '../../../../../services/firebase';
 import { CheckRegistration, userData } from '../../../Registration/RegisterationForm';
 
@@ -85,20 +85,6 @@ export default function Task() {
         todo.push(todoData);
     }
 
-
-    const completedTheTodo = async ( e,index)=>{
-        e.preventDefault();
-        const deleteDoc=todo[index];
-        let docId = auth.currentUser.email.split('@');
-        docId.pop();
-        docId = docId.join();
-        console.log(docId);
-       // console.log(form.regno);
-        const stdDoc = doc(db, 'students', docId);
-        await updateDoc(stdDoc, { "ownTask.todo": arrayRemove(deleteDoc) });
-        await updateDoc(stdDoc, { "ownTask.complete": arrayUnion(deleteDoc) });
-    }
-
     const handleChange = (event) => {
         setAge(event.target.value);
     };
@@ -135,8 +121,7 @@ export default function Task() {
                         <TabPanel value="1">
                             <List>
                                 {todo.map((tododata, index) => {
-                                    let date = tododata.dueDate.toDate().getDate();
-                                    let time = tododata.dueDate.toDate().getTime();
+
                                     return (
                                         <Box key={index}>
                                             <ListItem secondaryAction={
@@ -153,13 +138,13 @@ export default function Task() {
                                                 <ListItemText
                                                     primary={tododata.task}
                                                     secondary={<>
-                                                            <Typography variant='body2'>{tododata.des}</Typography>
-</>
+                                                                {/* <Typography variant='body2'>{tododata.des}</Typography> */}
+                                                                {/* <Typography variant='body2'>{'created by -'+tododata.createdBy}</Typography> */}
+                                                                {/* <Typography variant='body2'>{'Due date -'+tododata.dueDate.toDate().getDate()+'Due time` '+tododata.dueDate.toDate().getTime()}</Typography> */}
+                                                           </>
                                                     }
                                                 />
                                             </ListItem>
-                                            <Typography variant='body2'>{'created by -'+tododata.createdBy}</Typography>
-                                            <Typography variant='body2'>{'Due date -'+date}</Typography>
                                             <Divider />
                                         </Box>)
                                 })}

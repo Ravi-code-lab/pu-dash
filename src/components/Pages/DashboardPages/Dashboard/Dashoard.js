@@ -2,6 +2,7 @@ import React from 'react'
 import { Grid, Card, CardContent, Typography, CardHeader, IconButton } from '@mui/material'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Task from './Tasks/Task';
+import News from '../Dashboard/News/News';
 
 
 
@@ -14,7 +15,6 @@ import { makeStyles } from '@mui/styles';
 //   { task: 'Create a todo app', createdBy: 'UserName', dueDate: '12/12/2021 12:50AM', des: 'create the following things in the project', attachment: ['files'], submit: false },
 // ]
 
-
 const useStyles = makeStyles((theme) => ({
  
   Attandance:{
@@ -22,6 +22,10 @@ const useStyles = makeStyles((theme) => ({
   },
   Task:{
     width:'400px',
+  },
+  News:{
+    width: '500px',
+    height:'300px',
   }
 
 }));
@@ -51,19 +55,12 @@ export default function Dashoard() {
         </Grid>
         <Grid item>
           <Card className={classes.Task}> 
-          <Task />
+           <Task />
           </Card>
         </Grid>
         <Grid item>
-        <Card className={classes.Attandance}>
-            <CardHeader
-              action={<IconButton aria-label="settings">
-                <MoreHorizIcon />
-              </IconButton>}
-              title={<Typography varient="h6">News</Typography>}
-            />
-            <CardContent>
-            </CardContent>
+          <Card className={classes.News}>
+            <News />
           </Card>
         </Grid>
       </Grid>
