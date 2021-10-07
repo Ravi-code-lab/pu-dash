@@ -4,7 +4,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { Card, CardHeader, Grid, IconButton } from '@mui/material';
+import { CardHeader, Grid, IconButton } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
@@ -63,29 +63,28 @@ export default function News() {
     return (
         <div>
             <Grid item>
-                <Card className={classes.News}>
-                    <CardHeader
+                    <CardHeader className={classes.News}
                         action={<IconButton aria-label="settings">
                             <MoreHorizIcon />
-                        </IconButton>}
+                            </IconButton>}
                         title={<Typography varient="h6">News</Typography>}
+                    sx={{ pb: 0 }}
                     />
-                </Card>
+                
             </Grid>
 
-            <Box sx={{ width: '100%' }}>
+            <Box sx={{ width: '100%', mt: 0 }}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                     <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                        <Tab label="New News" {...a11yProps(0)} />
-                        <Tab label="All News" {...a11yProps(1)} />
-                       
+                        <Tab label="New News" sx={{ pt: 0, pb: 0 }} {...a11yProps(0)} />
+                        <Tab label="All News" sx={{ pt: 0, pb: 0 }} {...a11yProps(1)} />
                     </Tabs>
                 </Box>
                 <TabPanel value={value} index={0}>
-                    Item One
+                   Newsss
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    Item Two
+                    News
                 </TabPanel>
             </Box>
 

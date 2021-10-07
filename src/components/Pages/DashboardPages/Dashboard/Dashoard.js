@@ -20,9 +20,11 @@ const useStyles = makeStyles((theme) => ({
  
   Attandance:{
     width:'500px',
+    height:'300px'
   },
   Task:{
-    width:'400px',
+    width:'500px',
+    height:'300px'
   },
   News:{
     width: '500px',
