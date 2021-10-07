@@ -1,10 +1,8 @@
-import * as React from 'react';
-import { alpha, styled } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import { Button } from '@mui/material';
 
-
 const PuButton = styled(Button)(({ theme }) => ({
-  width: 300,
+  width: 30,
   color: theme.palette.success.main,
   borderRadius:4,
   root:{
@@ -15,6 +13,7 @@ const PuButton = styled(Button)(({ theme }) => ({
       width:20,
     },
   }
+  
   // '& .MuiSlider-thumb': {
   //   '&:hover, &.Mui-focusVisible': {
   //     boxShadow: `0px 0px 0px 8px ${alpha(theme.palette.success.main, 0.16)}`,
