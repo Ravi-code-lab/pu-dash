@@ -131,8 +131,6 @@ const useStyles = makeStyles(theme => ({
     <>
 
       <Box container className={classes.container}>
-
-
       {staffData.map((user, index) => {
             currentTechData = user.data();
             return (
@@ -148,7 +146,7 @@ const useStyles = makeStyles(theme => ({
       <Avatar className={classes.avatar}
       ></Avatar>
         <CardContent className={classes.cardContent}>
-          <Typography gutterBottom variant="h6" component="div">{currentTechData.name.lenght<= 15?(currentTechData.name):((currentTechData.name.substring(0,14)+'..').toString())}</Typography>
+          <Typography gutterBottom variant="h6" component="div">{currentTechData.name.lenght<= 15?(currentTechData.name):(currentTechData.name.substring(0,14)+'..')}</Typography>
           <Typography variant="body2" color="text.secondary">
             {'teacher'}
             </Typography>
@@ -168,13 +166,7 @@ const useStyles = makeStyles(theme => ({
       </Card>
       )
       })}
-
-
       </Box>
-
-
-
-
       {/* <Grid container spacing={2}>
         {staffData.map((user, index) => {
           currentTechData = user.data();

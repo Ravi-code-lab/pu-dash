@@ -101,6 +101,7 @@ export default function RegisterationForm({ submitCallback }) {
                 marks12thunit: form.marks12unit.value
             }
         }
+        
         //submiting the form
         insertFirebaseDocument("students", docId, data).then(() => { submitCallback(true) });
     }
