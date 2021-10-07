@@ -81,8 +81,6 @@ export default function Teachers() {
   //getTeacherData();
 
 
-
-
   // Student Styles  
 const useStyles = makeStyles(theme => ({
   container: {
@@ -90,13 +88,13 @@ const useStyles = makeStyles(theme => ({
     flexWrap:'wrap',
    card:{
     margin:'19px'
-
   },
   },
   
   cardBody:{
     width:'270px',
-    margin:'10px'
+    margin:'10px',
+    borderRadius:'13px'
   },
   avatar:{
     borderRadius: '16px',
@@ -137,7 +135,7 @@ const useStyles = makeStyles(theme => ({
             currentTechData = user.data();
             return (
 
-      <Card key={index} className={classes.cardBody}>
+      <Card  key={index} className={classes.cardBody}>
         <CardHeader
           action={
             <IconButton aria-label="settings">

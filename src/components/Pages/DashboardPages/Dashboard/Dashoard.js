@@ -15,7 +15,6 @@ import { makeStyles } from '@mui/styles';
 //   { task: 'Create a todo app', createdBy: 'UserName', dueDate: '12/12/2021 12:50AM', des: 'create the following things in the project', attachment: ['files'], submit: false },
 // ]
 
-
 const useStyles = makeStyles((theme) => ({
  
   Attandance:{
@@ -56,13 +55,11 @@ export default function Dashoard() {
             </CardContent>
           </Card>
         </Grid>
-        
         <Grid item>
           <Card className={classes.Task}> 
            <Task />
           </Card>
         </Grid>
-        
         <Grid item>
           <Card className={classes.News}>
             <News />
