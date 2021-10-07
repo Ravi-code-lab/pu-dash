@@ -285,7 +285,7 @@ export default function Layout() {
             filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
             mt: 1.5,
             width:330,
-            borderRadius:3,
+            borderRadius:1,
             '& .MuiAvatar-root': {
               width: 32,
               height: 32,
@@ -309,7 +309,7 @@ export default function Layout() {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-       <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+       <List sx={{ width: '100%', maxWidth: 300, bgcolor: 'background.paper' }}>
       <ListItem alignItems="flex-start">
         <ListItemAvatar>
           <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
@@ -392,7 +392,7 @@ export default function Layout() {
             filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
             mt: 1.5,
             width:200,
-            borderRadius:3,
+            borderRadius:2,
             '& .MuiAvatar-root': {
               width: 32,
               height: 32,
@@ -482,7 +482,7 @@ export default function Layout() {
           ))}
         </List>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{  flexGrow: 1, p: 3 }}>
         <DrawerHeader />
             <Switch>
               {/* On Clike content Change  */}

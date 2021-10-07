@@ -7,6 +7,7 @@ import {useState, useEffect} from 'react'
 import {auth} from './services/firebase'
 import { LinearProgress } from "@mui/material";
 // import { Skeleton } from '@mui/material';
+import ThemeConfig from './theme'
 
 export default function App() {
   const [user, setUser] = useState(auth.currentUser);//for verifying if user is signeIn or signedOut
@@ -49,15 +50,15 @@ export default function App() {
   }, [])
   // console.log(registered);
   return (
-    <>
     
+    <ThemeConfig>
     {loading === false ? (
     //for navigating to diffrent page based on registered logged in or not logged in
     GetPage()
     ) : (
       <LinearProgress/>
    )}
-   </>
+   </ThemeConfig>
   );
 }
 

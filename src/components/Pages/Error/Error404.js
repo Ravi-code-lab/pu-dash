@@ -1,13 +1,25 @@
 import React from 'react'
 
-import { Box } from '@mui/system';
-import { Button, Typography } from '@mui/material';
+import { Button, Typography,Box,Container } from '@mui/material';
 
+import { styled } from '@mui/system';
+
+
+
+const RootStyle = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  minHeight: '100%',
+  alignItems: 'center',
+  paddingTop: theme.spacing(15),
+  paddingBottom: theme.spacing(10)
+}));
 
 export default function Error404() {
 
   return (
-      <Box bgcolor="ButtonFace" sx={{ height:"100vh",display:'flex',flexDirection:'column', alignItems:'center',justifyContent:'center'}}>
+    <>
+    <RootStyle>
+      <Container>
         <Typography variant="h1">
           404
         </Typography >
@@ -18,7 +30,8 @@ export default function Error404() {
           
         </Typography>
       <Button>Back</Button>
-      </Box>     
-    
+      </Container>
+      </RootStyle>  
+    </>
   )
 }
