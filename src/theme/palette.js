@@ -6,6 +6,8 @@ function createGradient(color1, color2) {
   return `linear-gradient(to bottom, ${color1}, ${color2})`;
 }
 
+
+
 // SETUP COLORS
 const GREY = {
   0: '#FFFFFF',
@@ -27,12 +29,11 @@ const GREY = {
   500_56: alpha('#919EAB', 0.56),
   500_80: alpha('#919EAB', 0.8)
 };
-
 const PRIMARY = {
   lighter: '#C8FACD',
   light: '#5BE584',
   main: '#007FFF',
-  dark: '#007B55',
+  dark: '#007FF7',
   darker: '#005249',
   contrastText: '#fff'
 };

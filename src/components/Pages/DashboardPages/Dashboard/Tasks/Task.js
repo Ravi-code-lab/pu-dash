@@ -32,8 +32,8 @@ export let isTodoLoaded = false;
 function getTodoList() {
     let todoList = [];
     todoList = userData.ownTask.todo;
-    console.log(userData.ownTask.todo);
-    console.log(todoList);
+    //console.log(userData.ownTask.todo);
+    //console.log(todoList);
     return todoList;
 }
 
@@ -61,8 +61,8 @@ export default function Task() {
         let docId = auth.currentUser.email.split('@');
         docId.pop();
         docId = docId.join();
-        console.log(docId);
-        console.log(form.regno);
+       // console.log(docId);
+       // console.log(form.regno);
         const stdDoc = doc(db, 'students', docId);
         const date = new Date();
         const todoData = {
@@ -78,7 +78,7 @@ export default function Task() {
             allowAttachment: allowAttachment,
             allowText: allowText
         }
-        console.log(todoData);
+       // console.log(todoData);
         await updateDoc(stdDoc, { "ownTask.todo": arrayUnion(todoData) });
         setOpenTodoForm(false);
         CheckRegistration(auth.currentUser);
