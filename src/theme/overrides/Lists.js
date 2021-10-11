@@ -5,7 +5,6 @@ export default function Lists(theme) {
     MuiListItemIcon: {
       styleOverrides: {
         root: {
-          color: 'inherit',
           minWidth: 'auto',
           marginRight: theme.spacing(2)
         }

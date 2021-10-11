@@ -57,7 +57,7 @@ export default function GlobalStyles() {
           }
         },
 
-        img: { display: 'block', maxWidth: '100%' },
+        img: { display: 'block'},
 
         // Lazy Load Img
         '.blur-up': {

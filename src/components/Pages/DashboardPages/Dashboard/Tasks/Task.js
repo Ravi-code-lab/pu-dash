@@ -20,6 +20,26 @@ import { arrayUnion, arrayRemove, doc, Timestamp, updateDoc } from '@firebase/fi
 import { auth, db } from '../../../../../services/firebase';
 import { CheckRegistration, userData } from '../../../Registration/RegisterationForm';
 
+
+
+
+
+
+export let todo = [];
+export let comp = [];
+export let isTodoLoaded = false;
+
+function getTodoList() {
+    let todoList = [];
+    todoList = userData.ownTask.todo;
+    //console.log(userData.ownTask.todo);
+    //console.log(todoList);
+    return todoList;
+}
+
+//function getTodoCompList() {}
+
+
 export default function Task() {
     const [tabValue, setTabValue] = useState('1');
     //const [todoData, settodoData] = useState([]);
@@ -70,6 +90,32 @@ export default function Task() {
 
         //NEW ONE
 
+        const form = document.querySelector("#add-todo-form");
+        let docId = auth.currentUser.email.split('@');
+        docId.pop();
+        docId = docId.join();
+       // console.log(docId);
+       // console.log(form.regno);
+        const stdDoc = doc(db, 'students', docId);
+        const date = new Date();
+        const todoData = {
+            taskid: Timestamp.fromDate(date),
+            task: form.title.value,
+            des: form.des.value,
+            createdby: 'you',
+            attachment: ['test_txt.txt'],
+            dueDate: Timestamp.fromDate(dueDate),
+            submitted: false,
+            submitDate: Timestamp.fromDate(date),
+            priority: form.priority.value,
+            allowAttachment: allowAttachment,
+            allowText: allowText
+        }
+       // console.log(todoData);
+        await updateDoc(stdDoc, { "ownTask.todo": arrayUnion(todoData) });
+        setOpenTodoForm(false);
+        CheckRegistration(auth.currentUser);
+        todo.push(todoData);
     }
 
     const handleChange = (event) => {
