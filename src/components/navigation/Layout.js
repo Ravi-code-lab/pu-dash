@@ -6,7 +6,11 @@ import { styled,alpha,
 
    
 // components
+<<<<<<< HEAD
 import {Box,Toolbar,List,CssBaseline,Typography,Divider,IconButton,ListItem,ListItemIcon,LinearProgress,Avatar,ListItemText,Stack,Badge,Menu,MenuItem,Tooltip,InputBase, Card } from '@mui/material';
+=======
+import {Box,Toolbar,List,CssBaseline,Typography,Divider,IconButton,ListItem,ListItemIcon,LinearProgress,ListItemAvatar,Avatar,ListItemText,Stack,Badge,Menu,MenuItem,Tooltip,InputBase} from '@mui/material';
+>>>>>>> 80bb91219ba56735451068f83e9c4eed1663f3e9
 import MuiAppBar from '@mui/material/AppBar';
 import MuiDrawer from '@mui/material/Drawer';
 
@@ -14,8 +18,12 @@ import MuiDrawer from '@mui/material/Drawer';
 // icons
 
 import MenuIcon from '@mui/icons-material/Menu';
+<<<<<<< HEAD
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+=======
+import NotificationsIcon from '@mui/icons-material/Notifications';
+>>>>>>> 80bb91219ba56735451068f83e9c4eed1663f3e9
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import SchoolIcon  from '@mui/icons-material/School';
 import ClassIcon from '@mui/icons-material/Class';
@@ -28,8 +36,14 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationImportantIcon from '@mui/icons-material/NotificationImportant';
 import SearchIcon from '@mui/icons-material/Search';
 //import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
+<<<<<<< HEAD
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+=======
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+>>>>>>> 80bb91219ba56735451068f83e9c4eed1663f3e9
 
+// Logo
+import { pulogo } from '../Import';
 
 // Pages
 import Dashoard from '../Pages/DashboardPages/Dashboard/Dashoard';
@@ -99,6 +113,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     width: drawerWidth,
     flexShrink: 0,
     whiteSpace: 'nowrap',
+    textDecoration:'none',
     boxSizing: 'border-box',
     ...(open && {
       ...openedMixin(theme),
@@ -165,12 +180,9 @@ export default function Layout() {
   const routeLinks = ['/', '/MyClass', '/Student', '/Teachers', '/Events', '/Chats' ]
   const [activePage, setActivePage] = useState(0)
   const handleDrawerOpen = () => {
-    setOpen(true);
+    setOpen(!open);
   };
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
 
   function getIconTag(index,active){
     switch(index){
@@ -198,6 +210,19 @@ export default function Layout() {
     setAnchorEl(null);
   };
 
+<<<<<<< HEAD
+=======
+  const [anchorE, setAnchorE] = useState(null);
+  const mOpen = Boolean(anchorE);
+
+  const messageClick = (event) => {
+    setAnchorE(event.currentTarget);
+  };
+  const messageClose = () => {
+    setAnchorE(null);
+  };
+  
+>>>>>>> 80bb91219ba56735451068f83e9c4eed1663f3e9
   return (    
     <>
     <Router>
@@ -208,7 +233,11 @@ export default function Layout() {
 
        {/* App Bar Stat */}
 
+<<<<<<< HEAD
       <AppBar sx={{background:"white",color:"black"}} position="fixed" open={open}>
+=======
+      <AppBar  sx={{background:"white",boxShadow:'0 0 2px 0 rgb(145 158 171 / 24%), 0 16px 32px -4px rgb(145 158 171 / 24%)',color:"black",border:"1px solid rgb(229, 232, 236)"}} position="fixed"   open={open}>
+>>>>>>> 80bb91219ba56735451068f83e9c4eed1663f3e9
         <Toolbar>
           <IconButton
             color="inherit"
@@ -225,9 +254,14 @@ export default function Layout() {
           <Typography sx={{ flex:1, fontWeight:"bold"}} variant="h6" noWrap component="div">
             {routeName[activePage]}
           </Typography>
+<<<<<<< HEAD
           <Search>
+=======
+          
+          <Search sx={{ border:'1px solid rgb(229, 232, 236)',borderRadius:'10px'}}>
+>>>>>>> 80bb91219ba56735451068f83e9c4eed1663f3e9
             <SearchIconWrapper>
-              <SearchIcon />
+              <SearchIcon/>
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Search…"
@@ -235,6 +269,7 @@ export default function Layout() {
             />
 
           </Search>
+<<<<<<< HEAD
 
            <Stack spacing={3} direction="row">
 
@@ -264,6 +299,133 @@ export default function Layout() {
           </Card>
         </Tooltip>
 
+=======
+          <Tooltip onClick={messageClick} title="Message">
+           <Stack spacing={2} direction="row"sx={{margin:'0px 10px',border:'1px solid rgb(229, 232, 236)', borderRadius:'10px'}}>
+              <IconButton >
+              <Badge badgeContent={3} color="error">
+                <NotificationsIcon  />
+                
+              </Badge>
+              </IconButton>
+          </Stack>
+          </Tooltip>
+           <Tooltip onClick={profileClick}  title="Account settings">
+          <Box  sx={{borderRadius:'10px', border:'1px solid rgb(229, 232, 236)'}}>
+          <IconButton size='small'>
+            <Avatar sx={{width:'30px',height:'30px'}}   src={auth.currentUser.photoURL} ></Avatar>
+          </IconButton>
+          </Box>
+        
+        </Tooltip>
+
+        <Menu
+        anchorEl={anchorE}
+        open={mOpen}
+        onClose={messageClose}
+        onClick={messageClose}
+        PaperProps={{
+          elevation: 0,
+          sx: {
+            overflow: 'visible',
+            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+            mt: 1.5,
+            width:330,
+            borderRadius:1,
+            '& .MuiAvatar-root': {
+              width: 32,
+              height: 32,
+              ml: -0.5,
+              mr: 1,
+            },
+            '&:before': {
+              content: '""',
+              display: 'block',
+              position: 'absolute',
+              top: 0,
+              right: 14,
+              width: 10,
+              height: 10,
+              bgcolor: 'background.paper',
+              transform: 'translateY(-50%) rotate(45deg)',
+              zIndex: 0,
+            },
+          },
+        }}
+        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+      >
+       <List sx={{ width: '100%', maxWidth: 300, bgcolor: 'background.paper' }}>
+      <ListItem alignItems="flex-start">
+        <ListItemAvatar>
+          <Avatar alt="Remy Sharp" src="" />
+        </ListItemAvatar>
+        <ListItemText
+          primary="Brunch this weekend?"
+          secondary={
+            <>
+              <Typography
+                sx={{ display: 'inline' }}
+                component="span"
+                variant="body3"
+                color="text.primary"
+              >
+                Ali Connors
+              </Typography>
+              {" — I'll be in your nis…"}
+            </>
+          }
+        />
+      </ListItem>
+      <Divider variant="inset" component="li" />
+      <ListItem alignItems="flex-start">
+        <ListItemAvatar>
+          <Avatar alt="Travis Howard" src="" />
+        </ListItemAvatar>
+        <ListItemText
+          primary="Summer BBQ"
+          secondary={
+            <>
+              <Typography
+                sx={{ display: 'inline' }}
+                component="span"
+                variant="body6"
+                color="text.primary"
+              >
+                to Scott, Alex, Jennifer
+              </Typography>
+              {" — Wuld com"}
+            </>
+          }
+        />
+      </ListItem>
+      <Divider variant="inset" component="li" />
+      <ListItem alignItems="flex-start">
+        <ListItemAvatar>
+          <Avatar alt="Travis Howard" src="" />
+        </ListItemAvatar>
+        <ListItemText
+          primary="Summer BBQ"
+          secondary={
+            <>
+              <Typography
+                sx={{ display: 'inline' }}
+                component="span"
+                variant="body6"
+                color="text.primary"
+              >
+                to Scott, Alex, Jennifer
+              </Typography>
+              {" — Wuld com"}
+            </>
+          }
+        />
+      </ListItem>
+    </List>
+      </Menu>
+
+      {/* //Profile menu */}
+>>>>>>> 80bb91219ba56735451068f83e9c4eed1663f3e9
         <Menu
         anchorEl={anchorEl}
         open={opan}
@@ -319,21 +481,28 @@ export default function Layout() {
 
 
       {/* Sidebar */}
+<<<<<<< HEAD
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
+=======
+      <Drawer  sx={{borderRight:'none',boxShadow:'0 0 2px 0 rgb(145 158 171 / 24%), 0 16px 32px -4px rgb(145 158 171 / 24%)'}} variant="permanent" open={open}>
+        <DrawerHeader sx={{justifyContent:'flex-start',padding:0}}>
+          <img  alt="logo"src={pulogo}/>
+>>>>>>> 80bb91219ba56735451068f83e9c4eed1663f3e9
         </DrawerHeader>
         <Divider />
+        
         <List>
           {routeName.map((text, index) => (
-            <Link key={index} to={routeLinks[index]}>
-            <ListItem button onClick={()=>{setActivePage(index)}}>
+            <Link style={{textDecoration:'none'}} key={index} to={routeLinks[index]}>
+            <ListItem sx={{height:'46px',color:'#637381',fontSize:'0.975rem',lineHeight:'1.6px'}} button onClick={()=>{setActivePage(index)}}>
               <ListItemIcon>
                 {getIconTag(index,activePage)}
               </ListItemIcon>
-              <ListItemText primaryTypographyProps={{ style:{color:'#000' } }} primary={text}  />
+              <ListItemText primaryTypographyProps={{ style:{ fontWeight:'400' } }} primary={text}  />
             </ListItem>
             </Link>
           ))}
