@@ -1,11 +1,12 @@
 import { React, useState,useEffect } from 'react';
 import {BrowserRouter as Router, Route, Switch,Link} from "react-router-dom";
 
-import { styled,alpha} from '@mui/material/styles';
+import { styled,alpha,
+   useTheme } from '@mui/material/styles';
 
    
 // components
-import {Box,Toolbar,List,CssBaseline,Typography,Divider,IconButton,ListItem,ListItemIcon,LinearProgress,ListItemAvatar,Avatar,ListItemText,Stack,Badge,Menu,MenuItem,Tooltip,InputBase } from '@mui/material';
+import {Box,Toolbar,List,CssBaseline,Typography,Divider,IconButton,ListItem,ListItemIcon,LinearProgress,Avatar,ListItemText,Stack,Badge,Menu,MenuItem,Tooltip,InputBase, Card } from '@mui/material';
 import MuiAppBar from '@mui/material/AppBar';
 import MuiDrawer from '@mui/material/Drawer';
 
@@ -13,7 +14,7 @@ import MuiDrawer from '@mui/material/Drawer';
 // icons
 
 import MenuIcon from '@mui/icons-material/Menu';
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import SchoolIcon  from '@mui/icons-material/School';
@@ -23,10 +24,11 @@ import ForumRoundedIcon from '@mui/icons-material/ForumRounded';
 import GroupIcon from '@mui/icons-material/Group';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
+import MailIcon from '@mui/icons-material/Mail';
+import NotificationImportantIcon from '@mui/icons-material/NotificationImportant';
 import SearchIcon from '@mui/icons-material/Search';
 //import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
 // Pages
@@ -39,17 +41,10 @@ import Teachers from '../Pages/DashboardPages/Teachers/Teachers';
 //import TodoPage from '../Pages/DashboardPages/TaskPage/TaskPage'
 
 
-
 // Firebase
 import { auth,signOutGoogle } from '../../services/firebase';
-import { LockOpen, Mail, Task } from '@mui/icons-material';
 
-
-// Styles
-
-//const bottomborder="1px solid rgb(229, 232, 236)";
-const drawerWidth = 200;
-const smallDrawer = 56;
+const drawerWidth = 240;
 const openedMixin = (theme) => ({
   width: drawerWidth,
   transition: theme.transitions.create('width', {
@@ -65,9 +60,9 @@ const closedMixin = (theme) => ({
     duration: theme.transitions.duration.leavingScreen,
   }),
   overflowX: 'hidden',
-  width: `calc(${theme.spacing(9)} + 1px)`,
+  width: `calc(${theme.spacing(7)} + 1px)`,
   [theme.breakpoints.up('sm')]: {
-    width: `calc(${theme.spacing(7)} + 1px)`,
+    width: `calc(${theme.spacing(9)} + 1px)`,
   },
 });
 
@@ -80,12 +75,11 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
+
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
-      width: `calc(100% - ${smallDrawer}px)`,
-
   transition: theme.transitions.create(['width', 'margin'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -117,7 +111,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-/// styles & Define Search
+
+///  Search
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -164,7 +159,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 
 export default function Layout() {
-  //const theme = useTheme();
+  const theme = useTheme();
   const [open, setOpen] = useState(false);
   const routeName = ['Dashboard', 'My Class', 'Student', 'Teachers', 'Events', 'Chats' ];
   const routeLinks = ['/', '/MyClass', '/Student', '/Teachers', '/Events', '/Chats' ]
@@ -196,23 +191,12 @@ export default function Layout() {
 
   const [anchorEl, setAnchorEl] = useState(null);
   const opan = Boolean(anchorEl);
-  const profileClick = (event) => {
+  const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  const profileClose = () => {
+  const handleClose = () => {
     setAnchorEl(null);
   };
-
-  const [anchorE, setAnchorE] = useState(null);
-  const mOpen = Boolean(anchorE);
-
-  const messageClick = (event) => {
-    setAnchorE(event.currentTarget);
-  };
-  const messageClose = () => {
-    setAnchorE(null);
-  };
-
 
   return (    
     <>
@@ -224,16 +208,16 @@ export default function Layout() {
 
        {/* App Bar Stat */}
 
-      <AppBar  sx={{background:"white",boxShadow:0,color:"black",border:"1px solid rgb(229, 232, 236)"}} position="fixed"   open={open}>
+      <AppBar sx={{background:"white",color:"black"}} position="fixed" open={open}>
         <Toolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            
             sx={{
               marginRight: '36px',
+              ...(open && { display: 'none' }),
             }}
           >
             <MenuIcon />
@@ -241,7 +225,7 @@ export default function Layout() {
           <Typography sx={{ flex:1, fontWeight:"bold"}} variant="h6" noWrap component="div">
             {routeName[activePage]}
           </Typography>
-          <Search sx={{ border:'1px solid rgb(229, 232, 236)',borderRadius:'10px'}}>
+          <Search>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -249,150 +233,48 @@ export default function Layout() {
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
             />
+
           </Search>
 
-           <Stack spacing={2} direction="row"sx={{margin:'0px 10px',border:'1px solid rgb(229, 232, 236)', borderRadius:'10px'}}>
-              <IconButton onClick={messageClick}>
-              <Badge badgeContent={3} color="error">
-                <NotificationsIcon  />
-                
+           <Stack spacing={3} direction="row">
+
+           <IconButton>
+              <Badge badgeContent={4}  color="secondary">
+                <NotificationImportantIcon color="action"/>
+              </Badge>
+              </IconButton>
+              <IconButton>
+              <Badge badgeContent={4} color="success">
+                <MailIcon color="action" />
               </Badge>
               </IconButton>
           </Stack>
            <Tooltip  title="Account settings">
-          <Box sx={{display:'flex', borderRadius:'10px', border:'1px solid rgb(229, 232, 236)'}}>
-          <IconButton size='small'>
-            <Avatar sx={{width:'30px',height:'30px'}}   src={auth.currentUser.photoURL} ></Avatar>
+          <Card sx={{display:'flex', borderRadius:'10px'}}>
+          <IconButton  size="small">
+            <Avatar src={auth.currentUser.photoURL} ></Avatar>
           </IconButton>
           <Typography  sx={{m:'auto',}}>{
            auth.currentUser.displayName.length<=4?
            (auth.currentUser.displayName):(
             auth.currentUser.displayName.substring(0,4)+'..')
          } </Typography>
-          <IconButton><ArrowDropDownIcon onClick={profileClick} /></IconButton>
-          </Box>
-        
+          <IconButton><ArrowDropDownIcon onClick={handleClick} /></IconButton>
+          
+          </Card>
         </Tooltip>
-        <Menu
-        anchorEl={anchorE}
-        open={mOpen}
-        onClose={messageClose}
-        onClick={messageClose}
-        PaperProps={{
-          elevation: 0,
-          sx: {
-            overflow: 'visible',
-            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-            mt: 1.5,
-            width:330,
-            borderRadius:1,
-            '& .MuiAvatar-root': {
-              width: 32,
-              height: 32,
-              ml: -0.5,
-              mr: 1,
-            },
-            '&:before': {
-              content: '""',
-              display: 'block',
-              position: 'absolute',
-              top: 0,
-              right: 14,
-              width: 10,
-              height: 10,
-              bgcolor: 'background.paper',
-              transform: 'translateY(-50%) rotate(45deg)',
-              zIndex: 0,
-            },
-          },
-        }}
-        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-      >
-       <List sx={{ width: '100%', maxWidth: 300, bgcolor: 'background.paper' }}>
-      <ListItem alignItems="flex-start">
-        <ListItemAvatar>
-          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-        </ListItemAvatar>
-        <ListItemText
-          primary="Brunch this weekend?"
-          secondary={
-            <>
-              <Typography
-                sx={{ display: 'inline' }}
-                component="span"
-                variant="body3"
-                color="text.primary"
-              >
-                Ali Connors
-              </Typography>
-              {" — I'll be in your nis…"}
-            </>
-          }
-        />
-      </ListItem>
-      <Divider variant="inset" component="li" />
-      <ListItem alignItems="flex-start">
-        <ListItemAvatar>
-          <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-        </ListItemAvatar>
-        <ListItemText
-          primary="Summer BBQ"
-          secondary={
-            <>
-              <Typography
-                sx={{ display: 'inline' }}
-                component="span"
-                variant="body6"
-                color="text.primary"
-              >
-                to Scott, Alex, Jennifer
-              </Typography>
-              {" — Wuld com"}
-            </>
-          }
-        />
-      </ListItem>
-      <Divider variant="inset" component="li" />
-      <ListItem alignItems="flex-start">
-        <ListItemAvatar>
-          <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-        </ListItemAvatar>
-        <ListItemText
-          primary="Summer BBQ"
-          secondary={
-            <>
-              <Typography
-                sx={{ display: 'inline' }}
-                component="span"
-                variant="body6"
-                color="text.primary"
-              >
-                to Scott, Alex, Jennifer
-              </Typography>
-              {" — Wuld com"}
-            </>
-          }
-        />
-      </ListItem>
-    </List>
-      </Menu>
 
-
-        {/* //Profile menu */}
         <Menu
         anchorEl={anchorEl}
         open={opan}
-        onClose={profileClose}
-        onClick={profileClose}
+        onClose={handleClose}
+        onClick={handleClose}
         PaperProps={{
           elevation: 0,
           sx: {
             overflow: 'visible',
             filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
             mt: 1.5,
-            width:200,
-            borderRadius:2,
             '& .MuiAvatar-root': {
               width: 32,
               height: 32,
@@ -418,40 +300,13 @@ export default function Layout() {
       >
         <MenuItem>
           <ListItemIcon>
-            <AccountCircleIcon />
-          </ListItemIcon>
-            My Profile
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <Mail></Mail>
-          </ListItemIcon>
-           My Messages
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-          <Task/>
-          </ListItemIcon>
-          My Tasks
-        </MenuItem>
-        <Divider/>
-        <MenuItem>
-          <ListItemIcon>
-            <Settings  />
+            <Settings fontSize="small" />
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            
-            <LockOpen/>
-          </ListItemIcon>
-          Lock Screen
-        </MenuItem>
-        <Divider/>
         <MenuItem onClick={()=>{signOutGoogle()}}>
           <ListItemIcon>
-            <Logout  />
+            <Logout fontSize="small" />
           </ListItemIcon>
           Logout
         </MenuItem>
@@ -460,12 +315,14 @@ export default function Layout() {
         </Toolbar>
       </AppBar>
 
+
+
+
       {/* Sidebar */}
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
-          
           <IconButton onClick={handleDrawerClose}>
-            <ChevronRightIcon />
+            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </DrawerHeader>
         <Divider />
@@ -482,7 +339,7 @@ export default function Layout() {
           ))}
         </List>
       </Drawer>
-      <Box component="main" sx={{  flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
             <Switch>
               {/* On Clike content Change  */}
