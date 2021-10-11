@@ -170,7 +170,7 @@ export default function Layout() {
   const routeLinks = ['/', '/MyClass', '/Student', '/Teachers', '/Events', '/Chats' ]
   const [activePage, setActivePage] = useState(0)
   const handleDrawerOpen = () => {
-    setOpen(true);
+    setOpen(!open);
   };
 
   const handleDrawerClose = () => {
@@ -251,14 +251,14 @@ export default function Layout() {
             />
           </Search>
 
-           <Stack spacing={2} direction="row"sx={{margin:'0px 10px',border:'1px solid rgb(229, 232, 236)', borderRadius:'10px'}}>
+           {/* <Stack spacing={2} direction="row"sx={{margin:'0px 10px',border:'1px solid rgb(229, 232, 236)', borderRadius:'10px'}}> */}
               <IconButton onClick={messageClick}>
               <Badge badgeContent={3} color="error">
                 <NotificationsIcon  />
                 
               </Badge>
               </IconButton>
-          </Stack>
+          {/* </Stack> */}
            <Tooltip  title="Account settings">
           <Box sx={{display:'flex', borderRadius:'10px', border:'1px solid rgb(229, 232, 236)'}}>
           <IconButton size='small'>
