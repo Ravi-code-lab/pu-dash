@@ -1,0 +1,96 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
+
+
+$blue : #304FFD;
+
+$dark: #1D1E24;
+
+$bg: #F8F8F8;
+*{
+	margin: 0%;
+	border: 0px;
+	box-sizing: border-box;
+}
+@for $v from 1 to 70 {	
+	.f-size-#{$v}{
+		font-size: 1px * $v;
+		$v: $v +1 ;
+	}
+}
+
+
+@for $v from 1 to 70{
+	.b-size-#{$v}{
+		border: 1px * $v;
+		$v: $v +1;
+	}
+}
+
+
+/* Counter styles */
+.counter{
+  font-family: 'Monoton', cursive;
+  color: $dark;
+  display: inline-block;
+  text-align: center;
+  font-size: 2rem;
+  transform: scale(1);
+}
+.counter > div{
+  padding: 10px;
+  border-radius: 3px;
+  display: inline-block;
+  
+}
+.counter div > p{
+  font-size: 22px;
+  font-family: 'Monoton', cursive;
+  background-color: $bg;
+}
+.counter div > p > span{
+  font-size: 2rem;
+  font-family: 'Monoton', cursive;
+}
+.counter div > p {
+  padding: 15px;
+  border-radius: 25px;
+  display: inline-block;
+  box-shadow: 2px 0px 0 $blue, 3px -4px 0 $blue, 6px -4px 0 $blue;
+  border: 2px solid $blue;
+}
+
+@media only screen and (max-width: 600px) {
+  .counter div > p {
+    padding: 10px;
+    font-size: 12px;
+  }
+  .counter > div{
+    padding: 10px;
+  }
+}
+@media only screen and (max-width: 322px) {
+  .counter div > p > span{
+    font-size: 1.2rem;
+  }
+  
+  .counter div > p{
+    padding: 5px;
+    font-size: 12px !important;
+  }
+  .logo{
+    margin: 20px;
+  }
+  .counter > div{
+    padding: 5px;
+  }
+}
+@media only screen and (max-width: 375px) {
+  .counter div > p {
+    padding: 5px;
+    font-size: 14px;
+  }
+  .counter > div{
+    padding: 5px;
+  }
+}
