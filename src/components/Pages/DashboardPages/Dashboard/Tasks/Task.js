@@ -16,7 +16,7 @@ import { React, useState } from 'react';
 import { Box, Button, CardActions, CardContent, CardHeader, Checkbox, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, FormControlLabel, FormGroup, IconButton, InputLabel, List, Divider, ListItem, ListItemText, MenuItem, Select, Tab, TextField, Typography } from '@mui/material';
 
 // firebse
-import { arrayUnion, doc, Timestamp, updateDoc } from '@firebase/firestore';
+import { arrayUnion, arrayRemove, doc, Timestamp, updateDoc } from '@firebase/firestore';
 import { auth, db } from '../../../../../services/firebase';
 import { CheckRegistration, userData } from '../../../Registration/RegisterationForm';
 
@@ -47,6 +47,7 @@ export default function Task() {
     const [dueDate, setDueDate] = useState(null);
     const [allowText, setallowText] = useState(false);
     const [allowAttachment, setallowAttachment] = useState(false);
+    const [todo,setTodo] = useState([]);
 
     // const [todoList, setTodoList] = useState([]);
     const handleDueDateChange = (newValue) => {
@@ -55,8 +56,40 @@ export default function Task() {
     
     const [age, setAge] = useState('');
 
+    const getFuntion = ()=>{}
+
     const todoFormSubmit = async (e) => {
         e.preventDefault();
+        //
+        //const form = document.querySelector("#add-todo-form");
+        //let docId = auth.currentUser.email.split('@');
+        //docId.pop();
+        //docId = docId.join();
+        //console.log(docId);
+        //console.log(form.regno);
+        //const stdDoc = doc(db, 'students', docId);
+        //const date = new Date();
+        //const todoData = {
+        //    taskid: Timestamp.fromDate(date),
+        //    task: form.title.value,
+        //    des: form.des.value,
+        //    createdby: 'you',
+        //    attachment: ['test_txt.txt'],
+        //    dueDate: Timestamp.fromDate(dueDate),
+        //    submitted: false,
+        //    submitDate: Timestamp.fromDate(date),
+        //    priority: form.priority.value,
+        //    allowAttachment: allowAttachment,
+        //    allowText: allowText
+        //}
+        //console.log(todoData);
+        //await updateDoc(stdDoc, { "ownTask.todo": arrayUnion(todoData) });
+        //setOpenTodoForm(false);
+        //CheckRegistration(auth.currentUser);
+        //todo.push(todoData);
+
+        //NEW ONE
+
         const form = document.querySelector("#add-todo-form");
         let docId = auth.currentUser.email.split('@');
         docId.pop();
@@ -100,7 +133,20 @@ export default function Task() {
     const handleTabChange = (event, newValue) => {
         setTabValue(newValue);
     };
-    todo = getTodoList();
+
+    const handleTodoRemove = async (index) =>{
+        //old
+        //let todoData= todo[index];
+        //let docId = auth.currentUser.email.split('@');
+        //docId.pop();
+        //docId = docId.join();
+        //const stdDoc = doc(db, 'students', docId);
+        //await updateDoc(stdDoc, { "ownTask.todo": arrayRemove(todoData) });
+        //CheckRegistration(auth.currentUser);
+        //todo = todo.filter(item => item !== todo[index]);
+    };
+
+    //todo = getTodoList();
     return (
         <>
                 <CardHeader
@@ -124,17 +170,11 @@ export default function Task() {
 
                                     return (
                                         <Box key={index}>
-                                            <ListItem secondaryAction={
-                                                <Box>
-                                                <IconButton edge="end" aria-label="check">
-                                                <CheckIcon />
-                                            </IconButton>
-                                                <IconButton edge="end" aria-label="delete">
-                                                    <DeleteIcon />
+                                            <ListItem key={index} secondaryAction={
+                                                <IconButton color="primary" onClick={todo.length!==0?()=>handleTodoRemove(index):()=>{}}>
+                                                <DeleteIcon/>
                                                 </IconButton>
-                                                </Box>
-                                            } key={index} alignItems="flex-start">
-
+                                            } alignItems="flex-start">
                                                 <ListItemText
                                                     primary={tododata.task}
                                                     secondary={<>
