@@ -1,0 +1,50 @@
+@mixin btn($bg-color: #e2e2e2) {
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  border: 0;
+  padding: $base-padding ;
+  border-radius: 10px;
+  background-color: $bg-color;
+  /* We'll talk about this next */
+  transform: perspective(300px) scale(.95) translateZ(0);
+  transform-style: preserve-3d;
+}
+.btn {
+  @include btn;
+  font-family: 'Monoton', cursive;
+}
+@each $key, $val in $colors {
+  .btn-#{$key} {
+    @include btn($val);
+    &:hover {
+      background-color: lighten($val, 5);
+      animation: ripple 1.5s linear infinite;
+      transform: scale(1.001) rotateX(0);
+    }
+  }
+  .btn-outlined-#{$key} {
+    @include btn(#fff);
+    border: $base-border-thickness solid $val;
+    &:hover {
+      background-color: $val;
+      animation: ripple 1.5s linear infinite;
+      transform: scale(1.001) rotateX(0);
+    }
+  }
+  /* Ripple effect */
+  @keyframes ripple {
+    0% {
+      box-shadow: 0 0 0 0 rgba($val, 0.3),
+        0 0 0 1px rgba($val, 0.3),
+        0 0 0 3px rgba($val, 0.3),
+        0 0 0 5px rgba($val, 0.3);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba($val, 0.3),
+        0 0 0 2px rgba($val, 0.3),
+        0 0 0 50px rgba($val, 0),
+        0 0 0 10px rgba($val, 0);
+    }
+  }
+}
