@@ -13,14 +13,15 @@ export default function Login() {
     <Container component='main'  sx={{ height:'100vh',display:"flex"}}>
     <Box sx={{ textAlign: 'center', margin:"auto",height:"100%",width:"100%" }}>
       <Grid sx={7}>
-      <div className="animation a6">
-        <img src={puicon} alt="logo"></img>
-        <img src={puiconname} alt="logo"></img>
-      </div>
+      
         <Paper elevation={8} sx={{margin:"10px"}}>
+          <div className=" a6">
+            <img src={puicon} alt="logo"></img>
+            <img src={puiconname} alt="logo"></img>
+          </div>
         <Button variant="contained" color="primary"sx={{margin: 2,fontSize: 20}} onClick={() => signInGoogle()}>
             Login
-      </Button>
+        </Button>
           
         </Paper>
         </Grid>
