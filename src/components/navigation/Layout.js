@@ -165,6 +165,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 // Styles
 const useStyle = makeStyles((theme) => ({
+
+  AppBar:{
+    '@media only screen and (max-width: 600px)': {
+     display:"none"
+      
+    },
+  },
   Hover:{
     "&:hover":{
       border: "solid #fff 2px",
@@ -186,10 +193,6 @@ export default function Layout() {
   const handleDrawerOpen = () => {
     setOpen(!open);
   };
-
-
-
-
 
   function getIconTag(index,active){
     switch(index){
@@ -238,7 +241,7 @@ export default function Layout() {
 
        {/* App Bar Stat */}
 
-      <AppBar  sx={{background:"white",boxShadow:'0 0 2px 0 rgb(145 158 171 / 24%), 0 16px 32px -4px rgb(145 158 171 / 24%)',color:"black",border:"1px solid rgb(229, 232, 236)"}} position="fixed"   open={open}>
+      <AppBar className={classes.AppBar} sx={{background:"white",boxShadow:'0 0 2px 0 rgb(145 158 171 / 24%), 0 16px 32px -4px rgb(145 158 171 / 24%)',color:"black",border:"1px solid rgb(229, 232, 236)"}} position="fixed"   open={open}>
         <Toolbar>
           <IconButton
             color="inherit"
