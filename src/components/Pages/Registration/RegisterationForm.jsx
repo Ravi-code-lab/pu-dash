@@ -82,6 +82,7 @@ export default function RegisterationForm({ submitCallback }) {
             name: auth.currentUser.displayName,
             regno: form.regno.value.toUpperCase(),
             dob: form.dob.value,
+            profileImage: auth.currentUser.photoURL,
             email: auth.currentUser.email,
             mobile: parseInt(form.personalMobile.value),
             address: form.address.value,

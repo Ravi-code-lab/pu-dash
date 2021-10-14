@@ -138,6 +138,7 @@ export default function Student() {
         }
       />
      <Avatar className={classes.avatar}
+     src={currentStudentData.profileImage}
      ></Avatar>
       <CardContent className={classes.cardContent}>
          <Typography gutterBottom variant="h6" component="div">{
