@@ -267,7 +267,6 @@ export default function Layout() {
               <IconButton >
               <Badge badgeContent={3} color="error">
                 <NotificationsIcon  />
-                
               </Badge>
               </IconButton>
           </Stack>

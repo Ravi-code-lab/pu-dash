@@ -4,13 +4,11 @@ import { db, auth, insertFirebaseDocument } from '../../../services/firebase';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 import { Avatar, Grid, TextField, Typography, Box, Autocomplete, Button } from '@mui/material';
-import { AvatarIcon } from '../../Import';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 
 export let userData;
-
 //This Function is for checking the registeration
 export const CheckRegistration = async (user) => {
     let register = 'std';
@@ -110,23 +108,30 @@ export default function RegisterationForm({ submitCallback }) {
 
     return (
         <div>
-            <Container component="main" maxWidth="md" sx={{ textAlign: 'center' }}>
+            <Container  component="main" maxWidth="md" sx={{  textAlign: 'center' }}>
                 <Typography sx={{ padding: '20px' }} variant="h5" gutterBottom>Registration Form</Typography>
-                <Paper sx={{ padding: "20px 20px 20px 20px" }}>
+                <Paper   sx={{ padding: "20px 20px 20px 20px" }}>
                     <form id="reg-form" method="POST" onSubmit={(e) => SubmitForm(e)}>
                         <Typography variant="h6" gutterBottom>Personal Details</Typography>
                         <Box style={{ margin: "auto" }}>
-                            <Avatar alt="Avatar Icon" sx={{ width: 150, height: 150, margin: "auto" }} src={AvatarIcon} />
+                            <Avatar alt="Avatar Icon" sx={{ width: 150, height: 150, margin: "auto" }} src={auth.currentUser.photoURL} />
                         </Box>
                         <Grid sx={{ mt: 1 }} container spacing={3}>
                             <Grid xs={12} item>
                                 <TextField label="Registation no" name="regno" fullWidth required />
                             </Grid>
                             <Grid xs={12} item>
-                                <TextField sx={{ textAlign: 'left' }} type="email" label="Personal Email" name="personalEmail" fullWidth required />
+                                <TextField sx={{ textAlign: 'left' }} type="email" 
+                                maxlength="10"
+                                
+                                label="Personal Email" name="personalEmail" fullWidth required />
                             </Grid>
                             <Grid xs={12} item>
-                                <TextField type="tel" label="Personal Mobile" name="personalMobile" fullWidth required />
+                                <TextField type="number" label="Personal Mobile"
+                                maxlength="10"
+                                pattern="\d{10}"
+                                name="personalMobile"
+                                fullWidth required />
                             </Grid>
                             <Grid xs={12} sm={6} item>
                                 <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -155,6 +160,7 @@ export default function RegisterationForm({ submitCallback }) {
                                     inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                                     label="Father Phone Number"
                                     fullWidth
+                                    type="number"
                                     name="fatherMobile"
                                     required />
                             </Grid>
@@ -172,7 +178,7 @@ export default function RegisterationForm({ submitCallback }) {
                         <Grid sx={{ mt: 1 }} container spacing={3}>
                             {/* 10ths Marks */}
                             <Grid xs={12} sm={3} item>
-                                <TextField label="10th Marks" name="marks10" type="" fullWidth required />
+                                <TextField label="10th Marks" name="marks10" type="number" fullWidth required />
                             </Grid>
                             {/* 10th Marks Unit */}
                             <Grid item xs={12} sm={3}>

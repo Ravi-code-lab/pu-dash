@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\components",
+    "\\src\\components\\navigation",
+    "\\src\\components\\Pages",
+    "\\src\\components\\Pages\\DashboardPages",
+    "\\src\\components\\Pages\\DashboardPages\\Student",
+    "\\src\\components\\PuButton",
+    "\\src\\config",
+    "\\src\\theme"
+  ],
+  "SelectedNode": "\\src\\components\\Pages\\DashboardPages\\Student\\Student.js",
+  "PreviewInSolutionExplorer": false
+}
