@@ -43,7 +43,6 @@ import Teachers from '../Pages/DashboardPages/Teachers/Teachers';
 // Firebase
 import { auth,signOutGoogle } from '../../services/firebase';
 import { LockOpen, Mail, Task } from '@mui/icons-material';
-import { makeStyles } from '@mui/styles';
 
 
 // Styles
@@ -163,29 +162,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-// Styles
-const useStyle = makeStyles((theme) => ({
-
-  AppBar:{
-    '@media only screen and (max-width: 600px)': {
-     display:"none"
-      
-    },
-  },
-  Hover:{
-    "&:hover":{
-      border: "solid #fff 2px",
-      backgroundColor: "#fff",
-      boxShadow:"0 20px 20px rgba(0, 0, 0, 0.2)",
-    }
-  }
-}));
-
 
 
 export default function Layout() {
   //const theme = useTheme();
-  const classes = useStyle();
   const [open, setOpen] = useState(false);
   const routeName = ['Dashboard', 'My Class', 'Student', 'Teachers', 'Events', 'Chats' ];
   const routeLinks = ['/', '/MyClass', '/Student', '/Teachers', '/Events', '/Chats' ]
@@ -193,6 +173,7 @@ export default function Layout() {
   const handleDrawerOpen = () => {
     setOpen(!open);
   };
+
 
   function getIconTag(index,active){
     switch(index){
@@ -229,7 +210,6 @@ export default function Layout() {
   const messageClose = () => {
     setAnchorE(null);
   };
- 
   
   return (    
     <>
@@ -241,18 +221,17 @@ export default function Layout() {
 
        {/* App Bar Stat */}
 
-      <AppBar className={classes.AppBar} sx={{background:"white",boxShadow:'0 0 2px 0 rgb(145 158 171 / 24%), 0 16px 32px -4px rgb(145 158 171 / 24%)',color:"black",border:"1px solid rgb(229, 232, 236)"}} position="fixed"   open={open}>
+      <AppBar  sx={{background:"white",boxShadow:'0 0 2px 0 rgb(145 158 171 / 24%), 0 16px 32px -4px rgb(145 158 171 / 24%)',color:"black",border:"1px solid rgb(229, 232, 236)"}} position="fixed"   open={open}>
         <Toolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
+            
             sx={{
               marginRight: '36px',
-              border:'1px solid rgb(229, 232, 236)', borderRadius:'10px'
             }}
-            className={classes.Hover}
           >
             <MenuIcon />
           </IconButton>
@@ -260,7 +239,7 @@ export default function Layout() {
             {routeName[activePage]}
           </Typography>
           
-          <Search className={classes.Hover} sx={{ border:'1px solid rgb(229, 232, 236)',borderRadius:'10px'}}>
+          <Search sx={{ border:'1px solid rgb(229, 232, 236)',borderRadius:'10px'}}>
             <SearchIconWrapper>
               <SearchIcon/>
             </SearchIconWrapper>
@@ -269,7 +248,7 @@ export default function Layout() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
-          <Tooltip className={classes.Hover} onClick={messageClick} title="Message">
+          <Tooltip onClick={messageClick} title="Message">
            <Stack spacing={2} direction="row"sx={{margin:'0px 10px',border:'1px solid rgb(229, 232, 236)', borderRadius:'10px'}}>
               <IconButton >
               <Badge badgeContent={3} color="error">
@@ -279,7 +258,7 @@ export default function Layout() {
               </IconButton>
           </Stack>
           </Tooltip>
-           <Tooltip className={classes.Hover}  onClick={profileClick}  title="Account settings">
+           <Tooltip onClick={profileClick}  title="Account settings">
           <Box  sx={{borderRadius:'10px', border:'1px solid rgb(229, 232, 236)'}}>
           <IconButton size='small'>
             <Avatar sx={{width:'30px',height:'30px'}}   src={auth.currentUser.photoURL} ></Avatar>
@@ -484,7 +463,7 @@ export default function Layout() {
         <List>
           {routeName.map((text, index) => (
             <Link style={{textDecoration:'none'}} key={index} to={routeLinks[index]}>
-            <ListItem className={classes.Hover}  sx={{height:'46px',color:'#637381',fontSize:'0.975rem',lineHeight:'1.6px'}} button onClick={()=>{setActivePage(index)}}>
+            <ListItem sx={{height:'46px',color:'#637381',fontSize:'0.975rem',lineHeight:'1.6px'}} button onClick={()=>{setActivePage(index)}}>
               <ListItemIcon>
                 {getIconTag(index,activePage)}
               </ListItemIcon>
@@ -499,9 +478,7 @@ export default function Layout() {
             <Switch>
               {/* On Clike content Change  */}
               <Route exact path="/">
-                
                 <Dashoard />
-
               </Route>
               {/* On Clike content Change  */}
               <Route exact path="/MyClass">

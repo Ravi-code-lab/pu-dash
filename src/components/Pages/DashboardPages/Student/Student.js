@@ -24,7 +24,7 @@ import CallIcon from '@mui/icons-material/Call';
 import { userData } from "../../Registration/RegisterationForm";
 import { db } from '../../../../services/firebase';
 import { collection, query, where, getDocs} from "firebase/firestore";
-// Styles
+
 // Student Styles  
 //const mediaqtest= useMediaQuery('');
 // const theme = createTheme({});
@@ -41,19 +41,10 @@ const useStyles = makeStyles((theme) => ({
   cardBody:{
     width:'250px',
     margin:'5px',
-    "&:hover":{
-      border: "solid #fff 2px",
-      backgroundColor: "#fff",
-      boxShadow:"0 20px 20px rgba(0, 0, 0, 0.2)",
-    },
     // '@media (min-height:360px)':{
     //   width:'130px'
     // },
     '@media only screen and (max-width: 600px)': {
-      width: '223px'
-      
-    },
-    '@media only screen and (max-width: 700px)': {
       width: '223px'
     },
     
@@ -81,13 +72,6 @@ const useStyles = makeStyles((theme) => ({
 
   font:{
     fontSize: '16px'
-  },
-  Hover:{
-    "&:hover":{
-      border: "solid #fff 2px",
-      backgroundColor: "#fff",
-      boxShadow:"0 20px 20px rgba(0, 0, 0, 0.2)",
-    }
   }
 
 }));
