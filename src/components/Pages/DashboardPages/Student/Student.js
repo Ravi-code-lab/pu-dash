@@ -44,6 +44,11 @@ const useStyles = makeStyles((theme) => ({
     // '@media (min-height:360px)':{
     //   width:'130px'
     // },
+    "&:hover":{
+      border: "solid #fff 2px",
+      backgroundColor: "#fff",
+      boxShadow:"0 20px 20px rgba(0, 0, 0, 0.2)",
+    },
     '@media only screen and (max-width: 600px)': {
       width: '223px'
     },
@@ -66,14 +71,15 @@ const useStyles = makeStyles((theme) => ({
     marginRight:'6px',
   },
 
+  
   iconColor:{
     color: red[500]
   },
 
   font:{
     fontSize: '16px'
-  }
-
+  },
+ 
 }));
 
 

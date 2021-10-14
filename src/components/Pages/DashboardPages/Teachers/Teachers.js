@@ -94,7 +94,15 @@ const useStyles = makeStyles(theme => ({
   cardBody:{
     width:'270px',
     margin:'10px',
-    borderRadius:'13px'
+    borderRadius:'13px',
+    "&:hover":{
+      border: "solid #fff 2px",
+      backgroundColor: "#fff",
+      boxShadow:"0 20px 20px rgba(0, 0, 0, 0.2)",
+    },
+    '@media only screen and (max-width: 600px)': {
+      width: '223px'
+    },
   },
   avatar:{
     borderRadius: '16px',
@@ -107,6 +115,7 @@ const useStyles = makeStyles(theme => ({
   cardContent:{
     textAlign:'center'
   },
+ 
   iconButton:{
     background: red[50], 
     borderRadius: '20px' ,

@@ -1,5 +1,5 @@
 // import userEvent from '@testing-library/user-event';
-import { Button ,Container,Box ,Paper} from '@mui/material';
+import { Button ,Container,Box ,Paper, Typography} from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { React } from 'react'
 import { signInGoogle } from '../../../services/firebase';
@@ -11,19 +11,27 @@ const useStyle = makeStyles((theme) => ({
     display:"flex",
   },
   Box:{
-    textAlign: 'center',
-     margin:"auto",
-     height:"100%",
-     width:"100%", 
+    margin:"auto",
+    width:"100%", 
+    justifyContent:"center",
+  },
+  Boxlogo:{
+    display:'flex',
+    justifyContent:'center',
+    height:"40px",
+    margin:'20px'
+    
   },
   BoxLeft:{
     textAlign:"-webkit-center",
-     height:"100%",
-     width:"100%" 
+    height:"100%",
+    width:"100%",
+    padding:"20px"
   },
   BoxRight:{
     textAlign:"-webkit-center",
-    height:"100%",
+    padding:"20px",
+   
     width:"100%",
     backgroundImage:"url(https://firebasestorage.googleapis.com/v0/b/poornima-dashboord.appspot.com/o/bg.jpg?alt=media&token=03bf512a-e176-420a-9968-8ec68c170ccf)",
     
@@ -32,24 +40,14 @@ const useStyle = makeStyles((theme) => ({
     '@media only screen and (max-width: 600px)': {
       borderRadius:"0 0 20px 20px"
     },
-    
-  },
-  BoxRightMain:{
-    backgroundColor:"#007FFF",
-    borderRadius:"0 20px 20px 0",
-    '@media only screen and (max-width: 600px)': {
-      borderRadius:"0 0 20px 20px"
-    },
   },
   Papper:{
     borderRadius:"20px",
-    margin:"50px",
     display:"flex",
-    alignItems:"center",
     '@media only screen and (max-width: 600px)': {
       display:"block"
     },
-  }
+  },
 
 }));
 
@@ -63,26 +61,34 @@ export default function Login() {
   <>
     <Container className={classes.Container}>
       <Box className={classes.Box} >
-        <Paper elevation={8} className={classes.Papper} >
+        <Paper elevation={16} className={classes.Papper} >
           <Box className={classes.BoxLeft}>
-            <div className=" a6">
+            <Box className={classes.Boxlogo}>
               <img src={puicon} alt="logo"></img>
               <img src={puiconname} alt="logo"></img>
-            </div>
-            <Button variant="contained" color="primary"sx={{margin: 2}} onClick={() => signInGoogle()}>
+            </Box>
+            <Typography>
+           Testing Poornima University, established in 2012, is a private university in Jaipur, Rajasthan. The university was established by Rajasthan State Legislature vide Act No. 16/2012 and is recognized under section 22 of University
+            </Typography>
+            <Button variant="contained" color="primary" sx={{margin: 1}} onClick={() => signInGoogle()}>
                 Login
             </Button>
          </Box>
          <Box className={classes.BoxRight}>
-           <Box className={classes.BoxRightMain} >
-            <div className=" a6">
-              <img src={avlogo} alt="logo"></img>
-              <img src={puiconname} alt="logo"></img>
-            </div>
-            <Button variant="contained" color="primary"sx={{margin: 2}} onClick={() => signInGoogle()}>
-                Login
-            </Button>
+          
+            <Box className={classes.Boxlogo}>
+              <img  src={avlogo} alt="logo"></img>
+              <Typography color="blue" fontSize={20} fontWeight={300}>Avination</Typography>
             </Box>
+              <Typography >
+             Testing Creatuve Digital Design & Development
+We leverage the latest Web and mobile technologies to build,grow and support your business
+            </Typography>
+            
+            <Button target="_blank" href='http://avination.in' variant="contained" color="primary"  sx={{ margin: 2}}>
+                More
+            </Button>
+           
          </Box>
         </Paper>
       </Box>
