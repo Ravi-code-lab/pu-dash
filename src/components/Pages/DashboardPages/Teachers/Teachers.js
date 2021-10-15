@@ -105,7 +105,7 @@ const useStyles = makeStyles(theme => ({
   },
   avatar:{
     borderRadius: '16px',
-    margin: '-50px auto auto auto',
+    margin: '-40px auto auto auto',
     bgcolor: red[800],
     width: 90,
     height: 90,
