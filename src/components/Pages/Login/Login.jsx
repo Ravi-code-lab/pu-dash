@@ -1,9 +1,12 @@
 // import userEvent from '@testing-library/user-event';
-import { Button ,Container,Box ,Paper, Typography} from '@mui/material';
+import { Button ,Container,Box ,ListItemIcon,Paper, Typography, Divider} from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { React } from 'react'
 import { signInGoogle } from '../../../services/firebase';
 import {puicon,puiconname,avlogo} from '../../Import';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 const useStyle = makeStyles((theme) => ({
 
   Container:{
@@ -18,7 +21,7 @@ const useStyle = makeStyles((theme) => ({
   Boxlogo:{
     display:'flex',
     justifyContent:'center',
-    height:"40px",
+    height:"50px",
     margin:'20px'
     
   },
@@ -73,18 +76,25 @@ export default function Login() {
             <Button variant="contained" color="primary" sx={{margin: 1}} onClick={() => signInGoogle()}>
                 Login
             </Button>
+            <Divider/>
+            <Typography margin={1}>
+            Social Media
+            </Typography>
+          <ListItemIcon >
+            <FacebookIcon fontSize="large" sx={{m:1}}/>
+            <TwitterIcon fontSize="large" sx={{m:1}}/>
+            <LinkedInIcon fontSize="large" sx={{m:1}}/>
+          </ListItemIcon>
          </Box>
          <Box className={classes.BoxRight}>
-          
             <Box className={classes.Boxlogo}>
               <img  src={avlogo} alt="logo"></img>
               <Typography color="blue" fontSize={20} fontWeight={300}>Avination</Typography>
             </Box>
-              <Typography >
+              <Typography  >
              Testing Creatuve Digital Design & Development
-We leverage the latest Web and mobile technologies to build,grow and support your business
+             We leverage the latest Web and mobile technologies to build,grow and support your business
             </Typography>
-            
             <Button target="_blank" href='http://avination.in' variant="contained" color="primary"  sx={{ margin: 2}}>
                 More
             </Button>

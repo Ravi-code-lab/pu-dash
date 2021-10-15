@@ -167,8 +167,6 @@ export default function Student() {
     </Card>
     )
   })}
-
-
    </Box>
     </>
   );
