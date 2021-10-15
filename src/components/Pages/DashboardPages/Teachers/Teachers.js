@@ -86,56 +86,75 @@ const useStyles = makeStyles(theme => ({
   container: {
     display:'flex',
     flexWrap:'wrap',
-   card:{
-    margin:'19px'
+    
   },
+  card:{
+    margin:'9px'
   },
   cardBody:{
-    width:'270px',
-    margin:'10px',
-    borderRadius:'13px',
+    width:'190px',
+    height:'219px',
+    margin:'5px',
+    borderRadius:'16px',
     "&:hover":{
       border: "solid #fff 2px",
       backgroundColor: "#fff",
       boxShadow:"0 20px 20px rgba(0, 0, 0, 0.2)",
     },
-    '@media only screen and (max-width: 600px)': {
-      width: '223px'
+    '@media only screen and (max-width: 1370px)': {
+      width: '170px',
+      height:'209px',
+      margin:'3px',
     },
   },
   avatar:{
     borderRadius: '16px',
     margin: '-40px auto auto auto',
     bgcolor: red[800],
-    width: 90,
-    height: 90,
+    width: 70,
+    height: 70,
+    '@media only screen and (max-width: 1370px)': {
+      width: 67,
+     height: 67,
+    },
     
   },
   cardContent:{
-    textAlign:'center'
+    textAlign:'center',
+    padding:'6px',
+    '@media only screen and (max-width: 1370px)': {
+     padding:'6px 0 0 6px',
+    },
+    
   },
  
   iconButton:{
     background: red[50], 
     borderRadius: '20px' ,
-    marginRight:'6px'
+    marginRight:'3px',
+    fontSize:'12px',
+    padding:'5px'
   },
   iconColor:{
     color: red[500]
   },
   font:{
-    fontSize: '16px'
+    fontWeight:'400',
+    fontSize: '16px',
+    padding:'0 0 6px 6px',
+    '@media only screen and (max-width: 1370px)': {
+      fontSize: '14px',
+      padding:'0 0 3px 6px',
+    },
   }
 
 }));
-
 
   // styles
   const classes = useStyles();
 
   return (
     <>
-
       <Box container className={classes.container}>
       {staffData.map((user, index) => {
             currentTechData = user.data();
@@ -143,6 +162,7 @@ const useStyles = makeStyles(theme => ({
 
       <Card  key={index} className={classes.cardBody}>
         <CardHeader
+        sx={{padding:'16px 16px 0'}}
           action={
             <IconButton aria-label="settings">
               <MoreVertIcon />
@@ -152,20 +172,20 @@ const useStyles = makeStyles(theme => ({
       <Avatar className={classes.avatar}
       ></Avatar>
         <CardContent className={classes.cardContent}>
-          <Typography gutterBottom variant="h6" component="div">{currentTechData.name.lenght<= 15?(currentTechData.name):(currentTechData.name.substring(0,14)+'..')}</Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography gutterBottom variant="h6" sx={{margin:"0px",fontWeight:'500',}} component="div">{currentTechData.name.lenght<= 15?(currentTechData.name):(currentTechData.name.substring(0,14)+'..')}</Typography>
+          <Typography sx={{margin:"0px", padding:"2px"}} variant="body2" color="text.secondary">
             {'teacher'}
             </Typography>
           </CardContent>
         <CardActions className={classes.font}>
           <IconButton className={classes.iconButton} href={('tel:'+currentTechData.mobile.toString())}>
-          <CallIcon className={classes.iconColor} />
+          <CallIcon fontSize='small'  className={classes.iconColor} />
           </IconButton>
         {currentTechData.mobile}
         </CardActions>
-        <CardActions >
+        <CardActions className={classes.font} >
           <IconButton className={classes.iconButton} aria-label="Email" href={('mailto:'+user.id+'@poornima.edu.in')}>
-          <EmailIcon className={classes.iconColor} /> 
+          <EmailIcon fontSize='small' className={classes.iconColor} /> 
           </IconButton>
           {user.id}
         </CardActions>
@@ -173,70 +193,6 @@ const useStyles = makeStyles(theme => ({
       )
       })}
       </Box>
-      {/* <Grid container spacing={2}>
-        {staffData.map((user, index) => {
-          currentTechData = user.data();
-          return (currentTechData
-            <Grid item xs key={index} >
-              <Card
-                sx={{
-                  margin: 1,
-                }}
-              >
-                <CardHeader
-                  action={
-                    <IconButton aria-label="settings">
-                      <MoreVertIcon />
-                    </IconButton>
-                  }
-                  avatar={
-                    <Avatar
-                      variant="rounded"
-                      sx={{
-                        borderRadius: 4,
-                        alignItems: "center",
-                        justifyContent: "center",
-                        bgcolor: red[800],
-                        width: 90,
-                        height: 90,
-                      }}
-                    >
-                      A
-                    </Avatar>
-                  }
-                />
-                <CardContent sx={{ display: "block", textAlign: 'center' }}>
-                  <Typography gutterBottom variant="h6" component="div">
-                    {currentTechData.name}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {'teacher'}
-                  </Typography>
-                </CardContent>
-
-                <CardActions
-                  sx={{ display: "inline-block", alignItems: "center" }}
-                >
-                  <Box sx={{ display: "flex" }}>
-                    <IconButton
-                      sx={{ margin: 1, background: red[50], borderRadius: 6 }}
-                    >
-                      <CallIcon sx={{ color: red[500] }} />
-                      <Typography variant="body2">{currentTechData.mobile}</Typography>
-                    </IconButton>
-                  </Box>
-                  <Box sx={{ display: "flex" }}>
-                    <IconButton sx={{ background: red[50], borderRadius: 6 }}>
-                      <EmailIcon sx={{ color: red[500] }} />
-                      <Typography variant="body2">{user.id}</Typography>
-                    </IconButton>
-                  </Box>
-                </CardActions>
-              </Card>
-            </Grid>
-          )
-        })}
-      </Grid> */}
     </>
   );
 }

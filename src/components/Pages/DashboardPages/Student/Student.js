@@ -7,7 +7,7 @@ import { makeStyles } from '@mui/styles';
 // import {createTheme} from '@mui/material/styles'
 
 // components
-import {IconButton,CardHeader,Card,Typography,Avatar,CardActions,CardContent,Box,InputBase} from '@mui/material';
+import {IconButton,CardHeader,Card,Typography,Avatar,CardActions,CardContent,Box,InputBase, Pagination} from '@mui/material';
 
 
 
@@ -53,6 +53,9 @@ const useStyles = makeStyles((theme) => ({
     },
     '@media only screen and (max-width: 600px)': {
       width: '223px'
+    },
+    '@media only screen and (max-width: 1370px)': {
+      width: '230px'
     },
     
   },
@@ -127,9 +130,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 
-
-
-
 export default function Student() {
 
   const [studentData, setstudentData] = useState([]);
@@ -161,13 +161,19 @@ export default function Student() {
     return;
   }, []);
 
+  const [page, setPage] = useState(1);
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
+
 
   const classes = useStyles();
   
   return (
     <>
-
-    <Box sx={{width:"100%",border:'1px solid rgb(229, 232, 236)',borderRadius:'10px',padding:"2px"}} >
+    <Box sx={{display:'flex',width:"100%",borderRadius:'10px',padding:"13px",}} >
+    <Typography sx={{flex:'1'}}></Typography>
+      <Typography> hello</Typography>
       <Search sx={{ border:'1px solid rgb(229, 232, 236)',borderRadius:'10px'}}>
             <SearchIconWrapper>
               <SearchIcon />
@@ -224,7 +230,11 @@ export default function Student() {
     )
   })}
    </Box>
-   <Box sx={{border:'1px solid rgb(229, 232, 236)',borderRadius:'10px', padding:"10px"}}>End</Box>
+   <Box sx={{display:"flex",border:'1px solid rgb(229, 232, 236)',borderRadius:'10px', padding:"10px"}}>
+    <Typography sx={{flex:1}}> Page: {page} </Typography>
+    
+   </Box>
+
     </>
   );
 }
