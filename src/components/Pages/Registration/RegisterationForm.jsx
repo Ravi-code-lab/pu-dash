@@ -121,14 +121,12 @@ export default function RegisterationForm({ submitCallback }) {
                                 <TextField label="Registation no" name="regno" fullWidth required />
                             </Grid>
                             <Grid xs={12} item>
-                                <TextField sx={{ textAlign: 'left' }} type="email" 
-                                maxlength="10"
-                                
+                                <TextField sx={{ textAlign: 'left' }} type="email"                                 
                                 label="Personal Email" name="personalEmail" fullWidth required />
                             </Grid>
                             <Grid xs={12} item>
                                 <TextField type="number" label="Personal Mobile"
-                                maxlength="10"
+                                maxLength="10"
                                 pattern="\d{10}"
                                 name="personalMobile"
                                 fullWidth required />

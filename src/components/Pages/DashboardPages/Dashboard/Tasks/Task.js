@@ -154,7 +154,7 @@ export default function Task() {
             docId.pop();
             docId = docId.join();
             const stdDoc = doc(db, 'students', docId);
-            await getDoc(stdDoc).then(result => { console.log(result.data()); setTodo(result.ownTask.todo) });
+            await getDoc(stdDoc).then(result => { console.log(result.data()); setTodo(result.data().ownTask.todo) });
         }
     }, [])
     //todo = getTodoList();
