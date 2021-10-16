@@ -2,7 +2,7 @@ import React from 'react'
 import { auth,signOutGoogle } from '../../../services/firebase'
 import "./temp.scss"
 import {puicon,puiconname,backgr,Timer} from '../../Import'
-import Button from "@mui/material"
+import {Button} from "@mui/material"
 
 export default function Temp() {
   return (
@@ -25,9 +25,9 @@ export default function Temp() {
      </div>
       <h1 className="f-size-73"> {auth.currentUser.displayName}<br/> Welcome to Poornima University</h1>
       <div class="login-box">
-    <Button onClick={()=>signOutGoogle()}>
+     <Button variant='contained' onClick={()=>signOutGoogle()}>
       LogOut
-    </Button>
+     </Button>
    </div>
       </div>
     </div>
