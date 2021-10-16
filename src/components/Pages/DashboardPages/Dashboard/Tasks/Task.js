@@ -32,74 +32,39 @@ export let isTodoLoaded = false;
 function getTodoList() {
     let todoList = [];
     todoList = userData.ownTask.todo;
-    //console.log(userData.ownTask.todo);
-    //console.log(todoList);
     return todoList;
 }
 
-//function getTodoCompList() {}
 
 
 export default function Task() {
     const [tabValue, setTabValue] = useState('1');
-    //const [todoData, settodoData] = useState([]);
     const [openTodoForm, setOpenTodoForm] = useState(false);
     const [dueDate, setDueDate] = useState(null);
     const [allowText, setallowText] = useState(false);
     const [allowAttachment, setallowAttachment] = useState(false);
     const [todo, setTodo] = useState(userData.ownTask.todo);
+    const [age, setAge] = useState('');
+    const [secondTodo, setSecondTodo] = useState([userData.ownTask.todo]);
     const handleDueDateChange = (newValue) => {
         setDueDate(newValue);
     };
 
-    const [age, setAge] = useState('');
-
-    const getFuntion = () => { }
 
     const todoFormSubmit = async (e) => {
         e.preventDefault();
-        //
-        //const form = document.querySelector("#add-todo-form");
-        //let docId = auth.currentUser.email.split('@');
-        //docId.pop();
-        //docId = docId.join();
-        //console.log(docId);
-        //console.log(form.regno);
-        //const stdDoc = doc(db, 'students', docId);
-        //const date = new Date();
-        //const todoData = {
-        //    taskid: Timestamp.fromDate(date),
-        //    task: form.title.value,
-        //    des: form.des.value,
-        //    createdby: 'you',
-        //    attachment: ['test_txt.txt'],
-        //    dueDate: Timestamp.fromDate(dueDate),
-        //    submitted: false,
-        //    submitDate: Timestamp.fromDate(date),
-        //    priority: form.priority.value,
-        //    allowAttachment: allowAttachment,
-        //    allowText: allowText
-        //}
-        //console.log(todoData);
-        //await updateDoc(stdDoc, { "ownTask.todo": arrayUnion(todoData) });
-        //setOpenTodoForm(false);
-        //CheckRegistration(auth.currentUser);
-        //todo.push(todoData);
-
         //NEW ONE
         const form = document.querySelector("#add-todo-form");
         let docId = auth.currentUser.email.split('@');
         docId.pop();
         docId = docId.join();
-        // console.log(docId);
-        // console.log(form.regno);
         const stdDoc = doc(db, 'students', docId);
         const date = new Date();
         const todoData = {
             taskid: Timestamp.fromDate(date),
             task: form.title.value,
             des: form.des.value,
-            createdby: 'you',
+            createdBy: 'you',
             attachment: ['test_txt.txt'],
             dueDate: Timestamp.fromDate(dueDate),
             submitted: false,
@@ -112,7 +77,8 @@ export default function Task() {
         await updateDoc(stdDoc, { "ownTask.todo": arrayUnion(todoData) });
         setOpenTodoForm(false);
         //CheckRegistration(auth.currentUser);
-        setTodo([...todo, todoData]);
+        setSecondTodo([...todo, todoData]);
+        
     }
 
     const handleChange = (event) => {
@@ -142,22 +108,20 @@ export default function Task() {
         await updateDoc(stdDoc, { "ownTask.todo": arrayRemove(todoData) });
         tempTodo.splice(index, 1);
         console.log(tempTodo);
-        setTodo(tempTodo);
-        //todo = todo.filter(item => item !== todo[index]);
-
-    
+        setSecondTodo(tempTodo);
     }
 
     useEffect(() => {
-        return async () => {
+        const fetchTodo = async () => {
             let docId = auth.currentUser.email.split('@');
             docId.pop();
             docId = docId.join();
             const stdDoc = doc(db, 'students', docId);
             await getDoc(stdDoc).then(result => { console.log(result.data()); setTodo(result.data().ownTask.todo) });
         }
-    }, [])
-    //todo = getTodoList();
+        fetchTodo();
+    }, [secondTodo])
+
     return (
         <>
             <CardHeader
@@ -188,12 +152,7 @@ export default function Task() {
                                         } alignItems="flex-start">
                                             <ListItemText
                                                 primary={tododata.task}
-                                                secondary={<>
-                                                    {/* <Typography variant='body2'>{tododata.des}</Typography> */}
-                                                    {/* <Typography variant='body2'>{'created by -'+tododata.createdBy}</Typography> */}
-                                                    {/* <Typography variant='body2'>{'Due date -'+tododata.dueDate.toDate().getDate()+'Due time` '+tododata.dueDate.toDate().getTime()}</Typography> */}
-                                                </>
-                                                }
+                                                secondary={ tododata.des }
                                             />
                                         </ListItem>
                                         <Divider />
