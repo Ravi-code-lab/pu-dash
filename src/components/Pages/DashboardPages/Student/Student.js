@@ -1,5 +1,5 @@
 import {React, useState,useEffect} from 'react';
-import { styled,alpha } from '@mui/system';
+
 
 // Use For Styles 
 
@@ -7,9 +7,7 @@ import { makeStyles } from '@mui/styles';
 // import {createTheme} from '@mui/material/styles'
 
 // components
-import {IconButton,CardHeader,Card,Typography,Avatar,CardActions,CardContent,Box,InputBase, Pagination} from '@mui/material';
-
-
+import {IconButton,CardHeader,Card,Typography,Avatar,CardActions,CardContent,Box, Pagination} from '@mui/material';
 
 
 // mui Color
@@ -19,8 +17,10 @@ import SearchIcon from '@mui/icons-material/Search';
 import EmailIcon from '@mui/icons-material/Email';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CallIcon from '@mui/icons-material/Call';
-
-
+import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
+import ArrowDropDownOutlinedIcon from '@mui/icons-material/ArrowDropDownOutlined';
+// Search 
+import {Search,SearchIconWrapper,StyledInputBase} from '../../../../theme/Styles/Search'
 
 // Data red
 import { userData } from "../../Registration/RegisterationForm";
@@ -38,11 +38,13 @@ const useStyles = makeStyles((theme) => ({
   },
   
   card:{
-    margin:'19px'
+    margin:'9px'
   },
   cardBody:{
     width:'250px',
+    height:'329px',
     margin:'5px',
+    borderRadius:'16px',
     // '@media (min-height:360px)':{
     //   width:'130px'
     // },
@@ -61,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar:{
     borderRadius: '16px',
-    margin: '-50px auto auto auto',
+    margin: '-40px auto auto auto',
     bgcolor: red[800],
     width: 90,
     height: 90,
@@ -87,49 +89,6 @@ const useStyles = makeStyles((theme) => ({
  
 }));
 
-
-//search
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(3),
-    width: 'auto',
-  },
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
-    },
-  },
-}));
-
-
 export default function Student() {
 
   const [studentData, setstudentData] = useState([]);
@@ -154,7 +113,7 @@ export default function Student() {
     fetchData();
     return;
   }, []);
-
+  // pages
   const [page, setPage] = useState(1);
   const handleChange = (event, value) => {
     setPage(value);
@@ -165,19 +124,26 @@ export default function Student() {
   
   return (
     <>
-    <Box sx={{display:'flex',width:"100%",borderRadius:'10px',padding:"13px",}} >
-    <Typography sx={{flex:'1'}}></Typography>
-      <Typography> hello</Typography>
-      <Search sx={{ border:'1px solid rgb(229, 232, 236)',borderRadius:'10px'}}>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
+     {/* hader */}
+
+    <Box sx={{display:'flex',width:"100%",borderRadius:'10px',marginBottom:"13px",}} >
+      <Search sx={{ border:'1px solid rgb(229, 232, 236)',borderRadius:'16px'}}>
+      <SearchIconWrapper>
+         <SearchIcon />
+          </SearchIconWrapper>
+          <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
-            />
-      </Search>
+          />
+      </Search><Typography sx={{flex:'1'}}></Typography>
+      <Box sx={{ display:'flex', border:'1px solid rgb(229, 232, 236)',borderRadius:'16px' ,padding:'10px',margin:'auto'}}>
+      <FilterAltOutlinedIcon/>
+      <Typography body2 sx={{margin:'0px 10px'}}>Filter</Typography>
+      <ArrowDropDownOutlinedIcon/>
+      </Box>
     </Box>
+
+
     <Box container className={classes.container}>
     {studentData.map((user, index) => {
           currentStudentData = user.data();
@@ -220,9 +186,13 @@ export default function Student() {
     </Card>
     )
   })}
+
    </Box>
-   <Box sx={{display:"flex",border:'1px solid rgb(229, 232, 236)',borderRadius:'10px', padding:"10px"}}>
-    <Typography sx={{flex:1}}> Page: {page} </Typography>
+   {/* footer */}
+   <Box sx={{display:"flex", marginTop:"20px"}}>
+    <Typography  sx={{flex:1,margin:'auto'}}> Page: {page} </Typography>
+    <Pagination size='medium'  count={2}  variant='outlined' shape='rounded'></Pagination>
+    
    </Box>
     </>
   );
