@@ -1,22 +1,36 @@
-import { React, useState, useEffect } from "react";
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardContent from "@mui/material/CardContent";
-import Avatar from "@mui/material/Avatar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import CallIcon from "@mui/icons-material/Call";
-import EmailIcon from "@mui/icons-material/Email";
-import CardActions from "@mui/material/CardActions";
-import Box from "@mui/material/Box";
+import {React, useState,useEffect} from 'react';
+
+
+// Use For Styles 
+
+import { makeStyles } from '@mui/styles';
+// import {createTheme} from '@mui/material/styles'
+
+// components
+import {IconButton,CardHeader,Card,Typography,Avatar,CardActions,CardContent,Box, Pagination} from '@mui/material';
+
+
+// mui Color
+import { red } from '@mui/material/colors';
+// Icons
+import SearchIcon from '@mui/icons-material/Search';
+import EmailIcon from '@mui/icons-material/Email';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import CallIcon from '@mui/icons-material/Call';
+
+
+
+
+
+
 import { userData } from "../../Registration/RegisterationForm";
 import { db } from '../../../../services/firebase';
 import { collection, query, where, getDocs } from "firebase/firestore";
 // Use For Styles 
 
-import { makeStyles } from '@mui/styles';
+// Search 
+import {Search,SearchIconWrapper,StyledInputBase} from '../../../../theme/Styles/Search'
+
 
 
 export default function Teachers() {
@@ -79,74 +93,69 @@ export default function Teachers() {
     return;
   }, []);
   //getTeacherData();
+   // pages
+  const [page, setPage] = useState(1);
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
 
 
   // Student Styles  
 const useStyles = makeStyles(theme => ({
-  container: {
+ container: {
     display:'flex',
     flexWrap:'wrap',
-    
   },
+  
   card:{
     margin:'9px'
   },
   cardBody:{
-    width:'190px',
-    height:'219px',
+    width:'250px',
+    height:'329px',
     margin:'5px',
     borderRadius:'16px',
+    // '@media (min-height:360px)':{
+    //   width:'130px'
+    // },
     "&:hover":{
       border: "solid #fff 2px",
       backgroundColor: "#fff",
       boxShadow:"0 20px 20px rgba(0, 0, 0, 0.2)",
     },
-    '@media only screen and (max-width: 1370px)': {
-      width: '170px',
-      height:'209px',
-      margin:'3px',
+    '@media only screen and (max-width: 600px)': {
+      width: '223px'
     },
+    '@media only screen and (max-width: 1370px)': {
+      width: '230px'
+    },
+    
   },
   avatar:{
     borderRadius: '16px',
     margin: '-40px auto auto auto',
     bgcolor: red[800],
-    width: 70,
-    height: 70,
-    '@media only screen and (max-width: 1370px)': {
-      width: 67,
-     height: 67,
-    },
+    width: 90,
+    height: 90,
     
   },
   cardContent:{
-    textAlign:'center',
-    padding:'6px',
-    '@media only screen and (max-width: 1370px)': {
-     padding:'6px 0 0 6px',
-    },
-    
+    textAlign:'center'
   },
- 
   iconButton:{
     background: red[50], 
-    borderRadius: '20px' ,
-    marginRight:'3px',
-    fontSize:'12px',
-    padding:'5px'
+    borderRadius: '20px',
+    marginRight:'6px',
   },
+
+  
   iconColor:{
     color: red[500]
   },
+
   font:{
-    fontWeight:'400',
-    fontSize: '16px',
-    padding:'0 0 6px 6px',
-    '@media only screen and (max-width: 1370px)': {
-      fontSize: '14px',
-      padding:'0 0 3px 6px',
-    },
-  }
+    fontSize: '16px'
+  },
 
 }));
 
@@ -155,6 +164,21 @@ const useStyles = makeStyles(theme => ({
 
   return (
     <>
+    {/* hader */}
+
+    <Box sx={{display:'flex',width:"100%",borderRadius:'10px',marginBottom:"13px",}} >
+    <Typography sx={{flex:'1'}}></Typography>
+      <Typography> hello</Typography>
+      <Search sx={{ border:'1px solid rgb(229, 232, 236)',borderRadius:'10px'}}>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ 'aria-label': 'search' }}
+            />
+      </Search>
+    </Box>
       <Box container className={classes.container}>
       {staffData.map((user, index) => {
             currentTechData = user.data();
@@ -162,7 +186,7 @@ const useStyles = makeStyles(theme => ({
 
       <Card  key={index} className={classes.cardBody}>
         <CardHeader
-        sx={{padding:'16px 16px 0'}}
+       
           action={
             <IconButton aria-label="settings">
               <MoreVertIcon />
@@ -172,8 +196,8 @@ const useStyles = makeStyles(theme => ({
       <Avatar className={classes.avatar}
       ></Avatar>
         <CardContent className={classes.cardContent}>
-          <Typography gutterBottom variant="h6" sx={{margin:"0px",fontWeight:'500',}} component="div">{currentTechData.name.lenght<= 15?(currentTechData.name):(currentTechData.name.substring(0,14)+'..')}</Typography>
-          <Typography sx={{margin:"0px", padding:"2px"}} variant="body2" color="text.secondary">
+          <Typography gutterBottom variant="h6"  component="div">{currentTechData.name.lenght<= 15?(currentTechData.name):(currentTechData.name.substring(0,14)+'..')}</Typography>
+          <Typography variant="body2" color="text.secondary">
             {'teacher'}
             </Typography>
           </CardContent>
@@ -185,7 +209,7 @@ const useStyles = makeStyles(theme => ({
         </CardActions>
         <CardActions className={classes.font} >
           <IconButton className={classes.iconButton} aria-label="Email" href={('mailto:'+user.id+'@poornima.edu.in')}>
-          <EmailIcon fontSize='small' className={classes.iconColor} /> 
+          <EmailIcon  className={classes.iconColor} /> 
           </IconButton>
           {user.id}
         </CardActions>
@@ -193,6 +217,14 @@ const useStyles = makeStyles(theme => ({
       )
       })}
       </Box>
+       {/* footer */}
+      
+      <Box sx={{display:"flex", marginTop:"20px"}}>
+        <Typography  sx={{flex:1,margin:'auto'}}> Page: {page} </Typography>
+        <Pagination size='medium'  count={2}  variant='outlined' shape='rounded'></Pagination>
+        
+      </Box>
+
     </>
   );
 }

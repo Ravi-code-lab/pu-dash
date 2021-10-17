@@ -9,7 +9,6 @@ import {Box,Toolbar,List,CssBaseline,Typography,Divider,IconButton,ListItem,List
 import MuiAppBar from '@mui/material/AppBar';
 import MuiDrawer from '@mui/material/Drawer';
 
-
 // icons
 
 import MenuIcon from '@mui/icons-material/Menu';
@@ -489,7 +488,15 @@ export default function Layout() {
             </Link>
           ))}
         </List>
+        <Typography sx={{flex:1}}/>
+        <Box sx={{margin:'auto',marginBottom:'30%',textAlign:'center'}} >
+          <Typography variant='h4' sx={{margin:'auto'}} >Poornima <br/>Uinversty</Typography>
+          <Typography variant='body1'>&copy;2021 All Right Reserved <br/> Made with &hearts; by Avination</Typography>
+        </Box>
+        
       </Drawer>
+
+      {/* content box */}
       <Box component="main" sx={{  flexGrow: 1, p: 3 }}>
         <DrawerHeader />
             <Switch>
