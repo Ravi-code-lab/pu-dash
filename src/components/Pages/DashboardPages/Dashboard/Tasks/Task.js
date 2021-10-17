@@ -85,7 +85,7 @@ export default function Task() {
     };
 
     const handleClose = () => {
-        setOpenTodoForm(false);
+    setOpenTodoForm(false);
     };
 
     const handleTabChange = (event, newValue) => {
@@ -239,8 +239,8 @@ export default function Task() {
                                             </IconButton>
                                         } alignItems="flex-start">
                                             <ListItemText
-                                                primary={tododata.task}
-                                                secondary={tododata.des}
+                                                primary={completedData.task}
+                                                secondary={completedData.des}
                                             />
                                         </ListItem>
                                         <Divider />
