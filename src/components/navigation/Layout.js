@@ -165,6 +165,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 // Styles
 const useStyle = makeStyles((theme) => ({
+  Logo:{
+    height:'52px'
+  },
   Hover:{
     "&:hover":{
       border: "solid #fff 2px",
@@ -470,7 +473,7 @@ export default function Layout() {
       {/* Sidebar */}
       <Drawer  sx={{borderRight:'none',boxShadow:'0 0 2px 0 rgb(145 158 171 / 24%), 0 16px 32px -4px rgb(145 158 171 / 24%)'}} variant="permanent" open={open}>
         <DrawerHeader sx={{justifyContent:'flex-start',padding:0}}>
-          <img  alt="logo"src={pulogo}/>
+          <img className={classes.Logo}  alt="logo"src={pulogo}/>
         </DrawerHeader>
         <Divider />
         
