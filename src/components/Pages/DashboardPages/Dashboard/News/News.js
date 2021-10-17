@@ -1,4 +1,4 @@
-import React from 'react'
+import {React,useEffect,useState} from 'react'
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -6,6 +6,9 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import {  CardHeader, IconButton } from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import { getDocs, query, collection, where,orderBy} from '@firebase/firestore';
+import {db} from '../../../../../services/firebase';
+import { userData } from '../../../Registration/RegisterationForm';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -42,15 +45,25 @@ function a11yProps(index) {
 
 
 export default function News() {
-    
-
-    
     const [value, setValue] = React.useState(0);
+    const [latestNews, setLatestNews] = useState([]);
+    const [oldNews, setOldNews] = useState([]);
+    const [updateNews, setUpdateNews] = useState([]);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
+    /*useEffect(() => {
+        const fetchNews = async () => {
+            let data;
+            let coll = collection(db, 'news');
+            await getDocs(query(coll, where('department','array-contains',userData.department), orderBy('date'))).then();
+            
+        }
+    }, [updateNews])
+*/
+    
     return (
         <>
             
@@ -71,7 +84,7 @@ export default function News() {
                     </Tabs>
                 </Box>
                 <TabPanel value={value} index={0}>
-                    Item One
+                    Item Two
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                     Item Two

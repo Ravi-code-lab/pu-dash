@@ -93,6 +93,7 @@ export default function RegisterationForm({ submitCallback }) {
             motherName: form.motherName.value,
             motherMobile: form.motherMobile.value == null ? parseInt('0') : parseInt(form.motherMobile.value),
             ownTask:{todo:[],complete:[]},
+            notificaton:{unread:[],readed:[]},
             acadmics: {
                 marks10th: parseInt(form.marks10.value),
                 marks10thunit: form.marks10unit.value,
