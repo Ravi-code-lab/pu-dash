@@ -1,5 +1,5 @@
 //icons
-import { AddSharp, Undo } from '@mui/icons-material';
+import { AddSharp} from '@mui/icons-material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import CheckIcon from '@mui/icons-material/Check';
@@ -72,7 +72,7 @@ export default function Task() {
         todoData.submitDate = Timestamp.fromDate(new Date())
         await updateDoc(stdDoc, { "ownTask.complete": arrayUnion(todoData) })
         tempTodo.splice(index, 1);
-        console.log(tempTodo);
+       // console.log(tempTodo);
         setSecondTodo(tempTodo);
     }
 
@@ -123,7 +123,7 @@ export default function Task() {
             docId.pop();
             docId = docId.join();
             const stdDoc = doc(db, 'students', docId);
-            await getDoc(stdDoc).then(result => { console.log(result.data()); setTodo(result.data().ownTask.todo); setCompletedTodo(result.data().ownTask.complete); });
+            await getDoc(stdDoc).then(result => { {/*console.log*/}(result.data()); setTodo(result.data().ownTask.todo); setCompletedTodo(result.data().ownTask.complete); });
         }
         fetchTodo();
     }, [secondTodo])

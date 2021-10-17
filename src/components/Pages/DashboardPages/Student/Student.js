@@ -77,8 +77,6 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '20px',
     marginRight:'6px',
   },
-
-  
   iconColor:{
     color: red[500]
   },
