@@ -192,12 +192,14 @@ export default function Task() {
                                         name="des"
                                         rows={4}
                                         required
+                                        sx={{margin:'5px 0px'}}
                                     />
                                     <Button
                                         variant="contained"
                                         component="label"
                                         type="file"
                                         startIcon={<AddSharp />}
+                                        sx={{margin:'5px 0px'}}
                                     >
                                         Upload File
                                         {/* <input // type="file"

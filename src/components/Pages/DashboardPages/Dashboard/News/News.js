@@ -1,4 +1,4 @@
-import {React,useEffect,useState} from 'react'
+import {useEffect,useState} from 'react'
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -45,7 +45,7 @@ function a11yProps(index) {
 
 
 export default function News() {
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = useState(0);
     const [latestNews, setLatestNews] = useState([]);
     const [oldNews, setOldNews] = useState([]);
     const [updateNews, setUpdateNews] = useState([]);
@@ -54,15 +54,16 @@ export default function News() {
         setValue(newValue);
     };
 
-    /*useEffect(() => {
+    useEffect(() => {
         const fetchNews = async () => {
             let data;
             let coll = collection(db, 'news');
-            await getDocs(query(coll, where('department','array-contains',userData.department), orderBy('date'))).then();
-            
+            await getDocs(query(coll, where('department','array-contains',userData.department), orderBy('date'))).then(result=>{
+            result.forEach();
+            });
         }
     }, [updateNews])
-*/
+
     
     return (
         <>

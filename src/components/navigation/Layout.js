@@ -171,7 +171,7 @@ const useStyle = makeStyles((theme) => ({
     "&:hover":{
       border: "solid #fff 2px",
       backgroundColor: "#fff",
-      boxShadow:"0 20px 20px rgba(0, 0, 0, 0.2)",
+      boxShadow:"0 10px 10px rgba(0, 0, 0, 0.1)",
     }
   }
 }));
@@ -489,10 +489,10 @@ export default function Layout() {
           ))}
         </List>
         <Typography sx={{flex:1}}/>
-        <Box sx={{margin:'auto',marginBottom:'30%',textAlign:'center'}} >
-          <Typography variant='h4' sx={{margin:'auto'}} >Poornima <br/>Uinversty</Typography>
-          <Typography variant='body1'>&copy;2021 All Right Reserved <br/> Made with &hearts; by Avination</Typography>
-        </Box>
+        {open ?<Box sx={{margin:'auto',marginBottom:'30%',textAlign:'center'}} >
+          <Typography variant='h4' sx={{margin:'auto'}} >Poornima <br/>University</Typography>
+          <Typography variant='body1'>&copy;2021 All Right Reserved <br/> Made with &#10084;&#65039; by Avination</Typography>
+        </Box>:<></>}
         
       </Drawer>
 
