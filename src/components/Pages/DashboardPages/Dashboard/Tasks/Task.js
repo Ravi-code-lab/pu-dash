@@ -60,7 +60,7 @@ export default function Task() {
         setSecondTodo([...todo, todoData]);
     }
 
-    /*const completedTodo = async (index) => {
+    const handleTodoComplete = async (index) => {
         let todoData = todo[index];
         let tempTodo = todo;
         let docId = auth.currentUser.email.split('@');
@@ -70,11 +70,11 @@ export default function Task() {
         await updateDoc(stdDoc, { "ownTask.todo": arrayRemove(todoData) });
         todoData.submitted = true;
         todoData.submitDate = Timestamp.fromDate(new Date())
-        await updateDoc(stdDoc, { "ownTask.todo": arrayUnion(todoData) })
+        await updateDoc(stdDoc, { "ownTask.complete": arrayUnion(todoData) })
         tempTodo.splice(index, 1);
         console.log(tempTodo);
         setSecondTodo(tempTodo);
-    }*/
+    }
 
     const handleChange = (event) => {
         setAge(event.target.value);
@@ -105,6 +105,17 @@ export default function Task() {
         setSecondTodo(tempTodo);
     }
 
+    const handleCompleteRemove = async (index) =>{
+        let todoData = completedTodo[index];
+        let tempTodo = todo;
+        let docId = auth.currentUser.email.split('@');
+        docId.pop();
+        docId = docId.join();
+        const stdDoc = doc(db, 'students', docId);
+        await updateDoc(stdDoc, { "ownTask.complete": arrayRemove(todoData) });
+        setSecondTodo(tempTodo); 
+    }
+
 
     useEffect(() => {
         const fetchTodo = async () => {
@@ -112,7 +123,7 @@ export default function Task() {
             docId.pop();
             docId = docId.join();
             const stdDoc = doc(db, 'students', docId);
-            await getDoc(stdDoc).then(result => { console.log(result.data()); setTodo(result.data().ownTask.todo) });
+            await getDoc(stdDoc).then(result => { console.log(result.data()); setTodo(result.data().ownTask.todo); setCompletedTodo(result.data().ownTask.complete); });
         }
         fetchTodo();
     }, [secondTodo])
@@ -141,9 +152,14 @@ export default function Task() {
                                 return (
                                     <Box key={index}>
                                         <ListItem key={index} secondaryAction={
+                                            <>
                                             <IconButton color="primary" onClick={todo.length !== 0 ? () => handleTodoRemove(index) : () => { }}>
                                                 <DeleteIcon />
                                             </IconButton>
+                                            <IconButton color="primary" onClick={todo.length !== 0 ? () => handleTodoComplete(index) : () => { }}>
+                                                <CheckIcon />
+                                            </IconButton>
+                                            </>
                                         } alignItems="flex-start">
                                             <ListItemText
                                                 primary={tododata.task}
@@ -234,8 +250,8 @@ export default function Task() {
                                 return (
                                     <Box key={index}>
                                         <ListItem key={index} secondaryAction={
-                                            <IconButton color="primary" onClick={completedData.length !== 0 ? () => handleTodoRemove(index) : () => { }}>
-                                                <Undo/>
+                                            <IconButton color="primary" onClick={completedData.length !== 0 ? () => handleCompleteRemove(index) : () => { }}>
+                                                <DeleteIcon/>
                                             </IconButton>
                                         } alignItems="flex-start">
                                             <ListItemText
