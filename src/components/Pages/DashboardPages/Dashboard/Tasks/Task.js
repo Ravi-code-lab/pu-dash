@@ -1,5 +1,5 @@
 //icons
-import { AddSharp } from '@mui/icons-material';
+import { AddSharp, Undo } from '@mui/icons-material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import CheckIcon from '@mui/icons-material/Check';
@@ -18,24 +18,7 @@ import { Box, Button, CardActions, CardContent, CardHeader, Checkbox, Dialog, Di
 // firebse
 import { arrayUnion, arrayRemove, doc, Timestamp, updateDoc, getDoc } from '@firebase/firestore';
 import { auth, db } from '../../../../../services/firebase';
-import { CheckRegistration, userData } from '../../../Registration/RegisterationForm';
-
-
-
-
-
-
-export let todo = [];
-export let comp = [];
-export let isTodoLoaded = false;
-
-function getTodoList() {
-    let todoList = [];
-    todoList = userData.ownTask.todo;
-    return todoList;
-}
-
-
+import { userData } from '../../../Registration/RegisterationForm';
 
 export default function Task() {
     const [tabValue, setTabValue] = useState('1');
@@ -45,15 +28,14 @@ export default function Task() {
     const [allowAttachment, setallowAttachment] = useState(false);
     const [todo, setTodo] = useState(userData.ownTask.todo);
     const [age, setAge] = useState('');
-    const [secondTodo, setSecondTodo] = useState([userData.ownTask.todo]);
+    const [secondTodo, setSecondTodo] = useState(userData.ownTask.todo);
+    const [completedTodo, setCompletedTodo] =  useState(userData.ownTask.complete);
     const handleDueDateChange = (newValue) => {
         setDueDate(newValue);
     };
 
-
     const todoFormSubmit = async (e) => {
         e.preventDefault();
-        //NEW ONE
         const form = document.querySelector("#add-todo-form");
         let docId = auth.currentUser.email.split('@');
         docId.pop();
@@ -73,13 +55,26 @@ export default function Task() {
             allowAttachment: allowAttachment,
             allowText: allowText
         }
-        // console.log(todoData);
         await updateDoc(stdDoc, { "ownTask.todo": arrayUnion(todoData) });
         setOpenTodoForm(false);
-        //CheckRegistration(auth.currentUser);
         setSecondTodo([...todo, todoData]);
-        
     }
+
+    /*const completedTodo = async (index) => {
+        let todoData = todo[index];
+        let tempTodo = todo;
+        let docId = auth.currentUser.email.split('@');
+        docId.pop();
+        docId = docId.join();
+        const stdDoc = doc(db, 'students', docId);
+        await updateDoc(stdDoc, { "ownTask.todo": arrayRemove(todoData) });
+        todoData.submitted = true;
+        todoData.submitDate = Timestamp.fromDate(new Date())
+        await updateDoc(stdDoc, { "ownTask.todo": arrayUnion(todoData) })
+        tempTodo.splice(index, 1);
+        console.log(tempTodo);
+        setSecondTodo(tempTodo);
+    }*/
 
     const handleChange = (event) => {
         setAge(event.target.value);
@@ -96,9 +91,8 @@ export default function Task() {
     const handleTabChange = (event, newValue) => {
         setTabValue(newValue);
     };
-    
+
     const handleTodoRemove = async (index) => {
-        //old
         let todoData = todo[index];
         let tempTodo = todo;
         let docId = auth.currentUser.email.split('@');
@@ -110,6 +104,7 @@ export default function Task() {
         console.log(tempTodo);
         setSecondTodo(tempTodo);
     }
+
 
     useEffect(() => {
         const fetchTodo = async () => {
@@ -152,7 +147,7 @@ export default function Task() {
                                         } alignItems="flex-start">
                                             <ListItemText
                                                 primary={tododata.task}
-                                                secondary={ tododata.des }
+                                                secondary={tododata.des}
                                             />
                                         </ListItem>
                                         <Divider />
@@ -232,9 +227,28 @@ export default function Task() {
                             </form>
                         </Dialog>
                     </TabPanel>
-                    <TabPanel value="2">Item Two</TabPanel>
+                    {/*This is the complete tab */}
+                    <TabPanel value="2">
+                        <List>
+                            {completedTodo.map((completedData, index) => {
+                                return (
+                                    <Box key={index}>
+                                        <ListItem key={index} secondaryAction={
+                                            <IconButton color="primary" onClick={completedData.length !== 0 ? () => handleTodoRemove(index) : () => { }}>
+                                                <Undo/>
+                                            </IconButton>
+                                        } alignItems="flex-start">
+                                            <ListItemText
+                                                primary={tododata.task}
+                                                secondary={tododata.des}
+                                            />
+                                        </ListItem>
+                                        <Divider />
+                                    </Box>)
+                            })}
+                        </List>
+                    </TabPanel>
                 </TabContext>
-
             </CardContent>
             <CardActions>
                 {tabValue === '1' ? <Button variant="outlined" fullWidth onClick={handleClickOpen} startIcon={<AddSharp />}>

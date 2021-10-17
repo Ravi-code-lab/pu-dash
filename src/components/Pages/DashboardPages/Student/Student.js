@@ -142,20 +142,14 @@ export default function Student() {
     const fetchData = async () => {
       const studentCollection = collection(db, "students");
       let data = [];
-      //  if (lastStaffDoc === null) {
-      await getDocs(query(studentCollection, where('course','==', userData.course))).then(
+      await getDocs(query(studentCollection, where('course','==', userData.course),)).then(
         (result) => {
           result.forEach(doc => {
-            // console.log(doc.id, '=>', doc.data());
             data.push(doc);
           })
-          // lastStaffDoc = data[19];
-          // console.log(lastStaffDoc);
         }
       )
-      // } 
       setstudentData(data);
-      // console.log(data);
     }
     fetchData();
     return;
@@ -185,12 +179,9 @@ export default function Student() {
       </Search>
     </Box>
     <Box container className={classes.container}>
-
-
     {studentData.map((user, index) => {
           currentStudentData = user.data();
           return (
-    
     <Card key={index} className={classes.cardBody}>
       <CardHeader
         action={
@@ -232,9 +223,7 @@ export default function Student() {
    </Box>
    <Box sx={{display:"flex",border:'1px solid rgb(229, 232, 236)',borderRadius:'10px', padding:"10px"}}>
     <Typography sx={{flex:1}}> Page: {page} </Typography>
-    
    </Box>
-
     </>
   );
 }
