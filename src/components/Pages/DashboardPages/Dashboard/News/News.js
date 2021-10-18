@@ -58,15 +58,21 @@ export default function News() {
     useEffect(() => {
         const fetchNews = async () => {
             let data = [];
-            let otherNews
+            let otherNews = [];
             let coll = collection(db, 'news');
             await getDocs(query(coll, where('department', 'array-contains', userData.department))).then(result => {
                 result.forEach(documentData => {
-                    
+                    if(documentData.data().latest){
                     data.push(documentData.data());
+                    }else{
+                        
+                    otherNews.push(documentData.data());
+                    }
                 });
                 setLatestNews(data);
+                setOldNews(otherNews);
                 console.log(data);
+                console.log(otherNews);
             });
         }
         fetchNews();
@@ -107,7 +113,18 @@ export default function News() {
                     </List>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    Item Two
+                    <List>
+                        {oldNews.map((news, index) => {
+                            return (<Box key={index}> <ListItem >
+                                <ListItemText primary={news.heading} secondary={news.description} />
+                                <ListItemText secondary={'Publised By:'+news.publised_by} align="right"/>
+                                </ListItem>
+                                <Typography sx={{textAlign:'center', color:'#637381 '}} variant='body2'>{fDateTime(news.date.toDate())}</Typography>
+                                <Divider />
+                            </Box>)
+                        })
+                        }
+                    </List>
                 </TabPanel>
             </Box>
 
