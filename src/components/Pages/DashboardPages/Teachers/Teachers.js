@@ -198,7 +198,7 @@ const useStyles = makeStyles(theme => ({
       <Avatar className={classes.avatar}
       ></Avatar>
         <CardContent className={classes.cardContent}>
-          <Typography gutterBottom variant="h6"  component="div">{currentTechData.name.lenght<= 15?(currentTechData.name):(currentTechData.name.substring(0,14)+'..')}</Typography>
+          <Typography gutterBottom variant="h6"  component="div">{currentTechData.name.length<= 15?(currentTechData.name):(currentTechData.name.substring(0,14)+'..')}</Typography>
           <Typography variant="body2" color="text.secondary">
             {'teacher'}
             </Typography>
