@@ -64,96 +64,45 @@ const useStyles = makeStyles({
                         </ListItemIcon>
                         <ListItemText primary="Arun">Arun</ListItemText>
                     </ListItem>
-                    <ListItem button key="Arun">
-                        <ListItemIcon>
-                            <Avatar alt="" src="" />
-                        </ListItemIcon>
-                        <ListItemText primary="Arun">Arun</ListItemText>
-                    </ListItem>
-                    <ListItem button key="Arun">
-                        <ListItemIcon>
-                            <Avatar alt="" src="" />
-                        </ListItemIcon>
-                        <ListItemText primary="Arun">Arun</ListItemText>
-                    </ListItem>
-                    <ListItem button key="Arun">
-                        <ListItemIcon>
-                            <Avatar alt="" src="" />
-                        </ListItemIcon>
-                        <ListItemText primary="Arun">Arun</ListItemText>
-                    </ListItem>
-                    <ListItem button key="Arun">
-                        <ListItemIcon>
-                            <Avatar alt="" src="" />
-                        </ListItemIcon>
-                        <ListItemText primary="Arun">Arun</ListItemText>
-                    </ListItem>
-                    <ListItem button key="Arun">
-                        <ListItemIcon>
-                            <Avatar alt="" src="" />
-                        </ListItemIcon>
-                        <ListItemText primary="Arun">Arun</ListItemText>
-                    </ListItem>
-                    <ListItem button key="Arun">
-                        <ListItemIcon>
-                            <Avatar alt="" src="" />
-                        </ListItemIcon>
-                        <ListItemText primary="Arun">Arun</ListItemText>
-                    </ListItem>
-                    <ListItem button key="Arun">
-                        <ListItemIcon>
-                            <Avatar alt="" src="" />
-                        </ListItemIcon>
-                        <ListItemText primary="Arun">Arun</ListItemText>
-                    </ListItem>
-                    <ListItem button key="Arun">
-                        <ListItemIcon>
-                            <Avatar alt="" src="" />
-                        </ListItemIcon>
-                        <ListItemText primary="Arun">Arun</ListItemText>
-                    </ListItem>
-                    <ListItem button key="Arun">
-                        <ListItemIcon>
-                            <Avatar alt="" src="" />
-                        </ListItemIcon>
-                        <ListItemText primary="Arun">Arun</ListItemText>
-                    </ListItem>
+                   
+                
                 </List>
             </Grid>
             <Grid item xs={9}>
                 <List className={classes.messageArea}>
                     <ListItem key="1">
-                        <Grid container>
-                            <Grid item xs={12}>
-                                <ListItemText align="right" primary="Hey man, What's up ?"></ListItemText>
-                            </Grid>
+                        <Grid container> 
                             <Grid item xs={12}>
                                 <ListItemText align="right" secondary="09:30"></ListItemText>
                             </Grid>
+                            <Grid item xs={12}>
+                                <ListItemText align="right" primary="Hey man, What's up ?"></ListItemText>
+                            </Grid>
+                           
                         </Grid>
                     </ListItem>
                     <ListItem key="2">
                         <Grid container>
+                             <Grid item xs={12}>
+                                <ListItemText align="left" secondary="09:31"></ListItemText>
+                            </Grid>
                             <Grid item xs={12}>
                                 <ListItemText align="left" primary="Hey, Iam Good! What about you ?"></ListItemText>
                             </Grid>
-                            <Grid item xs={12}>
-                                <ListItemText align="left" secondary="09:31"></ListItemText>
-                            </Grid>
+                           
                         </Grid>
                     </ListItem>
                     <ListItem key="3">
                         <Grid container>
+                             <Grid item xs={12}>
+                                <ListItemText align="right" secondary="10:30"></ListItemText>
+                            </Grid>
                             <Grid item xs={12}>
                                 <ListItemText align="right" primary="Cool. i am good, let's catch up!"></ListItemText>
                             </Grid>
-                            <Grid item xs={12}>
-                                <ListItemText align="right" secondary="10:30"></ListItemText>
-                            </Grid>
                         </Grid>
                     </ListItem>
-                </List>
-                
+                </List>       
                 <Grid container style={{padding: '20px'}}>
                     <Grid item xs={11}>
                         <TextField sx={{borderRadius:'16px'}} id="outlined-basic-email" label="Type Something" fullWidth />
