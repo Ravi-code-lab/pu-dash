@@ -77,8 +77,6 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '20px',
     marginRight:'6px',
   },
-
-  
   iconColor:{
     color: red[500]
   },
@@ -138,7 +136,7 @@ export default function Student() {
       </Search><Typography sx={{flex:'1'}}></Typography>
       <Box sx={{ display:'flex', border:'1px solid rgb(229, 232, 236)',borderRadius:'16px' ,padding:'10px',margin:'auto'}}>
       <FilterAltOutlinedIcon/>
-      <Typography body2 sx={{margin:'0px 10px'}}>Filter</Typography>
+      <Typography variant='body2' sx={{margin:'0px 10px'}}>Filter</Typography>
       <ArrowDropDownOutlinedIcon/>
       </Box>
     </Box>

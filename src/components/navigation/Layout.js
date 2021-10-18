@@ -1,11 +1,11 @@
 import { React, useState,useEffect } from 'react';
 import {BrowserRouter as Router, Route, Switch,Link} from "react-router-dom";
 
-import { styled,alpha} from '@mui/material/styles';
+import { styled} from '@mui/material/styles';
 
    
 // components
-import {Box,Toolbar,List,CssBaseline,Typography,Divider,IconButton,ListItem,ListItemIcon,LinearProgress,ListItemAvatar,Avatar,ListItemText,Stack,Badge,Menu,MenuItem,Tooltip,InputBase} from '@mui/material';
+import {Box,Toolbar,List,CssBaseline,Typography,Divider,IconButton,ListItem,ListItemIcon,LinearProgress,ListItemAvatar,Avatar,ListItemText,Stack,Badge,Menu,MenuItem,Tooltip} from '@mui/material';
 import MuiAppBar from '@mui/material/AppBar';
 import MuiDrawer from '@mui/material/Drawer';
 
@@ -42,6 +42,9 @@ import Teachers from '../Pages/DashboardPages/Teachers/Teachers';
 // Firebase
 import { auth,signOutGoogle } from '../../services/firebase';
 import { LockOpen, Mail, Task } from '@mui/icons-material';
+
+//
+import {Search,SearchIconWrapper,StyledInputBase} from '../../theme/Styles/Search'
 
 
 // Styles
@@ -118,50 +121,6 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-/// styles & Define Search
-
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(1),
-    width: 'auto',
-  },
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '12ch',
-      '&:focus': {
-        width: '20ch',
-      },
-    },
-  },
-}));
-
 // Styles
 const useStyle = makeStyles((theme) => ({
   Logo:{
@@ -173,7 +132,21 @@ const useStyle = makeStyles((theme) => ({
       backgroundColor: "#fff",
       boxShadow:"0 10px 10px rgba(0, 0, 0, 0.1)",
     }
+  },
+  Sidebar:{
+    border:'none',
+    boxShadow:'none',
+    borderRight:'none',
+  },
+  paper:{
+    borderRight:'none',
+    boxShadow:'0 8px 10px 0 rgb(183 192 206 / 20%)',
+    
+  },
+  Border:{
+
   }
+
 }));
 
 export default function Layout() {
@@ -235,7 +208,7 @@ export default function Layout() {
 
        {/* App Bar Stat */}
 
-      <AppBar  sx={{background:"white",boxShadow:'0 0 2px 0 rgb(145 158 171 / 24%), 0 16px 32px -4px rgb(145 158 171 / 24%)',color:"black",border:"1px solid rgb(229, 232, 236)"}} position="fixed"   open={open}>
+      <AppBar  sx={{background:"white",boxShadow:'3px 0 10px 0 rgb(183 192 206 / 20%)',color:"black",border:"none"}} position="fixed"   open={open}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -470,16 +443,18 @@ export default function Layout() {
       </AppBar>
 
       {/* Sidebar */}
-      <Drawer  sx={{borderRight:'none',boxShadow:'0 0 2px 0 rgb(145 158 171 / 24%), 0 16px 32px -4px rgb(145 158 171 / 24%)'}} variant="permanent" open={open}>
+      <Drawer classes={{
+        paper: classes.paper,
+      }} className={classes.Sidebar}  sx={{boxShadow:'none',border:'none'}} variant="permanent" open={open}>
         <DrawerHeader sx={{justifyContent:'flex-start',padding:0}}>
           <img className={classes.Logo}  alt="logo"src={pulogo}/>
         </DrawerHeader>
-        <Divider />
+        
         
         <List>
           {routeName.map((text, index) => (
             <Link style={{textDecoration:'none'}} key={index} to={routeLinks[index]}>
-            <ListItem className={classes.Hover} sx={{height:'46px',color:'#637381',fontSize:'0.975rem',lineHeight:'1.6px'}} button onClick={()=>{setActivePage(index)}}>
+            <ListItem  sx={{height:'46px',color:'#637381',fontSize:'0.975rem',lineHeight:'1.6px'}} button onClick={()=>{setActivePage(index)}}>
               <ListItemIcon>
                 {getIconTag(index,activePage)}
               </ListItemIcon>

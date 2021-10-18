@@ -17,16 +17,15 @@ import SearchIcon from '@mui/icons-material/Search';
 import EmailIcon from '@mui/icons-material/Email';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CallIcon from '@mui/icons-material/Call';
-
-
-
-
+import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
+import ArrowDropDownOutlinedIcon from '@mui/icons-material/ArrowDropDownOutlined';
 
 
 import { userData } from "../../Registration/RegisterationForm";
 import { db } from '../../../../services/firebase';
 import { collection, query, where, getDocs } from "firebase/firestore";
 // Use For Styles 
+
 
 // Search 
 import {Search,SearchIconWrapper,StyledInputBase} from '../../../../theme/Styles/Search'
@@ -167,17 +166,20 @@ const useStyles = makeStyles(theme => ({
     {/* hader */}
 
     <Box sx={{display:'flex',width:"100%",borderRadius:'10px',marginBottom:"13px",}} >
-    <Typography sx={{flex:'1'}}></Typography>
-      <Typography> hello</Typography>
-      <Search sx={{ border:'1px solid rgb(229, 232, 236)',borderRadius:'10px'}}>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
+      <Search sx={{ border:'1px solid rgb(229, 232, 236)',borderRadius:'16px'}}>
+      <SearchIconWrapper>
+         <SearchIcon />
+          </SearchIconWrapper>
+          <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
-            />
-      </Search>
+          />
+      </Search><Typography sx={{flex:'1'}}></Typography>
+      <Box sx={{ display:'flex', border:'1px solid rgb(229, 232, 236)',borderRadius:'16px' ,padding:'10px',margin:'auto'}}>
+      <FilterAltOutlinedIcon/>
+      <Typography variant='body2' sx={{margin:'0px 10px'}}>Filter</Typography>
+      <ArrowDropDownOutlinedIcon/>
+      </Box>
     </Box>
       <Box container className={classes.container}>
       {staffData.map((user, index) => {
