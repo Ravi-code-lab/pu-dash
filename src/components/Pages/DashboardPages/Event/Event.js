@@ -1,120 +1,142 @@
 import React from 'react'
+import FullCalendar, { formatDate } from '@fullcalendar/react'
+import dayGridPlugin from '@fullcalendar/daygrid'
+import timeGridPlugin from '@fullcalendar/timegrid'
+import interactionPlugin from '@fullcalendar/interaction'
+import { INITIAL_EVENTS, createEventId } from './event-utils'
+import { Box } from '@mui/material'
+import { makeStyles } from '@mui/styles'
 
-export default function Event() {
+
+const useStyles = makeStyles((theme) => ({
+ 
+  
+ 
+}));
+
+export default class DemoApp extends React.Component {
+
+  state = {
+    weekendsVisible: true,
+    currentEvents: []
+  }
+
+  render() {
+    return (
+      <div className='demo-app'>
+        {this.renderSidebar()}
+        <div className='demo-app-main'>
+          <FullCalendar
+            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+            headerToolbar={{
+              left: 'prev,next today',
+              center: 'title',
+              right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            }}
+            initialView='dayGridMonth'
+            editable={true}
+            selectable={true}
+            selectMirror={true}
+            dayMaxEvents={true}
+            weekends={this.state.weekendsVisible}
+            initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
+            select={this.handleDateSelect}
+            eventContent={renderEventContent} // custom render function
+            eventClick={this.handleEventClick}
+            eventsSet={this.handleEvents} // called after events are initialized/added/changed/removed
+            /* you can update a remote database when these fire:
+            eventAdd={function(){}}
+            eventChange={function(){}}
+            eventRemove={function(){}}
+            */
+          />
+        </div>
+      </div>
+    )
+  }
+
+  renderSidebar() {
+    return (
+      <Box className='demo-app-sidebar'>
+        <Box className='demo-app-sidebar-section'>
+          <h2>Instructions</h2>
+          <ul>
+            <li>Select dates and you will be prompted to create a new event</li>
+            <li>Drag, drop, and resize events</li>
+            <li>Click an event to delete it</li>
+          </ul>
+        </Box>
+        <Box className='demo-app-sidebar-section'>
+          <label>
+            <input
+              type='checkbox'
+              checked={this.state.weekendsVisible}
+              onChange={this.handleWeekendsToggle}
+            ></input>
+            toggle weekends
+          </label>
+        </Box>
+        <Box className='demo-app-sidebar-section'>
+          <h2>All Events ({this.state.currentEvents.length})</h2>
+          <ul>
+            {this.state.currentEvents.map(renderSidebarEvent)}
+          </ul>
+        </Box>
+      </Box>
+    )
+  }
+
+  handleWeekendsToggle = () => {
+    this.setState({
+      weekendsVisible: !this.state.weekendsVisible
+    })
+  }
+
+  handleDateSelect = (selectInfo) => {
+    let title = prompt('Please enter a new title for your event')
+    let calendarApi = selectInfo.view.calendar
+
+    calendarApi.unselect() // clear date selection
+
+    if (title) {
+      calendarApi.addEvent({
+        id: createEventId(),
+        title,
+        start: selectInfo.startStr,
+        end: selectInfo.endStr,
+        allDay: selectInfo.allDay
+      })
+    }
+  }
+
+  // handleEventClick = (clickInfo) => {
+  //   if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
+  //     clickInfo.event.remove()
+  //   }
+  // }
+
+  handleEvents = (events) => {
+    this.setState({
+      currentEvents: events
+    })
+  }
+
+}
+
+function renderEventContent(eventInfo) {
   return (
-    <div>
-      <h1>Event testing </h1>
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dignissimos libero rerum animi non maiores quis assumenda neque? Officia repudiandae eos earum, iste error hic deserunt sequi saepe veritatis, cum iure?
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni veritatis quibusdam rerum, quidem saepe voluptatem officiis quia, ut odio in at nostrum, earum dignissimos consequuntur. Ut placeat doloribus necessitatibus inventore!
-      Quia, impedit dignissimos? Nobis est minus, placeat nostrum mollitia dicta iste alias voluptatem beatae similique nam repudiandae animi necessitatibus sequi voluptates. Laboriosam totam fugiat ea excepturi provident illo doloribus expedita.
-      Quibusdam nemo eaque iusto libero esse minima eum dolores tenetur labore, nisi nam eligendi voluptate officiis corporis, sed magnam fugiat voluptatem aspernatur ipsa? Sequi eligendi accusamus tenetur quaerat nemo debitis?
-      Laudantium ratione aperiam vero earum consectetur hic sapiente alias nesciunt consequatur provident aut maiores tenetur, adipisci corrupti sunt quasi placeat perferendis aliquam nam a officia at possimus quo. Ullam, dolorum!
-      Nobis quos numquam consequuntur dolorum suscipit veniam, laborum aliquid molestiae temporibus ad ipsa adipisci tenetur voluptate earum dolorem id provident dolor nulla enim? Voluptatem corporis veniam a facilis reiciendis optio.
-      Tenetur deleniti, harum perspiciatis asperiores, laudantium reprehenderit excepturi, perferendis aliquid earum error nemo. Placeat deleniti quaerat ratione sint, quibusdam maxime molestias eius repudiandae magni nihil minus laborum, nemo itaque ut!
-      Quos quam, quis provident magni fugit, minus sunt sit et tenetur nulla error maxime blanditiis repudiandae in. Reprehenderit quibusdam magni dolorem, dignissimos alias dicta, blanditiis possimus minima odio fugiat autem.
-      Dicta vero deserunt iure rerum numquam quidem quaerat reprehenderit mollitia veniam in sint autem, quasi iusto repellendus blanditiis, minus cum nisi tempore itaque enim quibusdam voluptate, quo vitae. Voluptatem, tenetur.
-      Ad, voluptatum eligendi? Laudantium aut beatae est maxime ad? Aliquam hic, facere ut quibusdam nulla voluptatibus doloribus quod repudiandae non delectus qui quisquam molestias ipsa asperiores. Dignissimos, delectus rem? Possimus?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt eum porro nesciunt enim vel dicta ducimus tempore veniam natus ipsum dolorem, incidunt magni aliquam quia debitis tenetur dolores atque dignissimos.      
-    </div>
+    <>
+      <b>{eventInfo.timeText}</b>
+      <i>{eventInfo.event.title}</i>
+    </>
+  )
+}
+
+function renderSidebarEvent(event) {
+  return (
+    <li key={event.id}>
+      <b>{formatDate(event.start, {year: 'numeric', month: 'short', day: 'numeric'})}</b>
+      <i>{event.title}</i>
+    </li>
   )
 }
