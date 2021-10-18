@@ -5,14 +5,27 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import { INITIAL_EVENTS, createEventId } from './event-utils'
 import { Box } from '@mui/material'
-import { makeStyles } from '@mui/styles'
 
-
-const useStyles = makeStyles((theme) => ({
- 
-  
- 
-}));
+const event ={
+  display: 'flex',
+  minHeight:'100%',
+  fontSize:'14px'
+}
+const eventMain ={
+  flexGrow:'1',
+  padding:' 3em'
+}
+const eventSidebar ={
+  width: '300px',
+  lineHeight:'1.5',
+  background:'#eaf9ff',
+  borderRight: '1px solid #d3e2e8',
+  height: 'max-content',
+  marginTop:'3em'
+}
+const eventSidebarSection ={
+  padding:'2em',
+}
 
 export default class DemoApp extends React.Component {
 
@@ -23,9 +36,9 @@ export default class DemoApp extends React.Component {
 
   render() {
     return (
-      <div className='demo-app'>
+      <Box style={event} >
         {this.renderSidebar()}
-        <div className='demo-app-main'>
+        <Box style={eventMain}>
           <FullCalendar
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
             headerToolbar={{
@@ -50,33 +63,15 @@ export default class DemoApp extends React.Component {
             eventRemove={function(){}}
             */
           />
-        </div>
-      </div>
+        </Box>
+      </Box>
     )
   }
 
   renderSidebar() {
     return (
-      <Box className='demo-app-sidebar'>
-        <Box className='demo-app-sidebar-section'>
-          <h2>Instructions</h2>
-          <ul>
-            <li>Select dates and you will be prompted to create a new event</li>
-            <li>Drag, drop, and resize events</li>
-            <li>Click an event to delete it</li>
-          </ul>
-        </Box>
-        <Box className='demo-app-sidebar-section'>
-          <label>
-            <input
-              type='checkbox'
-              checked={this.state.weekendsVisible}
-              onChange={this.handleWeekendsToggle}
-            ></input>
-            toggle weekends
-          </label>
-        </Box>
-        <Box className='demo-app-sidebar-section'>
+      <Box style={eventSidebar}>
+        <Box style={eventSidebarSection}>
           <h2>All Events ({this.state.currentEvents.length})</h2>
           <ul>
             {this.state.currentEvents.map(renderSidebarEvent)}
@@ -109,11 +104,12 @@ export default class DemoApp extends React.Component {
     }
   }
 
-  // handleEventClick = (clickInfo) => {
-  //   if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-  //     clickInfo.event.remove()
-  //   }
-  // }
+   handleEventClick = (clickInfo) => {
+     if (window.confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) 
+     {
+        clickInfo.event.remove()
+      }
+   }
 
   handleEvents = (events) => {
     this.setState({
