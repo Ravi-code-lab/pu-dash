@@ -4,7 +4,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { CardHeader, Divider, IconButton, List ,ListItem, ListItemText} from '@mui/material';
+import { CardHeader, Divider, IconButton, List, ListItem, ListItemText } from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { getDocs, query, collection, where, orderBy } from '@firebase/firestore';
 import { db } from '../../../../../services/firebase';
@@ -58,13 +58,15 @@ export default function News() {
         const fetchNews = async () => {
             let data = [];
             let coll = collection(db, 'news');
-            await getDocs(query(coll, where('department', 'array-contains', userData.department), orderBy('date'))).then(result => {
-                result.forEach((documentData) => {
+            await getDocs(query(coll, where('department', 'array-contains', userData.department))).then(result => {
+                result.forEach(documentData => {
                     data.push(documentData.data());
                 });
                 setLatestNews(data);
+                console.log(data);
             });
         }
+        fetchNews();
     }, [updateNews])
 
 
@@ -90,11 +92,14 @@ export default function News() {
                 <TabPanel value={value} index={0}>
                     <List>
                         {latestNews.map((news, index) => {
-                            return <ListItem key={index}>
-                        {<ListItemText primary={news.heading} secondary={news.description}/>
-                           } </ListItem>
+                            return (<Box key={index}> <ListItem >
+                                <ListItemText primary={news.heading} secondary={news.description} />
+                                <ListItemText secondary={'Publised By:'+news.publised_by} align="right"/>
+                                </ListItem>
+                                <Divider />
+                            </Box>)
                         })
-                    }
+                        }
                     </List>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
