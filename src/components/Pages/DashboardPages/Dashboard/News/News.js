@@ -9,6 +9,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { getDocs, query, collection, where, orderBy } from '@firebase/firestore';
 import { db } from '../../../../../services/firebase';
 import { userData } from '../../../Registration/RegisterationForm';
+import { fDateTime } from '../../../../../utils/formatTime';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -57,9 +58,11 @@ export default function News() {
     useEffect(() => {
         const fetchNews = async () => {
             let data = [];
+            let otherNews
             let coll = collection(db, 'news');
             await getDocs(query(coll, where('department', 'array-contains', userData.department))).then(result => {
                 result.forEach(documentData => {
+                    
                     data.push(documentData.data());
                 });
                 setLatestNews(data);
@@ -85,7 +88,7 @@ export default function News() {
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                     <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                         <Tab label="New News" {...a11yProps(0)} />
-                        <Tab label="All News" {...a11yProps(1)} />
+                        <Tab label="Old News" {...a11yProps(1)} />
 
                     </Tabs>
                 </Box>
@@ -96,6 +99,7 @@ export default function News() {
                                 <ListItemText primary={news.heading} secondary={news.description} />
                                 <ListItemText secondary={'Publised By:'+news.publised_by} align="right"/>
                                 </ListItem>
+                                <Typography sx={{textAlign:'center', color:'#637381 '}} variant='body2'>{fDateTime(news.date.toDate())}</Typography>
                                 <Divider />
                             </Box>)
                         })
