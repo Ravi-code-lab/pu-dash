@@ -146,8 +146,6 @@ const useStyles = makeStyles(theme => ({
     borderRadius: '20px',
     marginRight:'6px',
   },
-
-  
   iconColor:{
     color: red[500]
   },
@@ -220,7 +218,6 @@ const useStyles = makeStyles(theme => ({
       })}
       </Box>
        {/* footer */}
-      
       <Box sx={{display:"flex", marginTop:"20px"}}>
         <Typography  sx={{flex:1,margin:'auto'}}> Page: {page} </Typography>
         <Pagination size='medium'  count={2}  variant='outlined' shape='rounded'></Pagination>

@@ -202,7 +202,7 @@ export default function Layout() {
     <>
     <Router>
     {loading === false ? (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex',backgroundColor:'#f9fafb' }}>
 
       <CssBaseline />
 
@@ -472,7 +472,7 @@ export default function Layout() {
       </Drawer>
 
       {/* content box */}
-      <Box component="main" sx={{  flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{  flexGrow: 1, p: 3, backgroundColor:'f9fafb' }}>
         <DrawerHeader />
             <Switch>
               {/* On Clike content Change  */}
