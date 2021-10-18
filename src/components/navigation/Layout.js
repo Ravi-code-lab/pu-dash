@@ -154,8 +154,8 @@ export default function Layout() {
 
   const classes = useStyle();
   const [open, setOpen] = useState(false);
-  const routeName = ['Dashboard', 'My Class', 'Student', 'Teachers', 'Events', 'Chats' ];
-  const routeLinks = ['/', '/MyClass', '/Student', '/Teachers', '/Events', '/Chats' ]
+  const routeName = ['Dashboard', 'My Class', 'Student', 'Teachers', 'Event', 'Chats' ];
+  const routeLinks = ['/', '/MyClass', '/Student', '/Teachers', '/Event', '/Chats' ]
   const [activePage, setActivePage] = useState(0)
   const handleDrawerOpen = () => {
     setOpen(!open);
@@ -493,7 +493,7 @@ export default function Layout() {
               </Route>
               {/* On Clike content Change  */}
               <Route exact path="/Event">
-                <Event />
+                <Event/>
               </Route>
               {/* On Clike content Change  */}
               <Route exact path="/Chats">

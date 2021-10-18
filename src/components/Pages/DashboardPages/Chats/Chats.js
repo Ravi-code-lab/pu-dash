@@ -49,7 +49,9 @@ const useStyles = makeStyles({
                         <ListItemIcon>
                             <Avatar alt="" src="" />
                         </ListItemIcon>
-                        <ListItemText primary="Ravi">Remy Sharp</ListItemText>
+                        <ListItemText primary="Ravi">Remy Sharp
+                        
+                        </ListItemText>
                         <ListItemText secondary="online" align="right"></ListItemText>
                     </ListItem>
                     <ListItem button key="Yadav">

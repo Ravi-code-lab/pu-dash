@@ -60,7 +60,6 @@ export default function GlobalStyles() {
         },
 
         img: { display: 'block'},
-
         // Lazy Load Img
         '.blur-up': {
           WebkitFilter: 'blur(5px)',
