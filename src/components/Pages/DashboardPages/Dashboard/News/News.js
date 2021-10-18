@@ -1,13 +1,13 @@
-import {useEffect,useState} from 'react'
+import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import {  CardHeader, IconButton } from '@mui/material';
+import { CardHeader, Divider, IconButton, List ,ListItem, ListItemText} from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import { getDocs, query, collection, where,orderBy} from '@firebase/firestore';
-import {db} from '../../../../../services/firebase';
+import { getDocs, query, collection, where, orderBy } from '@firebase/firestore';
+import { db } from '../../../../../services/firebase';
 import { userData } from '../../../Registration/RegisterationForm';
 
 function TabPanel(props) {
@@ -56,36 +56,46 @@ export default function News() {
 
     useEffect(() => {
         const fetchNews = async () => {
-            let data;
+            let data = [];
             let coll = collection(db, 'news');
-            await getDocs(query(coll, where('department','array-contains',userData.department), orderBy('date'))).then(result=>{
-            result.forEach();
+            await getDocs(query(coll, where('department', 'array-contains', userData.department), orderBy('date'))).then(result => {
+                result.forEach((documentData) => {
+                    data.push(documentData.data());
+                });
+                setLatestNews(data);
             });
         }
     }, [updateNews])
 
-    
+
     return (
         <>
-            
-                    <CardHeader
-                        action={<IconButton aria-label="settings">
-                            <MoreHorizIcon />
-                        </IconButton>}
-                        title={<Typography varient="h6">News</Typography>}
-                    />
-            
+
+            <CardHeader
+                action={<IconButton aria-label="settings">
+                    <MoreHorizIcon />
+                </IconButton>}
+                title={<Typography varient="h6">News</Typography>}
+            />
+
 
             <Box sx={{ width: '100%' }}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                     <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                         <Tab label="New News" {...a11yProps(0)} />
                         <Tab label="All News" {...a11yProps(1)} />
-                       
+
                     </Tabs>
                 </Box>
                 <TabPanel value={value} index={0}>
-                    Item Two
+                    <List>
+                        {latestNews.map((news, index) => {
+                            return <ListItem key={index}>
+                        {<ListItemText primary={news.heading} secondary={news.description}/>
+                           } </ListItem>
+                        })
+                    }
+                    </List>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                     Item Two
